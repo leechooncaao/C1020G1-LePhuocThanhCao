@@ -1,0 +1,10 @@
+BEGIN
+	INPUT a,b,c
+	max = a
+	IF(max < b)
+		max = b
+	IF (max < c)
+		max = c
+	END IF
+	Display max
+END
