@@ -1,0 +1,8 @@
+Begin
+	Input N // N is random natural number in interval (0-9)
+	Input M // from user
+	IF(N==M)
+		Display "Correct prediction"
+	ELSE
+		Display "Incorrect prediction"
+End
