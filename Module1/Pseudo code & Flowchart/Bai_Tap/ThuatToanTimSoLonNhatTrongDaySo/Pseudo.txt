@@ -1,0 +1,19 @@
+BEGIN
+	INPUT N
+	i = 1
+	WHILE(i <= N)
+	DO
+		INPUT ai
+		i = i + 1
+	END DO
+	max = a1
+	j = 2
+	WHILE(i <= N)
+	DO
+		IF(max < aj)
+			max = aj
+		END IF
+		j = j + 1
+	END DO
+	Display max
+END
