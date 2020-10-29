@@ -1,0 +1,7 @@
+Begin
+	Input mathPoint
+	Input physicPoint
+	Input chemistryPoint
+	average = (mathPoint + physicPoint + chemistryPoint)/3
+	Display average
+End
