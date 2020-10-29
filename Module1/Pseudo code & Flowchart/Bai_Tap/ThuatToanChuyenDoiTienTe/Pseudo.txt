@@ -1,0 +1,5 @@
+Begin
+	Input usd
+	vnd = usd*23000
+	Display vnd
+End
