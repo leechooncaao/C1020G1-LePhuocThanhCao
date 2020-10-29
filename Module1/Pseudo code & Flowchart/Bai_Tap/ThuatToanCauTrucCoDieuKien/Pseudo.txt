@@ -1,0 +1,14 @@
+BEGIN
+	INPUT point
+	IF(point >= 75)
+		Display "Type A"
+	ELSE IF(point >= 60)
+		Display "Type B"
+	ELSE IF(point >=45)
+		Display "Type C"
+	ElSE IF(point >= 35)
+		Display "Type D"
+	ElSE
+		Display "Type E"
+	END IF
+END
