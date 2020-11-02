@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your hobbies</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: "Arial Black";
+    }
+
+    h2 {
+        color: white;
+        background-color: orangered;
+        text-align: center;
+    }
+
+    .label1 {
+        color: blue;
+        width: 100px;
+        display: inline-block;
+        text-align: right;
+    }
+
+    .label2 {
+        color: orangered;
+        /*text-align: left;*/
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .label3{
+        margin-left: 105px;
+    }
+    .label4{
+        vertical-align: center;
+    }
+</style>
+<body>
+
+<h2>YOUR HOBBIES</h2>
+<form>
+    <!--Full Name-->
+    <label class="label1" for="fname">Full Name</label>
+    <input type="text" id="fname" name="yourname" value="xyz"><br><br>
+
+    <!-- email-->
+    <label class="label1" for="email">Email</label>
+    <input type="text" id="email" name="email" value="abc@gmail.com"><br><br>
+
+    <!--Hobbies -->
+
+    <label class="label1">Hobbies</label>
+    <div class="label2">
+    <input type="checkbox" id="hobby1" class="label4" name="hobby1" value="Sport">
+    <label for="hobby1" class="label4" style="margin-right: 14px">Sport</label>
+    <input type="checkbox" id="hobby2" class="label4" name="hobby2" value="Music">
+    <label for="hobby2"class="label4" style="margin-right: 16px" >Music</label>
+    <input type="checkbox" id="hobby3" class="label4" name="hobby3" value="Reading">
+    <label for="hobby3" class="label4">Reading</label><br>
+    <input type="checkbox" id="hobby4" class="label4" name="hobby4" value="Surfing">
+    <label for="hobby3" class="label4">Surfing</label>
+    <input type="checkbox" id="hobby5" name="hobby5" value="Gaming">
+    <label for="hobby5"class="label4" >Gaming</label>
+    <input type="checkbox" id="hobby6" name="hobby6" value="Film">
+    <label for="hobby6" class="label4">Film</label><br>
+    <input type="checkbox" id="hobby7" name="hobby7" value="Travelling">
+    <label for="hobby7" class="label4">Travelling</label><br><br>
+    </div>
+
+    <!--Buttons-->
+    <div class="label3">
+        <input type="submit" style="padding: 5px" name="submit" value="Send">
+        <input type="reset" style="margin-left: 20px; padding: 5px">
+    </div>
+</form>
+
+
+</body>
+</html>
