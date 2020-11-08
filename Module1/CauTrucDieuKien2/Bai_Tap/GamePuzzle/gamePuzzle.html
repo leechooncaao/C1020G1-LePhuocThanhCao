@@ -179,18 +179,24 @@
         for (let i = 0; i < 4; i++)
           if (result[i] !== result[i + 1]) flag = false;
 
+        let part1 = document.getElementById("part1");
+        let part2 = document.getElementById("part2");
+        let part3 = document.getElementById("part3");
+        let part4 = document.getElementById("part4");
+        let part5 = document.getElementById("part5");
+
         if (flag) {
-          document.getElementById("part1").setAttribute("class", "winTheme");
-          document.getElementById("part2").setAttribute("class", "winTheme");
-          document.getElementById("part3").setAttribute("class", "winTheme");
-          document.getElementById("part4").setAttribute("class", "winTheme");
-          document.getElementById("part5").setAttribute("class", "winTheme");
+          part1.setAttribute("class", "winTheme");
+          part2.setAttribute("class", "winTheme");
+          part3.setAttribute("class", "winTheme");
+          part4.setAttribute("class", "winTheme");
+          part5.setAttribute("class", "winTheme");
         } else {
-          document.getElementById("part1").removeAttribute("class");
-          document.getElementById("part2").removeAttribute("class");
-          document.getElementById("part3").removeAttribute("class");
-          document.getElementById("part4").removeAttribute("class");
-          document.getElementById("part5").removeAttribute("class");
+          part1.removeAttribute("class");
+          part2.removeAttribute("class");
+          part3.removeAttribute("class");
+          part4.removeAttribute("class");
+          part5.removeAttribute("class");
         }
       }
     </script>
