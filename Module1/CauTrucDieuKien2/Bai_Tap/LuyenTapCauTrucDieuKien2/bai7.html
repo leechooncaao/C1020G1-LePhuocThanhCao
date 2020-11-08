@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      alert("The second degree equation has the form ax^2 + bx + c");
+
+      let a = prompt("Enter a : ");
+      let b = prompt("Enter b : ");
+      let c = prompt("Enter c : ");
+
+      let delta = b * b - 4 * a * c;
+
+      if (delta < 0) alert("No solution !");
+      else if (delta === 0) {
+        let = solution = (-1 * b * 0.5) / a;
+        alert("the equation has double solutions : " + solution);
+      } else {
+        let solution1 = (-1 * b + Math.sqrt(delta)) / 2;
+        let solution2 = (-1 * b - Math.sqrt(delta)) / 2;
+
+        alert(
+          "The equation has 2 diffenrent solution : " +
+            solution1 +
+            " ; " +
+            solution2
+        );
+      }
+    </script>
+  </body>
+</html>

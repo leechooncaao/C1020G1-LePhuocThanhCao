@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let originalMoney = prompt("Enter original amount of money : ");
+      let loanMonth = prompt("Enter numbers of loan month : ");
+      let rate = prompt("Enter loan rate : ");
+
+      let total = originalMoney;
+      for (let i = 1; i <= loanMonth; i++) total += rate * total;
+
+      alert("Total : " + total);
+    </script>
+  </body>
+</html>

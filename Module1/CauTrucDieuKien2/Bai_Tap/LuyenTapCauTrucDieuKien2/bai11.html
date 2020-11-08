@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let income = prompt("Enter your income ($): ");
+
+      let tax;
+      if (income > 2000) tax = 0.04;
+      else if (income > 1000) tax = 0.02;
+      else tax = 0.01;
+
+      let totalTax = tax * income;
+      alert("Total taxes : " + totalTax);
+    </script>
+  </body>
+</html>

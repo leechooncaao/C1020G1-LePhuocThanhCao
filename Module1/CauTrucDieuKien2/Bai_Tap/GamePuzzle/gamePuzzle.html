@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      display: block;
+      margin: 1em;
+      padding: 0.2em;
+      width: 600px;
+      height: 150px;
+      box-shadow: black 2px 3px 3px;
+    }
+    body {
+      display: block;
+    }
+
+    table {
+      border: 0.5px;
+    }
+
+    .winTheme {
+      box-shadow: red 4px 4px 9px;
+    }
+  </style>
+  <body>
+    <div class="puzzle">
+      <img
+        src="images/the-cat1_part1x1.jpg"
+        id="part1"
+        onclick="clickedPic1()"
+      />
+      <img
+        src="images/the-monkey_part2x1.jpg"
+        id="part2"
+        onclick="clickedPic2()"
+      />
+      <img
+        src="images/the-panda_swap_part3x1.jpg"
+        id="part3"
+        onclick="clickedPic3()"
+      />
+      <img
+        src="images/the-cat1_part4x1.jpg"
+        id="part4"
+        onclick="clickedPic4()"
+      />
+      <img
+        src="images/the-panda_swap_part5x1.jpg"
+        id="part5"
+        onclick="clickedPic5()"
+      />
+    </div>
+
+    <script>
+      let part1 = [
+        "images/the-cat1_part1x1.jpg",
+        "images/the-monkey_part1x1.jpg",
+        "images/the-panda_swap_part1x1.jpg",
+      ];
+      let part2 = [
+        "images/the-cat1_part2x1.jpg",
+        "images/the-monkey_part2x1.jpg",
+        "images/the-panda_swap_part2x1.jpg",
+      ];
+      let part3 = [
+        "images/the-cat1_part3x1.jpg",
+        "images/the-monkey_part3x1.jpg",
+        "images/the-panda_swap_part3x1.jpg",
+      ];
+      let part4 = [
+        "images/the-cat1_part4x1.jpg",
+        "images/the-monkey_part4x1.jpg",
+        "images/the-panda_swap_part4x1.jpg",
+      ];
+      let part5 = [
+        "images/the-cat1_part5x1.jpg",
+        "images/the-monkey_part5x1.jpg",
+        "images/the-panda_swap_part5x1.jpg",
+      ];
+
+      let result = [1, 2, 3, 1, 3];
+
+      function clickedPic1() {
+        let img = document.getElementById("part1");
+
+        // change pic when click
+        if (img.src.includes("cat")) {
+          img.src = part1[1]; //change to monkey
+          result[0] = 2;
+        } else if (img.src.includes("monkey")) {
+          img.src = part1[2]; // change to panda
+          result[0] = 3;
+        } else {
+          img.src = part1[0]; // change to cat
+          result[0] = 1;
+        }
+        img.style.enabled = true;
+        // isWin();
+      }
+
+      function clickedPic2() {
+        let img = document.getElementById("part2");
+
+        // change pic when click
+        if (img.src.includes("cat")) {
+          img.src = part2[1]; //change to monkey
+          result[1] = 2;
+        } else if (img.src.includes("monkey")) {
+          img.src = part2[2]; // change to panda
+          result[1] = 3;
+        } else {
+          img.src = part2[0]; // change to cat
+          result[1] = 1;
+        }
+
+        isWin();
+      }
+
+      function clickedPic3() {
+        let img = document.getElementById("part3");
+
+        // change pic when click
+        if (img.src.includes("cat")) {
+          img.src = part3[1]; //change to monkey
+          result[2] = 2;
+        } else if (img.src.includes("monkey")) {
+          img.src = part3[2]; // change to panda
+          result[2] = 3;
+        } else {
+          img.src = part3[0]; // change to cat
+          result[2] = 1;
+        }
+
+        isWin();
+      }
+
+      function clickedPic4() {
+        let img = document.getElementById("part4");
+
+        // change pic when click
+        if (img.src.includes("cat")) {
+          img.src = part4[1]; //change to monkey
+          result[3] = 2;
+        } else if (img.src.includes("monkey")) {
+          img.src = part4[2]; // change to panda
+          result[3] = 3;
+        } else {
+          img.src = part4[0]; // change to cat
+          result[3] = 1;
+        }
+
+        isWin();
+      }
+
+      function clickedPic5() {
+        let img = document.getElementById("part5");
+
+        // change pic when click
+        if (img.src.includes("cat")) {
+          img.src = part5[1]; //change to monkey
+          result[4] = 2;
+        } else if (img.src.includes("monkey")) {
+          img.src = part5[2]; // change to panda
+          result[4] = 3;
+        } else {
+          img.src = part5[0]; // change to cat
+          result[4] = 1;
+        }
+
+        isWin();
+      }
+
+      function isWin() {
+        let flag = true;
+        for (let i = 0; i < 4; i++)
+          if (result[i] !== result[i + 1]) flag = false;
+
+        if (flag) {
+          document.getElementById("part1").setAttribute("class", "winTheme");
+          document.getElementById("part2").setAttribute("class", "winTheme");
+          document.getElementById("part3").setAttribute("class", "winTheme");
+          document.getElementById("part4").setAttribute("class", "winTheme");
+          document.getElementById("part5").setAttribute("class", "winTheme");
+        } else {
+          document.getElementById("part1").removeAttribute("class");
+          document.getElementById("part2").removeAttribute("class");
+          document.getElementById("part3").removeAttribute("class");
+          document.getElementById("part4").removeAttribute("class");
+          document.getElementById("part5").removeAttribute("class");
+        }
+      }
+    </script>
+  </body>
+</html>

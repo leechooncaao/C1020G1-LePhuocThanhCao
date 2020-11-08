@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Do you love me ?</h1>
+    <input
+      type="button"
+      value="YES"
+      onclick="yesClick()"
+      style="margin-right: 5px"
+    />
+    <input
+      type="button"
+      value="NO"
+      onmouseover="catchMeifYouCan()"
+      id="no"
+      style="position: absolute"
+    />
+
+    <script>
+      function yesClick() {
+        alert("Love you chụt chụt <3");
+      }
+
+      function catchMeifYouCan() {
+        let heightScreen = window.innerHeight;
+        let widthScreen = window.innerWidth;
+
+        // count random position
+        let randomLeft = Math.random() * widthScreen;
+        let randomTop = Math.random() * heightScreen;
+
+        // apply changing
+        let noButton = document.getElementById("no");
+        noButton.style.left = randomLeft + "px";
+        noButton.style.top = randomTop + "px";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let sales = prompt("Enter the sales : ");
+      let commission;
+
+      if (sales > 1000000) commission = 0.05;
+      else if (sales > 200000) commission = 0.02;
+      else commission = 0.01;
+
+      let total = commission * sales;
+
+      alert("Sales on commission : " + total);
+    </script>
+  </body>
+</html>

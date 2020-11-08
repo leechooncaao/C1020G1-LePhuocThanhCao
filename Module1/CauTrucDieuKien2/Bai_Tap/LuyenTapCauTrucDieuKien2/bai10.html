@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let consumed = prompt("Enter the amount of electricity consumed(kWh) : ");
+
+      let cost;
+      if (consumed > 100) cost = 4000;
+      else if (consumed > 30) cost = 3500;
+      else cost = 3000;
+
+      let total = cost * consumed;
+      alert("Total cost : " + total);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .calculator {
+      border: 2px solid black;
+      display: inline-block;
+    }
+
+    .calculator_display {
+      border: 2px solid blue;
+      text-align: right;
+    }
+
+    button {
+      width: 30px;
+      height: 25px;
+    }
+  </style>
+  <body>
+    <div class="calculator">
+      <div class="calculator_display">0</div>
+      <div class="calculator_keys">
+        <table>
+          <tr>
+            <td>
+              <button class="number">1</button>
+            </td>
+            <td>
+              <button class="number">2</button>
+            </td>
+            <td><button class="number">3</button></td>
+            <td>
+              <button class="key_operator" data-action="add">+</button>
+            </td>
+          </tr>
+          <tr>
+            <td><button class="number">4</button></td>
+            <td>
+              <button class="number">5</button>
+            </td>
+            <td>
+              <button class="number">6</button>
+            </td>
+            <td>
+              <button class="key_operator" data-action="subtract">-</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="number">7</button>
+            </td>
+            <td>
+              <button class="number">8</button>
+            </td>
+            <td>
+              <button class="number">9</button>
+            </td>
+            <td>
+              <button class="key_operator" data-action="multiply">
+                &times;
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button data-action="clear" style="text-align: center">AC</button>
+            </td>
+            <td>
+              <button class="number">0</button>
+            </td>
+            <td>
+              <button class="key_equal" data-action="calculate">=</button>
+            </td>
+            <td>
+              <button class="key_operator" data-action="divide">/</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const calculator = document.querySelector(".calculator");
+      const keys = calculator.querySelector(".calculator_keys");
+      const display = document.querySelector(".calculator_display");
+
+      keys.addEventListener("click", (e) => {
+        if (e.target.matches("button")) {
+          const key = e.target;
+          const action = key.dataset.action;
+          const keyContent = key.textContent;
+          const displayedNum = display.textContent;
+          let previousKeyType = calculator.dataset.previousKeyType;
+
+          Array.from(key.parentNode.children).forEach((k) =>
+            k.classList.remove("is-depressed")
+          );
+
+          if (!action) {
+            if (displayedNum === "0" || previousKeyType === "operator")
+              display.textContent = keyContent;
+            else display.textContent = displayedNum + keyContent;
+
+            calculator.dataset.previousKeyType = "number";
+          }
+
+          if (
+            action === "add" ||
+            action === "subtract" ||
+            action === "multiply" ||
+            action === "divide"
+          ) {
+            calculator.dataset.previousKeyType = "operator";
+            calculator.dataset.firstValue = displayedNum;
+            calculator.dataset.operator = action;
+            key.classList.add("is-depressed");
+          }
+
+          if (action === "clear") {
+            if (keyContent === "AC") {
+              calculator.dataset.firstValue = "";
+              calculator.dataset.operator = "";
+              calculator.dataset.previousKeyType = "";
+            } else key.textContent = "AC";
+
+            display.textContent = 0;
+            calculator.dataset.previousKeyType = "clear";
+          }
+
+          if (action === "calculate") {
+            calculator.dataset.previousKeyType = "calculate";
+            let firstValue = calculator.dataset.firstValue;
+            let operator = calculator.dataset.operator;
+            let secondValue = displayedNum;
+
+            display.textContent = calculate(firstValue, secondValue, operator);
+          }
+        }
+      });
+
+      const calculate = (num1, num2, operator) => {
+        let result = "";
+
+        if (operator === "add") result = parseFloat(num1) + parseFloat(num2);
+        else if (operator === "subtract")
+          result = parseFloat(num1) - parseFloat(num2);
+        else if (operator === "multiply")
+          result = parseFloat(num1) * parseFloat(num2);
+        else if (operator === "divide") {
+          if (num2 === "0") result = "Math Error";
+          else result = parseFloat(num1) / parseFloat(num2);
+        }
+
+        return result;
+      };
+    </script>
+  </body>
+</html>

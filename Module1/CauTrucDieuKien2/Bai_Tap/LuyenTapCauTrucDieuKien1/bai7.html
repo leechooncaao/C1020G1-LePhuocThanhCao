@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let callTime = prompt("Enter total callTime (minute) : ");
+      let phoneCharge;
+
+      if (callTime > 60) phoneCharge = 3000;
+      else if (callTime > 30) phoneCharge = 3500;
+      else phoneCharge = 4000;
+
+      let total = phoneCharge * callTime;
+      alert("Total charges : " + total);
+    </script>
+  </body>
+</html>
