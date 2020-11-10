@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = "  Abc   XYZ  ";
+      let res = str.replace(/\s+/g, " ").trim().toLowerCase();
+
+      let arrStr = res.split(" ");
+
+      let newArr = arrStr.map((e) => {
+        return e.charAt(0).toUpperCase() + e.slice(1);
+      });
+
+      let final = newArr.join(" ");
+      console.log(final);
+
+      //   newArr.forEach((e) => {
+      //     console.log(e);
+      //   });
+
+      //   console.log(str);
+      //   console.log(result);
+    </script>
+  </body>
+</html>

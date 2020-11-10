@@ -112,31 +112,41 @@
 
         switch (selectedInfo) {
           case "1":
-            fullName = prompt("Full Name : ");
+            fullName = formatString(prompt("Full Name : "));
             break;
           case "2":
-            identityNumber = prompt("Identity number : ");
+            do {
+              identityNumber = prompt("Identity number : ");
+            } while (!validateIdentityNumber(identityNumber));
             break;
           case "3":
-            birthDay = prompt("Birthday : ");
+            do {
+              birthDay = prompt("Birthday : ");
+            } while (!validateBirthDay(birthDay));
             break;
           case "4":
-            email = prompt("Email : ");
+            do {
+              email = prompt("Email : ");
+            } while (!validateEmail(email));
             break;
           case "5":
-            address = prompt("Address : ");
+            address = formatString(prompt("Address : "));
             break;
           case "6":
-            typeCustomer = prompt("Type of customer : ");
+            typeCustomer = formatString(prompt("Type of customer : "));
             break;
           case "7":
             discount = prompt("Discount : ");
             break;
           case "8":
-            amountOfPeople = prompt("Amount of people :");
+            do {
+              amountOfPeople = parseInt(prompt("Amount of people :"));
+            } while (!validateNumber(amountOfPeople));
             break;
           case "9":
-            rentDay = parseInt(prompt("Rent day : "));
+            do {
+              rentDay = parseInt(prompt("Rent day : "));
+            } while (!validateNumber(rentDay));
             break;
           case "10":
             service = prompt("Service : ");
@@ -203,6 +213,59 @@
         let total = priceService * rentDay - totalDiscount;
 
         alert("The total price : " + total + " $");
+      }
+
+      function validateEmail(email) {
+        let emailFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (email.match(emailFormat)) return true;
+        else {
+          alert("Invalid email");
+          return false;
+        }
+      }
+
+      function validateIdentityNumber(identityNumber) {
+        let identNumFormat = /^[0-9]{8}$/;
+
+        if (identityNumber.match(identNumFormat)) {
+          return true;
+        } else {
+          alert("Invalid Identity Number !");
+          return false;
+        }
+      }
+
+      function validateBirthDay(birthDay) {
+        let birthDayFormat = /^(([0-2][0-9])|((3)[0-1]))([-/.])(((0)[0-9])|((1)[0-2]))([-/.])\d{4}$/;
+
+        if (birthDay.match(birthDayFormat)) return true;
+        else {
+          alert("Invalid birthday !");
+          return false;
+        }
+      }
+
+      function validateNumber(number) {
+        if (number > 0) return true;
+        else {
+          alert("Invalid input !");
+          return false;
+        }
+      }
+
+      function formatString(string) {
+        let arrStr = string
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase()
+          .split(" ");
+
+        let newArr = arrStr.map((e) => {
+          return e.charAt(0).toUpperCase() + e.slice(1);
+        });
+
+        return newArr.join(" ");
       }
     </script>
   </body>
