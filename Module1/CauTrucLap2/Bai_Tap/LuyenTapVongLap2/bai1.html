@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let f1 = 1;
+      let f2 = 1;
+      let fn = 0;
+
+      document.writeln(f1);
+      document.writeln(f2);
+
+      while (fn < 2000) {
+        fn = f1 + f2;
+        document.writeln(fn);
+
+        f1 = f2;
+        f2 = fn;
+      }
+    </script>
+  </body>
+</html>

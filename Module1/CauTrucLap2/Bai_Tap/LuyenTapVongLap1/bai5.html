@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let f1 = 1;
+      let f2 = 1;
+      let fn;
+      let sum = f1 + f2;
+      let count = 2;
+
+      while (count < 20) {
+        fn = f1 + f2;
+        sum += fn;
+        f1 = f2;
+        f2 = fn;
+        count++;
+      }
+
+      alert("Sum of 20-first-numbers in Fibonacci is : " + sum);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //data of a customer
+      let fullName = "Leechoncaao";
+      let identityNumber = "12379432";
+      let birthDay = "15/05/1996";
+      let email = "leechocaao@gmail.com";
+      let address = "Hai Chau District, Da Nang city";
+      let typeCustomer = "Diamond";
+      let discount = "10";
+      let amountOfPeople = "5";
+      let rentDay = "7";
+      let service = "Villa";
+      let typeRoom = "Vip";
+
+      let selected = prompt(
+        "MENU\n" +
+          "1. Show Information Customer\n" +
+          "2. Edit Information Customer\n" +
+          "3. Show the amount to be paid after discount\n\n" +
+          "Your select : "
+      );
+      switch (selected) {
+        case "1":
+          showInfo();
+          break;
+        case "2":
+          editInfo();
+          break;
+        case "3":
+          showPay();
+          break;
+        default:
+          alert("Please select in menu !");
+      }
+
+      function showInfo() {
+        alert(
+          "INFORMATION CUSTOMER " +
+            "\n" +
+            "Full Name : " +
+            fullName +
+            "\n" +
+            "Identity Number : " +
+            identityNumber +
+            "\n" +
+            "Birthday : " +
+            birthDay +
+            "\n" +
+            "Email : " +
+            email +
+            "\n" +
+            "Address : " +
+            address +
+            "\n" +
+            "Type of customer : " +
+            typeCustomer +
+            "\n" +
+            "Discount : " +
+            discount +
+            " %" +
+            "\n" +
+            "Amount of people : " +
+            amountOfPeople +
+            "\n" +
+            "Rent day : " +
+            rentDay +
+            "\n" +
+            "Service : " +
+            service +
+            "\n" +
+            "Type of room : " +
+            typeRoom +
+            "\n"
+        );
+      }
+
+      function editInfo() {
+        let selectedInfo = prompt(
+          "1.Full Name" +
+            "\n" +
+            "2.Identity Number" +
+            "\n" +
+            "3.Birthday" +
+            "\n" +
+            "4.Email" +
+            "\n" +
+            "5.Address" +
+            "\n" +
+            "6.Type of customer" +
+            "\n" +
+            "7.Discount" +
+            "\n" +
+            "8.Amount of people" +
+            "\n" +
+            "9.Rent day" +
+            "\n" +
+            "10.Service" +
+            "\n" +
+            "11.Type of room" +
+            "\n" +
+            "\n" +
+            "Your selection : "
+        );
+
+        switch (selectedInfo) {
+          case "1":
+            fullName = prompt("Full Name : ");
+            break;
+          case "2":
+            identityNumber = prompt("Identity number : ");
+            break;
+          case "3":
+            birthDay = prompt("Birthday : ");
+            break;
+          case "4":
+            email = prompt("Email : ");
+            break;
+          case "5":
+            address = prompt("Address : ");
+            break;
+          case "6":
+            typeCustomer = prompt("Type of customer : ");
+            break;
+          case "7":
+            discount = prompt("Discount : ");
+            break;
+          case "8":
+            amountOfPeople = prompt("Amount of people :");
+            break;
+          case "9":
+            rentDay = prompt("Rent day : ");
+            break;
+          case "10":
+            service = prompt("Service : ");
+            break;
+          case "11":
+            typeRoom = prompt("type room : ");
+            break;
+          default:
+            alert("Failed !");
+            break;
+        }
+
+        showInfo();
+      }
+
+      function showPay() {}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let output =
+        "<table border='1' width='300' cellspacing='0' cellpadding='3'>";
+      for (let row = 1; row <= 9; row++) {
+        output += "<tr>";
+        for (let col = 2; col <= 9; col++)
+          output += "<td>" + col + "x" + row + "=" + col * row + "</td>";
+
+        output += "</tr>";
+      }
+
+      document.write(output);
+    </script>
+  </body>
+</html>

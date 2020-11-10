@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let originalMoney = parseFloat(prompt("Enter the original money : "));
+      let loanMonth = parseFloat(prompt("Enter loan of month : "));
+      let month = parseFloat(prompt("Enter number of month : "));
+      let total = originalMoney;
+
+      while (month > 0) {
+        total += total * loanMonth;
+        month--;
+      }
+
+      alert("The total is : " + total);
+    </script>
+  </body>
+</html>

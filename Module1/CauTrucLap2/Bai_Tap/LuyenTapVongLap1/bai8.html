@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>LET'S GUESS</h2>
+    <button type="button" onclick="play()">Play</button>
+    <script>
+      function play() {
+        alert("Enter an interval in which you want to guess !");
+        let from = parseInt(prompt("Enter the from-value : "));
+        let to = parseInt(prompt("Enter to-value : "));
+
+        let enteredNumber;
+        let randomNumber = getRandomNumber(from, to);
+        let isWin;
+        let count = 0;
+
+        while (!isWin && count < 3) {
+          enteredNumber = parseInt(prompt("Let's guess ! "));
+          if (enteredNumber === randomNumber) {
+            isWin = true;
+            alert("You win !");
+          } else if (enteredNumber < randomNumber) {
+            alert("The enteredNumber is less than random number !");
+            count++;
+          } else {
+            alert("The enteredNumber is greater than random number !");
+            count++;
+          }
+
+          if (count === 3) alert("You lose !");
+        }
+      }
+
+      function getRandomNumber(from, to) {
+        return Math.floor(Math.random() * (to - from + 1)) + from;
+      }
+    </script>
+  </body>
+</html>

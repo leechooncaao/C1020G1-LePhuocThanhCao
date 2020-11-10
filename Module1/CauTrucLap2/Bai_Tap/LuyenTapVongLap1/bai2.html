@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let inputTemp;
+      do {
+        inputTemp = prompt("Enter a temperature (20 - 100): ");
+
+        if (inputTemp > 100) alert("Decrease temperature please !");
+        else if (inputTemp < 20) alert("Increase temperature please !");
+        else {
+          alert("Accepted !");
+          break;
+        }
+      } while (inputTemp > 100 || inputTemp < 20);
+    </script>
+  </body>
+</html>
