@@ -12,11 +12,11 @@
       let identityNumber = "12379432";
       let birthDay = "15/05/1996";
       let email = "leechocaao@gmail.com";
-      let address = "Hai Chau District, Da Nang city";
+      let address = "Da Nang";
       let typeCustomer = "Diamond";
       let discount = "10";
       let amountOfPeople = "5";
-      let rentDay = "7";
+      let rentDay = 7;
       let service = "Villa";
       let typeRoom = "Vip";
 
@@ -136,7 +136,7 @@
             amountOfPeople = prompt("Amount of people :");
             break;
           case "9":
-            rentDay = prompt("Rent day : ");
+            rentDay = parseInt(prompt("Rent day : "));
             break;
           case "10":
             service = prompt("Service : ");
@@ -152,7 +152,58 @@
         showInfo();
       }
 
-      function showPay() {}
+      function showPay() {
+        //price of services
+        const priceVilla = 500;
+        const priceHouse = 300;
+        const priceRoom = 100;
+
+        //get price of service
+        let priceService =
+          service == "Villa"
+            ? priceVilla
+            : service == "House"
+            ? priceHouse
+            : priceRoom;
+
+        //calculating discount by address
+        const daNang = 20;
+        const hue = 10;
+        const quangNam = 5;
+        let discountByAddress =
+          address == "Da Nang" ? daNang : address == "Hue" ? hue : quangNam;
+
+        //calculating discount by time
+        let discountByTime =
+          rentDay > 7 ? 30 : rentDay >= 5 ? 20 : rentDay >= 2 ? 10 : 0;
+
+        //calculating discount by type of customer
+        const diamond = 15;
+        const platium = 10;
+        const gold = 5;
+        const silver = 2;
+        const member = 0;
+
+        let discountByCustomer =
+          typeCustomer == "Diamond"
+            ? diamond
+            : typeCustomer == "Platium"
+            ? platium
+            : typeCustomer == "Gold"
+            ? gold
+            : typeCustomer == "Silver"
+            ? silver
+            : member;
+
+        //calculating total of discount
+        let totalDiscount =
+          discountByAddress + discountByTime + discountByCustomer;
+
+        //total money must be paid
+        let total = priceService * rentDay - totalDiscount;
+
+        alert("The total price : " + total + " $");
+      }
     </script>
   </body>
 </html>
