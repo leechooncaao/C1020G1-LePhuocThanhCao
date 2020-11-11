@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let size = parseInt(prompt("Enter size of array : "));
+      let numbers = [];
+
+      for (let i = 0; i < size; i++) {
+        numbers[i] = parseInt(prompt("Enter element in " + i + " position"));
+      }
+
+      let input = prompt("Enter a number : ");
+
+      let isContain = false;
+      for (number of numbers) {
+        if (input == number) {
+          isContain = true;
+          break;
+        }
+      }
+
+      if (isContain) alert("The entered number is in array !");
+      else alert("The entered number is not in array !");
+    </script>
+  </body>
+</html>

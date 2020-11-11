@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3 style="text-align: center">Caro Game Simple</h3>
+    <p id="caroGame" style="text-align: center"></p>
+    <input
+      type="button"
+      value="Player 1"
+      style="top: 70%; left: 40%; position: absolute"
+      onclick="play1()"
+    />
+    <input
+      type="button"
+      value="Player 2"
+      style="top: 70%; left: 50%; position: absolute"
+      onclick="play2()"
+    />
+
+    <script>
+      //show the board
+      let b = document.getElementById("caroGame");
+      let board = [];
+
+      for (let i = 0; i < 5; i++) board[i] = new Array(".", ".", ".", ".", ".");
+
+      traverseArray(board);
+
+      function play1() {
+        let positionX = prompt("X : ");
+        let positionY = prompt("Y : ");
+        board[positionX][positionY] = "X";
+
+        traverseArray(board);
+
+        if (check(board)) alert("Player 1 win !");
+      }
+
+      function play2() {
+        let positionX = prompt("X : ");
+        let positionY = prompt("Y : ");
+        board[positionX][positionY] = "O";
+
+        traverseArray(board);
+
+        if (check(board)) alert("Player 2 win !");
+      }
+
+      function traverseArray(arr) {
+        data = "";
+
+        for (let i = 0; i < 5; i++) {
+          data += "<br>";
+          for (let j = 0; j < 5; j++)
+            data += arr[i][j] + "&nbsp&nbsp&nbsp&nbsp";
+        }
+
+        b.innerHTML = "<hr>" + data + "<br>";
+      }
+
+      function check(arr) {
+        let flag = false;
+
+        // check by col and row
+        for (let k = 0; k < 5; k++) {
+          if (flag) break;
+
+          // check by column
+          for (let i = 0; i < 4; i++)
+            if (arr[i][k] !== "." && arr[i][k] === arr[i + 1][k] && i + 1 === 4)
+              flag = true;
+
+          // check by row
+          for (let j = 0; j < 4; j++)
+            if (arr[k][j] !== "." && arr[k][j] === arr[k][j + 1] && j + 1 === 4)
+              flag = true;
+        }
+
+        // check by diagonal 1
+        let i = 0;
+        let j = 0;
+        while (i < 4 && j < 4) {
+          if (
+            arr[i][j] !== "." &&
+            arr[i][j] === arr[i + 1][j + 1] &&
+            j + 1 === 4
+          )
+            flag = true;
+
+          i++;
+          j++;
+        }
+
+        // check by diagonal 2
+        let m = 4;
+        let n = 0;
+        while (m > 0 && n < 4) {
+          if (
+            arr[m][n] !== "." &&
+            arr[m][n] === arr[m - 1][n + 1] &&
+            n + 1 === 4
+          )
+            flag = true;
+
+          m--;
+          n++;
+        }
+
+        return flag;
+      }
+    </script>
+  </body>
+</html>

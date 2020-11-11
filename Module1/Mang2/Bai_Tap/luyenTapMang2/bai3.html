@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let size = parseInt(prompt("Enter size of array : "));
+      let arr = [];
+
+      for (let i = 0; i < size; i++) {
+        arr[i] = prompt("Enter a character :");
+      }
+
+      const NUMBERS = "0123456789";
+
+      let count = 0;
+      for (ch of arr) {
+        if (NUMBERS.indexOf(ch) !== -1) count++;
+      }
+
+      alert("The number of digit-characters in entered array : " + count);
+    </script>
+  </body>
+</html>

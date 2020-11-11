@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let numbers = [1, 2, 3, 6, 10, 24, 2, 55, 6, 78];
+      let max = numbers[0];
+      let sum = numbers[0];
+
+      for (let i = 1; i < numbers.length; i++) {
+        if (max < numbers[i]) max = numbers[i];
+
+        sum += numbers[i];
+      }
+
+      let aver = sum / numbers.length;
+
+      alert("Max number :" + max + " ;average : " + aver);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Type anything slowly</h1>
+    <div>
+      <form>
+        <textarea
+          name="txtArea"
+          id="txtArea"
+          cols="50"
+          rows="30"
+          onkeydown="processText()"
+        ></textarea>
+      </form>
+    </div>
+
+    <script>
+      let letters = [
+        "I",
+        " ",
+        "L",
+        "O",
+        "V",
+        "E",
+        " ",
+        "Y",
+        "O",
+        "U",
+        " ",
+        "C",
+        "H",
+        "Ị",
+        "C",
+        "H",
+        " ",
+        "C",
+        "H",
+        "Ị",
+        "C",
+        "H",
+      ];
+      let data = "";
+      function processText() {
+        let text = document.getElementById("txtArea").value;
+        let lengthTxt = text.length;
+
+        if (lengthTxt > 0) {
+          for (let i = 0; i < lengthTxt; i++) {
+            data += letters[i];
+            if (i == letters.length - 1) {
+              document.getElementById("txtArea").value = "";
+              data = "";
+            }
+          }
+        }
+
+        document.getElementById("txtArea").value = data;
+        data = "";
+        setTimeout("processText()", 1);
+      }
+    </script>
+  </body>
+</html>

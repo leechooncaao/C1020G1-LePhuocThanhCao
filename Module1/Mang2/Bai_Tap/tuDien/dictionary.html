@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Dictionary</h2>
+    <input type="text" name="input" id="input" />
+    <button type="button" onclick="search()">Search</button>
+
+    <script>
+      let engWords = ["love", "forever", "only", "together", "break", "crush"];
+      let vnWords = [
+        "Tình yêu",
+        "Mãi mãi",
+        "duy nhất",
+        "cùng nhau",
+        "chia tay",
+        "cảm nắng",
+      ];
+
+      function search() {
+        let word = document.getElementById("input").value;
+        let index = engWords.indexOf(word);
+
+        if (index === -1) alert("Not found !");
+        else alert(vnWords[index]);
+      }
+    </script>
+  </body>
+</html>

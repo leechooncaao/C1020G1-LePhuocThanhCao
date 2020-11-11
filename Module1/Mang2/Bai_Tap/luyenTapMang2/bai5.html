@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let seq1 = prompt("Enter the first sequence : ");
+      let seq2 = prompt("Enter the second sequence : ");
+
+      if (isIdentical(seq1, seq2)) alert("They are the same !");
+      else alert("They are different !");
+
+      function isIdentical(seq1, seq2) {
+        if (seq1.length !== seq2.length) return false;
+
+        let i = 0;
+        while (i < seq1.length) {
+          if (seq1.charAt(i) !== seq2.charAt(i)) return false;
+
+          i++;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>

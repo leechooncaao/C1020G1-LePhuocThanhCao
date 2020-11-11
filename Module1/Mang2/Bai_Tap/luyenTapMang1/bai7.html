@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let size = parseInt(prompt("Enter size of array : "));
+      let numbers = [];
+
+      for (let i = 0; i < size; i++) {
+        numbers[i] = parseInt(prompt("Enter element in " + i + " position"));
+      }
+
+      let input = prompt("Enter a number : ");
+
+      for (let i = 0; i < size; i++) {
+        if (input == numbers[i]) {
+          for (let j = i; j < size - 1; j++) {
+            numbers[j] = numbers[j + 1];
+          }
+          numbers[size - 1] = 0;
+          break;
+        }
+      }
+
+      alert("After processing : " + numbers);
+    </script>
+  </body>
+</html>
