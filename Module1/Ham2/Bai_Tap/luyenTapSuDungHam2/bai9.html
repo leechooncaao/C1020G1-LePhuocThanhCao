@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, "a", "b", "a", 67, 8, "a"];
+      alert(isContain(arr, "a"));
+
+      function isContain(arr, ch) {
+        if (!arr.includes(ch)) return -1;
+
+        let count = 0;
+        for (let i = 0; i < arr.length; i++) {
+          if (ch === arr[i]) count++;
+        }
+
+        return count;
+      }
+    </script>
+  </body>
+</html>

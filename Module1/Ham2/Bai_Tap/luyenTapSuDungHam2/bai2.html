@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let radius = parseInt(prompt("Enter a radius : "));
+      alert("The area of circle : " + area(radius));
+      alert("The perimeter of circle : " + perimeter(radius));
+
+      function area(radius) {
+        return radius * radius * Math.PI;
+      }
+
+      function perimeter(radius) {
+        return 2 * Math.PI * radius;
+      }
+    </script>
+  </body>
+</html>

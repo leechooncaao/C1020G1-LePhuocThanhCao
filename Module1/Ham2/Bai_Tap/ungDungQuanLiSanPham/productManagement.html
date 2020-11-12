@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="cssFile.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3>Add New Product</h3>
+      <span class="add-product">
+        <input type="text" placeholder="New Product" id="input-item" />
+        <button type="button" onclick="addItem()">Add</button>
+      </span>
+      <div class="display-product">
+        <h3>Display All Product</h3>
+        <div class="table-product">
+          <div id="head-table">
+            <span id="product-name">Product Name</span>
+            <span id="number-product"></span>
+          </div>
+          <div id="make-table"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let items = [];
+
+      function addItem() {
+        let item = document.getElementById("input-item").value;
+        items.push(item);
+        document.getElementById("input-item").value = "";
+        document.getElementById("number-product").innerHTML =
+          items.length + " Products";
+        displayItem();
+      }
+
+      function displayItem() {
+        let result = "<table>";
+        for (let i = 0; i < items.length; i++) {
+          result += "<tr>";
+          result += "<td>" + items[i] + "</td>";
+          result +=
+            "<td>" +
+            "<button type='button' onclick='editItem(" +
+            i +
+            ")'>Edit</button>" +
+            "</td>";
+          result +=
+            "<td>" +
+            "<button type='button' onclick='deleteItem(" +
+            i +
+            ")'>Delete</button>" +
+            "</td>";
+          result += "</tr>";
+        }
+
+        result += "</table>";
+
+        document.getElementById("make-table").innerHTML = result;
+      }
+
+      function editItem(index) {
+        let editedItem = prompt("Edit item : ");
+        items[index] = editedItem;
+        displayItem();
+      }
+
+      function deleteItem(index) {
+        items.splice(index, 1);
+        displayItem();
+        document.getElementById("number-product").innerHTML =
+          items.length + " Products";
+      }
+    </script>
+  </body>
+</html>

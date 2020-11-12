@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let text = prompt("Enter a string : ");
+
+      if (isPalindrome(text)) alert("Text is palindrome !");
+      else alert("Text is not a palindrome");
+
+      function isPalindrome(str) {
+        if (str.length === 0) return true;
+
+        if (str.length === 3) return str.charAt(0) === str.charAt(2);
+
+        if (str.length === 2) return str.charAt(0) === str.charAt(1);
+
+        return (
+          isPalindrome(str.substring(1, str.length - 1)) &&
+          str.charAt(0) === str.charAt(str.length - 1)
+        );
+        // rotor
+      }
+    </script>
+  </body>
+</html>

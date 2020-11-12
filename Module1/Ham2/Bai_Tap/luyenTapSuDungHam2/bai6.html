@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let number = parseInt(prompt("Enter a number : "));
+
+      if (isPositive(number)) alert("The entered number is positive");
+      else alert("The entered number is negative");
+
+      function isPositive(number) {
+        return number > 0 ? true : false;
+      }
+    </script>
+  </body>
+</html>

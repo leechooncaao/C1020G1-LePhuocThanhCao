@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let ch = prompt("Enter a character : ");
+      const NUMBERS = "0123456789";
+
+      if (isNumber(ch)) alert("Entered character is a number ");
+      else alert("Entered character is NOT a number ");
+
+      function isNumber(ch) {
+        if (NUMBERS.indexOf(ch) !== -1) return true;
+
+        return false;
+      }
+    </script>
+  </body>
+</html>
