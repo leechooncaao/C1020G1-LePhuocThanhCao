@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>MENU</h3>
+      <button type="button" onclick="addCustomer()">Add Name Customer</button>
+      <button type="button" onclick="deleteCustomer()">Delete Customer</button>
+    </div>
+
+    <script>
+      let customers = [];
+
+      function addCustomer() {
+        let numberCustomer = parseInt(prompt("Enter number of customer : "));
+        for (let i = 0; i < numberCustomer; i++) {
+          customers.push(prompt("Name customer " + i + " :"));
+        }
+
+        displayCustomer();
+      }
+
+      function deleteCustomer() {
+        let deletingCustomer = prompt("Enter customer to delete : ");
+        let index = customers.indexOf(deletingCustomer);
+
+        if (index === -1) alert("Customer does not exist !");
+        else {
+          customers.splice(index, 1);
+          displayCustomer();
+        }
+      }
+
+      function displayCustomer() {
+        alert(customers.sort());
+      }
+    </script>
+  </body>
+</html>
