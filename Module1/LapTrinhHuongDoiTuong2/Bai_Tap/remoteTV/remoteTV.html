@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Remote {
+        constructor(code) {
+          this.code = code;
+          this.tv = "";
+        }
+
+        connectToTV = function (tv) {
+          this.tv = tv;
+          console.log("Successfully connected !");
+        };
+
+        turnOnTv = function () {
+          this.tv.turnOn();
+        };
+
+        turnOffTv = function () {
+          this.tv.turnOff();
+        };
+
+        switchChannel = function (toChannel) {
+          this.tv.changeChannel(toChannel);
+        };
+
+        increaseVolume = function (value) {
+          this.tv.increaseVol(value);
+        };
+
+        decreaseVolume = function (value) {
+          this.tv.decreaseVol(value);
+        };
+      }
+
+      class TV {
+        constructor(currentChannel, volume) {
+          this.currentChannel = currentChannel;
+          this.volume = volume;
+          this.isOn = false;
+        }
+
+        turnOn = function () {
+          this.isOn = true;
+          console.log("TV is on");
+        };
+
+        turnOff = function () {
+          this.isOn = false;
+          console.log("TV is off");
+        };
+
+        increaseVol = function (value) {
+          if (this.isOn) {
+            if (this.volume + value < 100) {
+              this.volume += value;
+              console.log("The current volume : " + this.volume);
+            } else console.log("The volume is maximum !");
+          }
+        };
+
+        decreaseVol = function (value) {
+          if (this.isOn) {
+            if (this.volume - value > 0) {
+              this.volume -= value;
+              console.log("The current volume : " + this.volume);
+            } else console.log("The TV is mute");
+          }
+        };
+
+        changeChannel = function (toChannel) {
+          if (this.isOn) {
+            this.currentChannel = toChannel;
+            console.log("The TV is now on channel : " + this.currentChannel);
+          }
+        };
+      }
+
+      // start a script
+      let tv = new TV(1, 98);
+      let remote = new Remote("abc123");
+
+      tv.turnOn();
+      remote.connectToTV(tv);
+      tv.changeChannel(7);
+      remote.switchChannel(3);
+      remote.increaseVolume(2);
+      remote.decreaseVolume(100);
+      remote.turnOffTv();
+      remote.turnOnTv();
+    </script>
+  </body>
+</html>

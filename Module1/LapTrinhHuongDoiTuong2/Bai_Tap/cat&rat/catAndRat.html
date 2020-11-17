@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Rat {
+        constructor(name, weight, speed) {
+          this.name = name;
+          this.weight = weight;
+          this.speed = speed;
+          this.isAlive = true;
+        }
+
+        chirp = function () {
+          console.log("chit chit chit...");
+        };
+      }
+
+      class Cat {
+        constructor(name, weight, speed) {
+          this.name = name;
+          this.weight = weight;
+          this.speed = speed;
+          this.caught = false;
+        }
+
+        meow = function () {
+          console.log("meow meow meow");
+        };
+
+        catch = function (rat) {
+          this.meow();
+          rat.chirp();
+          if (this.speed > rat.speed) this.caught = true;
+          else console.log("Speed meow is less than rat's");
+        };
+
+        eat = function (rat) {
+          if (this.caught) {
+            if (rat.isAlive) {
+              this.weight += rat.weight;
+              rat.isAlive = false;
+            } else console.log("The rat is dead !");
+          } else console.log("The rat is not caught !");
+        };
+      }
+
+      // start a story
+      let cat = new Cat("Tom", 10, 100);
+      let rat = new Rat("Jerry", 1, 80);
+
+      cat.catch(rat);
+      cat.eat(rat);
+      console.log(cat.weight);
+      console.log(rat.isAlive);
+
+      let otherRat = new Rat("Timmy", 2, 90);
+
+      cat.catch(otherRat);
+      otherRat.isAlive = false;
+      cat.eat(otherRat);
+    </script>
+  </body>
+</html>
