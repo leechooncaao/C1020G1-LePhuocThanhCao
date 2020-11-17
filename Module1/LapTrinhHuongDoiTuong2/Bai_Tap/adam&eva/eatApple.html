@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Apple {
+        constructor() {
+          this.weight = 10;
+        }
+
+        decrease = function () {
+          this.weight--;
+        };
+
+        isEmpty = function () {
+          return this.weight === 0;
+        };
+
+        getWeight = function () {
+          return this.weight;
+        };
+      }
+
+      class Human {
+        constructor(name, gender, weight, saySomething) {
+          this.name = name;
+          this.gender = gender;
+          this.weight = weight;
+          this.saySomething = saySomething;
+        }
+
+        say = function () {
+          console.log(this.saySomething);
+        };
+
+        isMale = function () {
+          return gender === "male";
+        };
+
+        setGender = function (gender) {
+          this.gender = gender;
+        };
+
+        checkApple = function (apple) {
+          return apple.getWeight();
+        };
+
+        eat = function (apple) {
+          if (apple.getWeight() > 0) {
+            this.weight++;
+            apple.decrease();
+          }
+        };
+
+        setName = function (name) {
+          this.name = name;
+        };
+
+        getName = function () {
+          return this.name;
+        };
+
+        setWeight = function (weight) {
+          this.weight = weight;
+        };
+
+        getWeight = function () {
+          return this.weight;
+        };
+      }
+
+      let adam = new Human("Adam", "male", 80, "Love Eva chụt chụt !");
+      let eva = new Human("Eva", "female", 55, "Love Adam chịch chịch !");
+      let apple = new Apple();
+
+      adam.say();
+      eva.say();
+
+      adam.eat(apple);
+      adam.eat(apple);
+      console.log(adam.getWeight());
+      console.log(eva.checkApple(apple));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object</title>
+  </head>
+  <body>
+    <div id="game"></div>
+
+    <script>
+      function Hero(image, top, left, size, speed) {
+        this.image = image;
+        this.top = top;
+        this.left = left;
+        this.size = size;
+        this.speed = speed;
+
+        // direction = 1 --> move forward, = -1 --> move backward
+        this.direction = 1;
+
+        this.getHeroElement = function () {
+          return (
+            '<img width="' +
+            this.size +
+            '"' +
+            ' height="' +
+            this.size +
+            '"' +
+            ' src="' +
+            this.image +
+            '"' +
+            ' style="top: ' +
+            this.top +
+            "px; left:" +
+            this.left +
+            'px;position:absolute;" />'
+          );
+        };
+
+        // move by horizontal
+        this.moveHorizontal = function () {
+          this.left += this.direction * this.speed;
+        };
+
+        // move by vertical
+        this.moveVertical = function () {
+          this.top += this.direction * this.speed;
+        };
+      }
+
+      var hero = new Hero("image/Dog.jpg", 20, 30, 200, 50);
+
+      function start() {
+        // move right
+        if (hero.left < window.innerWidth - hero.size && hero.direction === 1) {
+          hero.moveHorizontal();
+          document.getElementById("game").innerHTML = hero.getHeroElement();
+        } else {
+          hero.direction = -1;
+        }
+
+        // move left
+        if (hero.left > 0 && hero.direction === -1) {
+          hero.moveHorizontal();
+          document.getElementById("game").innerHTML = hero.getHeroElement();
+        } else {
+          hero.direction = 1;
+        }
+
+        //move down
+        if (hero.top < window.innerHeight - hero.size && hero.direction === 1) {
+          hero.moveVertical();
+          document.getElementById("game").innerHTML = hero.getHeroElement();
+        } else {
+          hero.direction = -1;
+        }
+
+        // move up
+        if (hero.top > 0 && hero.direction === -1) {
+          hero.moveVertical();
+          document.getElementById("game").innerHTML = hero.getHeroElement();
+        } else {
+          hero.direction = 1;
+        }
+
+        setTimeout(start, 100);
+      }
+
+      start();
+    </script>
+  </body>
+</html>

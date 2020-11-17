@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Mobile {
+        constructor() {
+          this.battery = 100;
+          this.draft = "";
+          this.inbox = "";
+          this.sent = "";
+          this.isOn = true;
+        }
+
+        state = function () {
+          this.battery--;
+          if (this.isOn) console.log("The mobile is on !");
+          else console.log("The mobile is off !");
+        };
+
+        turnOn = function () {
+          this.isOn = true;
+        };
+
+        turnOff = function () {
+          this.isOn = false;
+        };
+
+        charge = function () {
+          this.battery = 100;
+        };
+
+        compose = function (message) {
+          if (this.isOn) {
+            this.battery--;
+            this.draft = message;
+          }
+        };
+
+        receiveMessage = function (message) {
+          if (this.isOn) {
+            this.battery--;
+            this.inbox = message;
+          }
+        };
+
+        sendMessage = function (toMobile) {
+          if (this.isOn) {
+            this.battery--;
+            this.sent = this.draft;
+            this.draft = "";
+            toMobile.receiveMessage(this.sent);
+          }
+        };
+
+        showDraft = function () {
+          if (this.isOn) {
+            this.battery--;
+            console.log(this.draft);
+          }
+        };
+
+        showInbox = function () {
+          if (this.isOn) {
+            this.battery--;
+            console.log(this.inbox);
+          }
+        };
+
+        showSent = function () {
+          if (this.isOn) {
+            this.battery--;
+            console.log(this.sent);
+          }
+        };
+      }
+
+      let iphone = new Mobile();
+      let nokia = new Mobile();
+
+      iphone.turnOff();
+      iphone.turnOn();
+
+      iphone.compose("Ahihi");
+      iphone.sendMessage(nokia);
+
+      nokia.compose("dkm");
+      nokia.sendMessage(iphone);
+
+      nokia.showInbox();
+      iphone.showInbox();
+
+      nokia.charge();
+
+      iphone.showDraft();
+
+      console.log(nokia.battery);
+      console.log(iphone.battery);
+    </script>
+  </body>
+</html>

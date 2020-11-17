@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      span {
+        float: left;
+        margin-right: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="700px"
+      height="400px"
+      style="border: 1px solid #d3d3d3"
+    ></canvas>
+    <span id="output">dfsaf</span>
+
+    <script>
+      class Rectangle {
+        constructor(width, height) {
+          this.width = width;
+          this.height = height;
+        }
+
+        getArea = function () {
+          return this.width * this.height;
+        };
+
+        getPerimeter = function () {
+          return 2 * (this.width + this.height);
+        };
+      }
+
+      function createRectangle() {
+        let context = document.getElementById("myCanvas").getContext("2d");
+
+        // create a random-size-rectangle
+        let width = Math.random() * 700;
+        let height = Math.random() * 400;
+        let rectangle = new Rectangle(width, height);
+        context.fillRect(100, 100, rectangle.width, rectangle.height);
+
+        // print info about that rect to screen
+        let area = rectangle.getArea();
+        let perimeter = rectangle.getPerimeter();
+        let info =
+          "The area : " + area + "<br>" + "The perimeter : " + perimeter;
+        document.getElementById("output").innerHTML = info;
+      }
+
+      createRectangle();
+    </script>
+  </body>
+</html>

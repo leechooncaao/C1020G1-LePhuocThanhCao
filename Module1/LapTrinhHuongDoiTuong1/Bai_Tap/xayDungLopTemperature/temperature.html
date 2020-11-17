@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Temperature {
+        constructor(celcius) {
+          this.celcius = celcius;
+        }
+
+        toFahrenheit = function () {
+          return this.celcius * 1.8 + 32;
+        };
+
+        toKelvin = function () {
+          return this.celcius + 273.15;
+        };
+      }
+
+      let temp = new Temperature(15);
+      let fahrenheit = temp.toFahrenheit();
+      let kelvin = temp.toKelvin();
+
+      alert("Farenheit : " + fahrenheit + "\n" + "Kelvin : " + kelvin);
+    </script>
+  </body>
+</html>
