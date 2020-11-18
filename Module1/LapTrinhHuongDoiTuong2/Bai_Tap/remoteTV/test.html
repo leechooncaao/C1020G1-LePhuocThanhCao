@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = [2, 5, 1, 8, -1];
+
+      function maxMinAvg(arr) {
+
+        let maxValue = arr.reduce((max,e)
+        => Math.max(max,e), arr[0]);
+
+        let minValue = arr.reduce((min,e)
+        => Math.min(min,e), arr[0]);
+
+        let sum = arr.reduce((total,e)
+        => total + e, 0);
+
+        let average = sum/arr.length;
+
+        let arrnew = [];
+       arrnew.push(maxValue,minValue,average);
+
+        return arrnew;
+      }
+
+      alert(maxMinAvg(a));
+    </script>
+  </body>
+</html>
