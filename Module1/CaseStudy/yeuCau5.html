@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //data of a customer
+
+      class Customer {
+        constructor(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          typeCustomer,
+          discount,
+          amountOfPeople,
+          rentDay,
+          service,
+          typeRoom
+        ) {
+          this.fullName = fullName;
+          this.identityNumber = identityNumber;
+          this.birthDay = birthDay;
+          this.email = email;
+          this.address = address;
+          this.typeCustomer = typeCustomer;
+          this.discount = discount;
+          this.amountOfPeople = amountOfPeople;
+          this.rentDay = rentDay;
+          this.service = service;
+          this.typeRoom = typeRoom;
+        }
+
+        display = function () {
+          alert(
+            "INFORMATION CUSTOMER " +
+              "\n" +
+              "Full Name : " +
+              this.fullName +
+              "\n" +
+              "Identity Number : " +
+              this.identityNumber +
+              "\n" +
+              "Birthday : " +
+              this.birthDay +
+              "\n" +
+              "Email : " +
+              this.email +
+              "\n" +
+              "Address : " +
+              this.address +
+              "\n" +
+              "Type of customer : " +
+              this.typeCustomer +
+              "\n" +
+              "Discount : " +
+              this.discount +
+              " %" +
+              "\n" +
+              "Amount of people : " +
+              this.amountOfPeople +
+              "\n" +
+              "Rent day : " +
+              this.rentDay +
+              "\n" +
+              "Service : " +
+              this.service +
+              "\n" +
+              "Type of room : " +
+              this.typeRoom +
+              "\n"
+          );
+        };
+      }
+
+      let arrListCustomers = [];
+
+      let fullName = "";
+      let identityNumber = "";
+      let birthDay = "";
+      let email = "";
+      let address = "";
+      let typeCustomer = "";
+      let discount = "";
+      let amountOfPeople = "";
+      let rentDay = "";
+      let service = "";
+      let typeRoom = "";
+
+      displayMainMenu();
+
+      function displayMainMenu() {
+        let selected = prompt(
+          "    MENU\n" +
+            "1. Add New Customer\n" +
+            "2. Display Information Customer\n" +
+            "3. Edit Information Customer\n" +
+            "4. Delete Customer\n" +
+            "5. Exit\n\n" +
+            "Your selection : "
+        );
+
+        switch (selected) {
+          case "1":
+            addNewCustomer();
+            break;
+          case "2":
+            displayCustomer();
+            break;
+          case "3":
+            editCustomer();
+            break;
+          case "4":
+            deleteCustomer();
+            break;
+          case "5":
+            alert("Exit !");
+            break;
+          default:
+            alert("Failed !");
+            break;
+        }
+      }
+
+      function addNewCustomer() {
+        fullName = prompt("Full Name : ");
+        identityNumber = prompt("Identity card number : ");
+        birthDay = prompt("Birthday : ");
+        email = prompt("Email : ");
+        address = prompt("Address : ");
+        typeCustomer = prompt("Type of customer : ");
+        discount = prompt("Discount : ");
+        amountOfPeople = prompt("Amount of people :");
+        rentDay = prompt("Rent day : ");
+        service = prompt("Service : ");
+        typeRoom = prompt("type room : ");
+
+        let newCustomer = new Customer(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          typeCustomer,
+          discount,
+          amountOfPeople,
+          rentDay,
+          service,
+          typeRoom
+        );
+
+        arrListCustomers.push(newCustomer);
+
+        console.log(arrListCustomers);
+
+        displayMainMenu();
+      }
+
+      function displayCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) customer.display();
+        else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      function getCustomer(customerName) {
+        for (let customer of arrListCustomers) {
+          if (customer.fullName === customerName) {
+            return customer;
+            break;
+          }
+        }
+        return false;
+      }
+
+      function editCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) {
+          customer.fullName = prompt("Full Name : ");
+          customer.identityNumber = prompt("Identity card number : ");
+          customer.birthDay = prompt("Birthday : ");
+          customer.email = prompt("Email : ");
+          customer.address = prompt("Address : ");
+          customer.typeCustomer = prompt("Type of customer : ");
+          customer.discount = prompt("Discount : ");
+          customer.amountOfPeople = prompt("Amount of people :");
+          customer.rentDay = prompt("Rent day : ");
+          customer.service = prompt("Service : ");
+          customer.typeRoom = prompt("type room : ");
+        } else alert("The customer does not exist !");
+
+        customer.display();
+
+        displayMainMenu();
+      }
+
+      function deleteCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) {
+          customer.display();
+
+          let index = arrListCustomers.indexOf(customer);
+          arrListCustomers.splice(index, 1);
+        } else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+    </script>
+  </body>
+</html>
