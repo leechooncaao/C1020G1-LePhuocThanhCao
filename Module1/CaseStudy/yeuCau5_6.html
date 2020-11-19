@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //price of services
+      const priceVilla = 500;
+      const priceHouse = 300;
+      const priceRoom = 100;
+
+      // discount by address
+      const daNang = 20;
+      const hue = 10;
+      const quangNam = 5;
+
+      // discount by type of customer
+      const diamond = 15;
+      const platium = 10;
+      const gold = 5;
+      const silver = 2;
+      const member = 0;
+
+      // salary
+      const manager = 500;
+      const sale = 300;
+      const marketing = 200;
+
+      class Customer {
+        constructor(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          typeCustomer,
+          discount,
+          amountOfPeople,
+          rentDay,
+          service,
+          typeRoom
+        ) {
+          this.fullName = fullName;
+          this.identityNumber = identityNumber;
+          this.birthDay = birthDay;
+          this.email = email;
+          this.address = address;
+          this.typeCustomer = typeCustomer;
+          this.discount = discount;
+          this.amountOfPeople = amountOfPeople;
+          this.rentDay = rentDay;
+          this.service = service;
+          this.typeRoom = typeRoom;
+        }
+
+        display = function () {
+          alert(
+            "INFORMATION CUSTOMER " +
+              "\n" +
+              "Full Name : " +
+              this.fullName +
+              "\n" +
+              "Identity Number : " +
+              this.identityNumber +
+              "\n" +
+              "Birthday : " +
+              this.birthDay +
+              "\n" +
+              "Email : " +
+              this.email +
+              "\n" +
+              "Address : " +
+              this.address +
+              "\n" +
+              "Type of customer : " +
+              this.typeCustomer +
+              "\n" +
+              "Discount : " +
+              this.discount +
+              " %" +
+              "\n" +
+              "Amount of people : " +
+              this.amountOfPeople +
+              "\n" +
+              "Rent day : " +
+              this.rentDay +
+              "\n" +
+              "Service : " +
+              this.service +
+              "\n" +
+              "Type of room : " +
+              this.typeRoom +
+              "\n"
+          );
+        };
+
+        getToTalPay = function () {
+          //get price of service
+          let priceService =
+            this.service == "Villa"
+              ? priceVilla
+              : this.service == "House"
+              ? priceHouse
+              : priceRoom;
+
+          //calculating discount by address
+          let discountByAddress =
+            this.address == "Da Nang"
+              ? daNang
+              : this.address == "Hue"
+              ? hue
+              : quangNam;
+
+          //calculating discount by time
+          let discountByTime =
+            this.rentDay > 7
+              ? 30
+              : this.rentDay >= 5
+              ? 20
+              : this.rentDay >= 2
+              ? 10
+              : 0;
+
+          //calculating discount by type of customer
+          let discountByCustomer =
+            this.typeCustomer == "Diamond"
+              ? diamond
+              : this.typeCustomer == "Platium"
+              ? platium
+              : this.typeCustomer == "Gold"
+              ? gold
+              : this.typeCustomer == "Silver"
+              ? silver
+              : member;
+
+          //calculating total of discount
+          let totalDiscount =
+            discountByAddress + discountByTime + discountByCustomer;
+
+          //total money must be paid
+          let total = priceService * parseFloat(this.rentDay) - totalDiscount;
+
+          alert("The total price : " + total + " $");
+        };
+      }
+
+      class Employee {
+        constructor(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          position
+        ) {
+          this.fullName = fullName;
+          this.identityNumber = identityNumber;
+          this.birthDay = birthDay;
+          this.email = email;
+          this.address = address;
+          this.position = position;
+        }
+
+        getSalary = function () {
+          let salary =
+            this.position == "manager"
+              ? manager
+              : this.position == "sale"
+              ? sale
+              : marketing;
+
+          alert("Salary of employee : " + salary + " $");
+        };
+
+        display = function () {
+          alert(
+            "INFORMATION EMPLOYEE " +
+              "\n" +
+              "Full Name : " +
+              this.fullName +
+              "\n" +
+              "Identity Number : " +
+              this.identityNumber +
+              "\n" +
+              "Birthday : " +
+              this.birthDay +
+              "\n" +
+              "Email : " +
+              this.email +
+              "\n" +
+              "Address : " +
+              this.address +
+              "\n" +
+              "Position : " +
+              this.position
+          );
+        };
+      }
+
+      let arrListCustomers = [];
+      let arrListEmployees = [];
+
+      // initial data of customer
+      let fullName = "";
+      let identityNumber = "";
+      let birthDay = "";
+      let email = "";
+      let address = "";
+      let typeCustomer = "";
+      let discount = "";
+      let amountOfPeople = "";
+      let rentDay = "";
+      let service = "";
+      let typeRoom = "";
+      let position = "";
+
+      displayMainMenu();
+
+      function displayMainMenu() {
+        let selected = prompt(
+          "    MENU\n" +
+            "1. Add New Customer\n" +
+            "2. Display Information Customer\n" +
+            "3. Edit Information Customer\n" +
+            "4. Delete Customer\n" +
+            "5. Display total pay of customer\n" +
+            "6. Add new Employee\n" +
+            "7. Display information Employee\n" +
+            "8. Salary of Employee\n" +
+            "9. Exit\n\n" +
+            "Your selection : "
+        );
+
+        switch (selected) {
+          case "1":
+            addNewCustomer();
+            break;
+          case "2":
+            displayCustomer();
+            break;
+          case "3":
+            editCustomer();
+            break;
+          case "4":
+            deleteCustomer();
+            break;
+          case "5":
+            displayToTalPay();
+            break;
+          case "6":
+            addNewEmployee();
+            break;
+          case "7":
+            displayEmployee();
+            break;
+          case "8":
+            displaySalary();
+            break;
+          case "9":
+            alert("Exit !");
+            break;
+          default:
+            alert("Failed !");
+            break;
+        }
+      }
+
+      // functions of customer
+
+      function addNewCustomer() {
+        fullName = formatString(prompt("Full Name : "));
+
+        do {
+          identityNumber = prompt("Identity number : ");
+        } while (!validateIdentityNumber(identityNumber));
+
+        do {
+          birthDay = prompt("Birthday : ");
+        } while (!validateBirthDay(birthDay));
+
+        do {
+          email = prompt("Email : ");
+        } while (!validateEmail(email));
+
+        address = formatString(prompt("Address : "));
+
+        typeCustomer = formatString(prompt("Type of customer : "));
+
+        discount = prompt("Discount : ");
+
+        do {
+          amountOfPeople = parseInt(prompt("Amount of people :"));
+        } while (!validateNumber(amountOfPeople));
+
+        do {
+          rentDay = parseInt(prompt("Rent day : "));
+        } while (!validateNumber(rentDay));
+
+        service = prompt("Service : ");
+
+        typeRoom = prompt("type room : ");
+
+        let newCustomer = new Customer(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          typeCustomer,
+          discount,
+          amountOfPeople,
+          rentDay,
+          service,
+          typeRoom
+        );
+
+        arrListCustomers.push(newCustomer);
+
+        displayMainMenu();
+      }
+
+      function displayCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) customer.display();
+        else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      function getCustomer(customerName) {
+        for (let customer of arrListCustomers) {
+          if (customer.fullName === customerName) {
+            return customer;
+            break;
+          }
+        }
+        return false;
+      }
+
+      function displayToTalPay() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) {
+          customer.getToTalPay();
+        } else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      function editCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) {
+          customer.fullName = formatString(prompt("Full Name : "));
+
+          do {
+            customer.identityNumber = prompt("Identity number : ");
+          } while (!validateIdentityNumber(customer.identityNumber));
+
+          do {
+            customer.birthDay = prompt("Birthday : ");
+          } while (!validateBirthDay(customer.birthDay));
+
+          do {
+            customer.email = prompt("Email : ");
+          } while (!validateEmail(customer.email));
+
+          customer.address = formatString(prompt("Address : "));
+
+          customer.typeCustomer = formatString(prompt("Type of customer : "));
+
+          customer.discount = prompt("Discount : ");
+
+          do {
+            customer.amountOfPeople = parseInt(prompt("Amount of people :"));
+          } while (!validateNumber(customer.amountOfPeople));
+
+          do {
+            customer.rentDay = parseInt(prompt("Rent day : "));
+          } while (!validateNumber(customer.rentDay));
+
+          customer.service = prompt("Service : ");
+
+          customer.typeRoom = prompt("type room : ");
+        } else alert("The customer does not exist !");
+        customer.display();
+
+        displayMainMenu();
+      }
+
+      function deleteCustomer() {
+        let customerName = prompt("Customer's fullname :");
+        let customer = getCustomer(customerName);
+        if (customer) {
+          customer.display();
+
+          let index = arrListCustomers.indexOf(customer);
+          arrListCustomers.splice(index, 1);
+        } else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      // functions of employee
+
+      function addNewEmployee() {
+        fullName = formatString(prompt("Full Name : "));
+
+        do {
+          identityNumber = prompt("Identity number : ");
+        } while (!validateIdentityNumber(identityNumber));
+
+        do {
+          birthDay = prompt("Birthday : ");
+        } while (!validateBirthDay(birthDay));
+
+        do {
+          email = prompt("Email : ");
+        } while (!validateEmail(email));
+
+        address = formatString(prompt("Address : "));
+
+        position = prompt("Position : ");
+
+        let newEmployee = new Employee(
+          fullName,
+          identityNumber,
+          birthDay,
+          email,
+          address,
+          position
+        );
+
+        arrListEmployees.push(newEmployee);
+
+        displayMainMenu();
+      }
+
+      function displayEmployee() {
+        let employeeName = prompt("Employee name :");
+        let employee = getEmployee(employeeName);
+        if (employee) employee.display();
+        else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      function getEmployee(employeeName) {
+        for (let employee of arrListEmployees) {
+          if (employee.fullName === employeeName) {
+            return employee;
+            break;
+          }
+        }
+
+        return false;
+      }
+
+      function displaySalary() {
+        let employeeName = prompt("Employee name :");
+        let employee = getEmployee(employeeName);
+        if (employee) employee.getSalary();
+        else alert("The customer does not exist !");
+
+        displayMainMenu();
+      }
+
+      // functions validating
+
+      function validateEmail(email) {
+        let emailFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (email.match(emailFormat)) return true;
+        else {
+          alert("Invalid email");
+          return false;
+        }
+      }
+
+      function validateBirthDay(birthDay) {
+        let birthDayFormat = /^(([0-2][0-9])|((3)[0-1]))([-/.])(((0)[0-9])|((1)[0-2]))([-/.])\d{4}$/;
+
+        if (birthDay.match(birthDayFormat)) return true;
+        else {
+          alert("Invalid birthday !");
+          return false;
+        }
+      }
+
+      function validateNumber(number) {
+        if (number > 0) return true;
+        else {
+          alert("Invalid input !");
+          return false;
+        }
+      }
+
+      function validateIdentityNumber(identityNumber) {
+        let identNumFormat = /^[0-9]{8}$/;
+
+        if (identityNumber.match(identNumFormat)) {
+          return true;
+        } else {
+          alert("Invalid Identity Number !");
+          return false;
+        }
+      }
+
+      function formatString(string) {
+        let arrStr = string
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase()
+          .split(" ");
+
+        let newArr = arrStr.map((e) => {
+          return e.charAt(0).toUpperCase() + e.slice(1);
+        });
+
+        return newArr.join(" ");
+      }
+    </script>
+  </body>
+</html>
