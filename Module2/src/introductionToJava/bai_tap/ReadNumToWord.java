@@ -6,8 +6,13 @@ public class ReadNumToWord {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a number (max 3 digits):");
-        var number = scanner.nextInt();
+        int number;
+        do {
+            System.out.println("Enter a number (max 3 digits):");
+            number = scanner.nextInt();
+            if(number >= 1000 || number < 0)
+                System.out.println("Invalid input !");
+        }while (number >= 1000 || number < 0);
 
         if (number == 0)
             System.out.println("zero");
@@ -16,7 +21,7 @@ public class ReadNumToWord {
             var hundred = number - dozen;
             String result = "";
 
-            if(hundred == 0)
+            if (hundred == 0)
                 result = getdozens(dozen);
             else if (dozen == 0)
                 result = getHundreds(hundred);
@@ -29,7 +34,7 @@ public class ReadNumToWord {
     public static String getUnit(int unit) {
         StringBuffer result = new StringBuffer();
 
-        if(unit == 0)
+        if (unit == 0)
             return "";
 
         result.append(" ");
@@ -69,10 +74,10 @@ public class ReadNumToWord {
     public static String getHundreds(int hundred) {
         StringBuffer result = new StringBuffer();
 
-        if(hundred == 0)
+        if (hundred == 0)
             return "";
 
-        switch (hundred){
+        switch (hundred) {
             case 100:
                 result.append("one");
                 break;
@@ -109,11 +114,11 @@ public class ReadNumToWord {
     public static String getdozens(int dozen) {
         StringBuffer result = new StringBuffer();
 
-        if(dozen == 0)
+        if (dozen == 0)
             return "";
 
-        if(dozen >= 10 && dozen < 20){
-            switch (dozen){
+        if (dozen >= 10 && dozen < 20) {
+            switch (dozen) {
                 case 10:
                     result.append("ten");
                     break;
@@ -124,7 +129,7 @@ public class ReadNumToWord {
                     result.append("twelve");
                     break;
                 case 13:
-                    result.append("thirdteen");
+                    result.append("thirteen");
                     break;
                 case 14:
                     result.append("fourteen");
@@ -145,7 +150,7 @@ public class ReadNumToWord {
                     result.append("nineteen");
                     break;
             }
-        }else {
+        } else {
             var unit = dozen % 10;
             dozen -= unit;
             var resUnit = getUnit(unit);
