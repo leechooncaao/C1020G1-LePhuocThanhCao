@@ -33,7 +33,12 @@ public class Circle extends Shape{
     }
 
     @Override
+    public void printArea() {
+        System.out.println("A Circle with area= " + getArea());
+    }
+
+    @Override
     public String toString() {
-        return "A Circle with radius= " + radius + " which is a subclass of " + super.toString() ;
+        return "A Circle with radius= " + radius + " and area= " + getArea() + " which is a subclass of " + super.toString() ;
     }
 }

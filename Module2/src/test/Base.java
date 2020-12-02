@@ -1,7 +1,11 @@
 package test;
 
 public class Base {
-   public int get(){
-       return 3;
+   public void print(){
+       System.out.println("from base");
+   }
+
+   public void display(){
+       System.out.println("display from base");
    }
 }

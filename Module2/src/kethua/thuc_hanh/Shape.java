@@ -28,6 +28,10 @@ public class Shape {
         this.filled = filled;
     }
 
+    public void printArea(){
+
+    }
+
     @Override
     public String toString() {
         var firstPart = "a shape with color of " + color + " and ";

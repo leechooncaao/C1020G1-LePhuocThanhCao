@@ -43,7 +43,12 @@ public class Rectangle extends Shape {
     }
 
     @Override
+    public void printArea() {
+        System.out.println("A rectangle with area= " + getArea());
+    }
+
+    @Override
     public String toString() {
-        return "A rectangle with width= " + width + " and length= " + length + " which is a subclass of " + super.toString();
+        return "A rectangle with width= " + width + " and length= " + length + " and area= " + getArea() + " which is a subclass of " + super.toString();
     }
 }
