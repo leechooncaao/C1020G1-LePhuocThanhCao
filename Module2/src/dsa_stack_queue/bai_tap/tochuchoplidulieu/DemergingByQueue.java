@@ -21,14 +21,12 @@ public class DemergingByQueue {
                 new SimpleDateFormat("dd-MM-yyyy").parse("22-10-2013")));
 
         System.out.println("Before sorting : ");
-        for(var element : list)
-            System.out.println(element.getFullName() + "; " + element.getGender() + "; " + element.getBirthDay());
+        list.stream().forEach(System.out::println);
 
         System.out.println();
         System.out.println("After sorting by birthDay : ");
         Collections.sort(list);
-        for(var element : list)
-            System.out.println(element.getFullName() + "; " + element.getGender() + "; " + element.getBirthDay());
+        list.stream().forEach(System.out::println);
 
         Queue<Employee> female = new ArrayDeque<>();
         Queue<Employee> male = new ArrayDeque<>();
@@ -49,8 +47,8 @@ public class DemergingByQueue {
 
         System.out.println();
         System.out.println("After sorting by gender and birthday :");
-        for(var element : sortedList)
-            System.out.println(element.getFullName() + "; " + element.getGender() + "; " + element.getBirthDay());
+
+        sortedList.stream().forEach(System.out::println);
 
 
 

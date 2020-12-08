@@ -44,4 +44,9 @@ public class Employee implements Comparable<Employee>{
 //        else return 1;
         return getBirthDay().compareTo(otherEmployee.getBirthDay());
     }
+
+    @Override
+    public String toString() {
+        return fullName + "; " + gender + "; " + birthDay;
+    }
 }

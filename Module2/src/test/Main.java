@@ -1,14 +1,12 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>();
-//        stack.push(2,4);
-
+        Random random = new Random();
+        var result = random.ints(0,5).limit(10).sorted().toArray();
+        for(var e : result)
+            System.out.println(e);
     }
 }
