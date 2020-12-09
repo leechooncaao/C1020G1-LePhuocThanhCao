@@ -86,13 +86,13 @@ public class BinarySearchTree {
         return false;
     }
 
-    public void remove(int value){
-        if(!contains(value))
-            throw new NoSuchElementException();
-
-
-
-    }
+//    public void remove(int value){
+//        if(!contains(value))
+//            throw new NoSuchElementException();
+//
+//
+//
+//    }
 
 
 }
