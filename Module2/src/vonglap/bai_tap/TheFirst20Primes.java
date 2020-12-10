@@ -36,4 +36,5 @@ public class TheFirst20Primes {
 
         return check;
     }
+
 }
