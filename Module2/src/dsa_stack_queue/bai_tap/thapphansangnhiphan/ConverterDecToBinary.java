@@ -7,12 +7,12 @@ public class ConverterDecToBinary {
         Stack<Integer> stack = new Stack<>();
         int dec = 174;
 
-        var quotien = dec/2;
+        var quotient = dec/2;
         var remainder = dec%2;
         stack.push(remainder);
-        while (quotien != 0){
-            remainder = quotien%2;
-            quotien = quotien/2;
+        while (quotient != 0){
+            remainder = quotient%2;
+            quotient = quotient/2;
             stack.push(remainder);
         }
 
