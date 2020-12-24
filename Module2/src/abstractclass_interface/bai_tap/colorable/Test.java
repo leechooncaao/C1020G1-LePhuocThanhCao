@@ -17,7 +17,7 @@ public class Test {
 
             if (shape instanceof SquareColorable) {
                 SquareColorable square = (SquareColorable) shape;
-                square.howToColor();
+                square.howToColor(new SquareColorable());
             }
 
         }

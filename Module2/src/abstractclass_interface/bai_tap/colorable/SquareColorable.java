@@ -20,7 +20,7 @@ public class SquareColorable extends Square implements Colorable {
     }
 
     @Override
-    public void howToColor() {
+    public void howToColor(Object obj) {
         System.out.println(" Color all four sides");
     }
 }
