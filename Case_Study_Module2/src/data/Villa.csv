@@ -1,0 +1,4 @@
+NameService,price,area-using,floorNumber,rentalType,otherAmenities,poolArea,numberTenants,idService
+Villa_1,1000.0,45,5,BY_HOUR,nothing,35,3,SVVL-0001
+Villa_2,3000.0,32,3,BY_DAY,nothing,12,4,SVVL-0002
+Villa_3,4000.0,43,5,BY_YEAR,massage a-z,23,2,SVVL-0003

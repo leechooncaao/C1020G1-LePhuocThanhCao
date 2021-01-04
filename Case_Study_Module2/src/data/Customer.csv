@@ -1,4 +1,5 @@
 fullName,address,birthDay,id,phoneNumber,email,gender,customerType
 Thanh Cao,Hue,13/12/1996,111 222 333,12312311,thanhcao@gmail.com,MALE,DIAMOND
-Thuy Duong,Hue,13/12/1996,111 222 333,12312311,thanhcao@gmail.com,MALE,DIAMOND
-Thu Thao,Hue,13/12/1996,111 222 333,12312311,thanhcao@gmail.com,MALE,DIAMOND
+Thuy Duong,Hue,13/12/1997,111 222 444,12312311,thuyduong@gmail.com,FEMALE,DIAMOND
+Thu Thao,Hue,13/12/1992,111 222 555,12312311,thuthao@gmail.com,FEMALE,GOLD
+Van Kien,hue,13/12/1990,111 111 777,132131211,vankien@gmail.com,MALE,MEMBER

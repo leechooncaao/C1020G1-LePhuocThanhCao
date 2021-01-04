@@ -50,7 +50,6 @@ public class CustomerManagement implements PersonManagement {
         return list.get(index);
     }
 
-
     private List<Customer> getDataFromFile() {
         List<Customer> newList = new ArrayList<>();
 

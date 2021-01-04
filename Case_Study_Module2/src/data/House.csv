@@ -1,0 +1,4 @@
+NameService,price,area-using,numberTenants,rentalType,otherAmenities,floorNumber,idService
+House_1,200.0,32,2,BY_MONTH,nothing,5,SVHO-0001
+House_2,400.0,55,9,BY_HOUR,nothing,5,SVHO-0002
+House_3,400.0,40,5,BY_MONTH,nothing,3,SVHO-0003

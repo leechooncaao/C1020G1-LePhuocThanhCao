@@ -1,0 +1,4 @@
+NameService,price,area-using,rentalType,otherAmenities,idService,numberTenants,roomType
+Room_1,50.0,31,BY_HOUR,nothing,SVRO-0001,2,SINGLE
+Room_2,90.0,40,BY_HOUR,nothing,SVRO-0003,3,VIP
+Room_3,100.0,45,BY_HOUR,nothing,SVRO-0002,3,SINGLE

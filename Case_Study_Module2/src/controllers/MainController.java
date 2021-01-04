@@ -62,7 +62,6 @@ public class MainController {
         var choice = -1;
         while (true){
             choice = Integer.parseInt(scanner.nextLine());
-
             switch (choice){
                 case 1:
                     addNewService();
@@ -100,6 +99,7 @@ public class MainController {
                     System.out.println("Invalid input !");
                     showMainMenu();
             }
+
         }
     }
 }

@@ -44,4 +44,10 @@ public class Customer extends Person implements Comparable<Customer> {
 
         return compareByName;
     }
+
+    public static void main(String[] args) {
+        // parents - child
+        // superclass - subclass
+        // base - derived
+    }
 }
