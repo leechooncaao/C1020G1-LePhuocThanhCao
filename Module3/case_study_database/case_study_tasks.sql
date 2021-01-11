@@ -26,7 +26,55 @@ JOIN contracts con USING (customer_id)
 WHERE ct.type_name = 'Diamond'
 GROUP BY con.customer_id;
 
--- task 5 :Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) cho tất cả các Khách hàng đã từng đặt phỏng. (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+-- task 5 :Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, 
+-- NgayKetThuc, TongTien (Với TongTien được tính theo công thức như sau: 
+-- GiaDichVu + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) 
+-- cho tất cả các Khách hàng đã từng đặt phỏng. 
+-- (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+
+CREATE TEMPORARY TABLE accompanied_total_payment
+SELECT 
+	dc.contract_id,
+    SUM(acs.price*dc.quantity) AS total_price
+FROM detailed_contracts dc
+JOIN accompanied_services acs USING (accompanied_service_id)
+GROUP BY dc.contract_id;
+
+SELECT 
+	con.contract_id,
+	cus.customer_id,
+    cus.full_name,
+    ct.type_name AS type_customer,
+    serv.service_name,
+    con.start_day,
+    con.end_day,
+    TIMESTAMPDIFF(DAY, con.start_day, con.end_day) * st.service_price + atp.total_price AS total_payment
+FROM customers cus
+JOIN customer_types ct USING (type_customer_id)
+LEFT JOIN contracts con USING (customer_id)
+LEFT JOIN services serv ON serv.service_id = con.service_id
+LEFT JOIN service_types st ON st.service_type_id = serv.service_type_id
+LEFT JOIN accompanied_total_payment atp ON atp.contract_id = con.contract_id;
+
+-- 6.	Hiển thị IDDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu của tất cả các loại Dịch vụ 
+-- chưa từng được Khách hàng thực hiện đặt từ quý 1 của năm 2020 (Quý 1 là tháng 1, 2, 3).
+
+SELECT 
+	serv.service_id,
+    serv.service_name,
+    serv.area,
+    st.service_price,
+    st.name AS type,
+    con.start_day
+FROM services serv
+JOIN service_types st USING (service_type_id)
+JOIN contracts con USING (service_id)
+WHERE MONTH(con.start_day) NOT IN (1,2,3)
+
+-- task 
+
+
+
 
 
 

@@ -16,27 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `positions`
+-- Table structure for table `services`
 --
 
-DROP TABLE IF EXISTS `positions`;
+DROP TABLE IF EXISTS `services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `positions` (
-  `position_id` int NOT NULL AUTO_INCREMENT,
-  `position_name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`position_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `services` (
+  `service_id` int NOT NULL AUTO_INCREMENT,
+  `service_name` varchar(45) DEFAULT NULL,
+  `area` int DEFAULT NULL,
+  `floor_number` int DEFAULT NULL,
+  `max_tenant` int DEFAULT NULL,
+  `service_type_id` int DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`service_id`),
+  KEY `type_service_id_idx` (`service_type_id`),
+  CONSTRAINT `service_type_id` FOREIGN KEY (`service_type_id`) REFERENCES `service_types` (`service_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `positions`
+-- Dumping data for table `services`
 --
 
-LOCK TABLES `positions` WRITE;
-/*!40000 ALTER TABLE `positions` DISABLE KEYS */;
-INSERT INTO `positions` VALUES (1,'receptionist'),(2,'waitress'),(3,'specialist'),(4,'supervisor'),(5,'manager'),(6,'director');
-/*!40000 ALTER TABLE `positions` ENABLE KEYS */;
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,'Villa_1',40,3,4,1,'available'),(2,'Room_1',35,2,2,3,'not available'),(3,'Room_2',38,2,3,3,'available'),(4,'House_1',35,3,2,2,'available'),(5,'Villa_2',60,3,4,1,'available');
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-08 11:18:39
+-- Dump completed on 2021-01-11 13:56:36

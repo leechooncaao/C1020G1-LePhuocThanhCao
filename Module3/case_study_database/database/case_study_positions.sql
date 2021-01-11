@@ -16,27 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customer_types`
+-- Table structure for table `positions`
 --
 
-DROP TABLE IF EXISTS `customer_types`;
+DROP TABLE IF EXISTS `positions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer_types` (
-  `type_customer_id` int NOT NULL AUTO_INCREMENT,
-  `type_name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`type_customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `positions` (
+  `position_id` int NOT NULL AUTO_INCREMENT,
+  `position_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`position_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer_types`
+-- Dumping data for table `positions`
 --
 
-LOCK TABLES `customer_types` WRITE;
-/*!40000 ALTER TABLE `customer_types` DISABLE KEYS */;
-INSERT INTO `customer_types` VALUES (1,'Diamond'),(2,'Platiumn'),(3,'Gold'),(4,'Silver'),(5,'Member');
-/*!40000 ALTER TABLE `customer_types` ENABLE KEYS */;
+LOCK TABLES `positions` WRITE;
+/*!40000 ALTER TABLE `positions` DISABLE KEYS */;
+INSERT INTO `positions` VALUES (1,'receptionist'),(2,'waitress'),(3,'specialist'),(4,'supervisor'),(5,'manager'),(6,'director');
+/*!40000 ALTER TABLE `positions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-08 11:18:39
+-- Dump completed on 2021-01-11 13:56:35

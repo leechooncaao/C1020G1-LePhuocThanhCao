@@ -16,39 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `contracts`
+-- Table structure for table `service_types`
 --
 
-DROP TABLE IF EXISTS `contracts`;
+DROP TABLE IF EXISTS `service_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `contracts` (
-  `contract_id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `service_id` int DEFAULT NULL,
-  `start_day` date DEFAULT NULL,
-  `end_day` date DEFAULT NULL,
-  `deposit` decimal(9,2) DEFAULT NULL,
-  `total_payment` decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY (`contract_id`),
-  KEY `employee_id_idx` (`employee_id`),
-  KEY `customer_id_idx` (`customer_id`),
-  KEY `service_id_idx` (`service_id`),
-  CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
-  CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`),
-  CONSTRAINT `service_id` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `service_types` (
+  `service_type_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `service_price` decimal(9,2) DEFAULT NULL,
+  PRIMARY KEY (`service_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `contracts`
+-- Dumping data for table `service_types`
 --
 
-LOCK TABLES `contracts` WRITE;
-/*!40000 ALTER TABLE `contracts` DISABLE KEYS */;
-INSERT INTO `contracts` VALUES (1,1,2,3,'2020-12-15','2021-02-01',500.00,2550.00),(2,2,7,5,'2020-10-01','2020-12-01',200.00,1750.00),(3,6,1,3,'2020-10-25','2020-11-25',200.00,1500.00),(4,4,4,4,'2020-02-01','2020-05-01',300.00,2200.00),(5,3,1,1,'2020-12-01','2020-12-20',500.00,2750.00);
-/*!40000 ALTER TABLE `contracts` ENABLE KEYS */;
+LOCK TABLES `service_types` WRITE;
+/*!40000 ALTER TABLE `service_types` DISABLE KEYS */;
+INSERT INTO `service_types` VALUES (1,'Villa',1000.00),(2,'House',500.00),(3,'Room',200.00);
+/*!40000 ALTER TABLE `service_types` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -60,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-08 11:18:39
+-- Dump completed on 2021-01-11 13:56:35

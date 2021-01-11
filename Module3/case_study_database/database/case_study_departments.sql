@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `rental_types`
+-- Table structure for table `departments`
 --
 
-DROP TABLE IF EXISTS `rental_types`;
+DROP TABLE IF EXISTS `departments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `rental_types` (
-  `rental_type_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `price` decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY (`rental_type_id`)
+CREATE TABLE `departments` (
+  `department_id` int NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rental_types`
+-- Dumping data for table `departments`
 --
 
-LOCK TABLES `rental_types` WRITE;
-/*!40000 ALTER TABLE `rental_types` DISABLE KEYS */;
-INSERT INTO `rental_types` VALUES (1,'By hour',80.00),(2,'By day',60.00),(3,'By month',35.00),(4,'By year',30.00);
-/*!40000 ALTER TABLE `rental_types` ENABLE KEYS */;
+LOCK TABLES `departments` WRITE;
+/*!40000 ALTER TABLE `departments` DISABLE KEYS */;
+INSERT INTO `departments` VALUES (1,'sale-marketing'),(2,'administration'),(3,'service'),(4,'management');
+/*!40000 ALTER TABLE `departments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-08 11:18:41
+-- Dump completed on 2021-01-11 13:56:35
