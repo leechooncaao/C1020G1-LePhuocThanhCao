@@ -37,7 +37,7 @@ CREATE TABLE `contracts` (
   CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
   CONSTRAINT `employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`),
   CONSTRAINT `service_id` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `contracts` (
 
 LOCK TABLES `contracts` WRITE;
 /*!40000 ALTER TABLE `contracts` DISABLE KEYS */;
-INSERT INTO `contracts` VALUES (1,1,2,3,'2020-12-15','2021-02-01',500.00),(2,2,7,5,'2020-10-01','2020-12-01',200.00),(3,6,1,3,'2020-10-25','2020-11-25',200.00),(4,4,4,4,'2020-02-01','2020-05-01',300.00),(5,3,1,1,'2020-12-01','2020-12-20',500.00);
+INSERT INTO `contracts` VALUES (1,1,2,3,'2020-12-15','2021-02-01',500.00),(2,2,7,5,'2020-10-01','2020-12-01',200.00),(3,6,1,3,'2020-10-25','2020-11-25',200.00),(4,4,4,4,'2021-02-01','2020-05-01',300.00),(5,3,1,1,'2020-12-01','2020-12-20',500.00),(6,2,1,5,'2021-03-05','2021-05-25',850.00);
 /*!40000 ALTER TABLE `contracts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-11 13:56:34
+-- Dump completed on 2021-01-11 16:54:48

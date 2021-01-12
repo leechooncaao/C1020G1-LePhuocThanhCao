@@ -43,7 +43,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,1,'Lê Phước Thanh Cao','1996-12-13','231325312','03121545','thanhcao@gmail.com','Huế'),(2,1,'Đặng Thị Hồng Thanh','1994-07-18','32321321','0445444554','hongthanh@gmail.com','Quảng Nam'),(3,4,'Trần Hữu Kiên','1991-10-22','3212311123','0494789797','huukien@gmail.com','Nghệ An'),(4,4,'Nguyễn Việt Dũng','1994-05-10','13213113','049788444','vietdung@gmail.com','Đà Nẵng'),(5,5,'Lê Hoàng Minh Tuấn','1994-08-08','1231313232','0545538987','minhtuan@gmail.com','Đà Nẵng'),(6,2,'Phạm Hồng Sơn','1997-09-09','32132131121','089879979','hongson@gmail.com','Đà Nẵng'),(7,2,'Trần Thị Thanh','2000-05-18','321322232321','098989790','thithanh@gmail.com','Quảng Trị'),(8,2,'Phạm Trường Phúc','1991-02-05','132131213','0213123211','truongphuc@gmail.com','Đà Nẵng');
+INSERT INTO `customers` VALUES (1,1,'Lê Phước Thanh Cao','1996-12-13','231325312','03121545','thanhcao@gmail.com','Huế'),(2,1,'Đặng Thị Hồng Thanh','1994-07-18','32321321','0445444554','hongthanh@gmail.com','Quảng Nam'),(3,4,'Trần Hữu Kiên','1991-10-22','3212311123','0494789797','huukien@gmail.com','Nghệ An'),(4,4,'Nguyễn Việt Dũng','1994-05-10','13213113','049788444','vietdung@gmail.com','Đà Nẵng'),(5,5,'Lê Hoàng Minh Tuấn','1994-08-08','1231313232','0545538987','minhtuan@gmail.com','Đà Nẵng'),(6,2,'Phạm Hồng Sơn','1997-09-09','32132131121','089879979','hongson@gmail.com','Đà Nẵng'),(7,2,'Trần Thị Thanh','2000-05-18','321322232321','098989790','thithanh@gmail.com','Quảng Trị'),(8,2,'Phạm Trường Phúc','1991-02-05','132131213','0213123211','truongphuc@gmail.com','Đà Nẵng'),(9,3,'Đặng Thị Hồng Thanh','2001-11-18','3212332123','0213323233','thanhabc@gmail.com','Quảng Ngãi');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-11 13:56:34
+-- Dump completed on 2021-01-11 16:54:47

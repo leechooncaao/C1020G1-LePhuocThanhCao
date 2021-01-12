@@ -56,7 +56,7 @@ LEFT JOIN services serv ON serv.service_id = con.service_id
 LEFT JOIN service_types st ON st.service_type_id = serv.service_type_id
 LEFT JOIN accompanied_total_payment atp ON atp.contract_id = con.contract_id;
 
--- 6.	Hiển thị IDDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu của tất cả các loại Dịch vụ 
+-- task 6.	Hiển thị IDDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu của tất cả các loại Dịch vụ 
 -- chưa từng được Khách hàng thực hiện đặt từ quý 1 của năm 2020 (Quý 1 là tháng 1, 2, 3).
 
 SELECT 
@@ -69,9 +69,73 @@ SELECT
 FROM services serv
 JOIN service_types st USING (service_type_id)
 JOIN contracts con USING (service_id)
-WHERE MONTH(con.start_day) NOT IN (1,2,3)
+WHERE MONTH(con.start_day) NOT IN (1,2,3);
 
--- task 
+-- task 7.	Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, 
+-- TenLoaiDichVu của tất cả các loại dịch vụ đã từng được Khách hàng đặt phòng trong năm 2020 
+-- nhưng chưa từng được Khách hàng đặt phòng  trong năm 2021
+
+DROP TEMPORARY TABLE IF EXISTS in_2020;
+CREATE TEMPORARY TABLE in_2020
+SELECT 
+	service_id,
+    start_day
+FROM contracts
+WHERE YEAR(start_day) IN (2020)
+GROUP BY service_id;
+
+DROP TEMPORARY TABLE IF EXISTS in_2021;
+CREATE TEMPORARY TABLE in_2021
+SELECT 
+	service_id,
+    start_day
+FROM contracts
+WHERE YEAR(start_day) IN (2021)
+GROUP BY service_id;
+
+SELECT 
+	in_2020.service_id,
+    serv.service_name,
+    serv.area,
+    serv.max_tenant,
+    st.service_price,
+    st.name AS service_type
+FROM in_2020
+JOIN services serv USING (service_id)
+JOIN service_types st ON st.service_type_id = serv.service_type_id
+WHERE NOT EXISTS (SELECT * FROM in_2021 WHERE in_2020.service_id = in_2021.service_id );
+
+-- task 8.	Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoTenKhachHang không trùng nhau.
+-- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên
+
+-- 1st way : 
+SELECT DISTINCT full_name
+FROM customers;
+
+-- 2nd way :
+SELECT 
+	full_name
+FROM customers
+GROUP BY full_name;
+
+-- 3rd way:
+
+-- SELECT 
+-- 	full_name
+-- FROM customers
+-- GROUP BY full_name
+-- HAVING COUNT(full_name)  = 1
+
+-- task 9.	Thực hiện thống kê doanh thu theo tháng, 
+-- nghĩa là tương ứng với mỗi tháng trong năm 2020 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng
+
+
+
+
+
+
+
+
 
 
 
