@@ -71,6 +71,28 @@ JOIN service_types st USING (service_type_id)
 JOIN contracts con USING (service_id)
 WHERE MONTH(con.start_day) NOT IN (1,2,3);
 
+-- SELECT 
+-- 	serv.service_id,
+--     serv.service_name,
+--     serv.area,
+--     st.service_price,
+--     st.name AS type
+-- FROM
+--     services serv
+-- JOIN service_types st USING (service_type_id)
+-- WHERE
+--     NOT EXISTS( SELECT 
+--             con.contract_id
+--         FROM contracts con
+--         WHERE
+--             (start_day BETWEEN '2020-01-01' AND '2020-03-01')
+-- 		AND con.service_id = services.service_id );
+
+SELECT 
+	contract_id
+    
+
+
 -- task 7.	Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, 
 -- TenLoaiDichVu của tất cả các loại dịch vụ đã từng được Khách hàng đặt phòng trong năm 2020 
 -- nhưng chưa từng được Khách hàng đặt phòng  trong năm 2021
