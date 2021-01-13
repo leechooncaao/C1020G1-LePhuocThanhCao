@@ -32,6 +32,7 @@ GROUP BY con.customer_id;
 -- cho tất cả các Khách hàng đã từng đặt phỏng. 
 -- (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
 
+DROP TEMPORARY TABLE IF EXISTS accompanied_total_payment;
 CREATE TEMPORARY TABLE accompanied_total_payment
 SELECT 
 	dc.contract_id,
@@ -69,34 +70,13 @@ SELECT
 FROM services serv
 JOIN service_types st USING (service_type_id)
 JOIN contracts con USING (service_id)
-WHERE MONTH(con.start_day) NOT IN (1,2,3);
-
--- SELECT 
--- 	serv.service_id,
---     serv.service_name,
---     serv.area,
---     st.service_price,
---     st.name AS type
--- FROM
---     services serv
--- JOIN service_types st USING (service_type_id)
--- WHERE
---     NOT EXISTS( SELECT 
---             con.contract_id
---         FROM contracts con
---         WHERE
---             (start_day BETWEEN '2020-01-01' AND '2020-03-01')
--- 		AND con.service_id = services.service_id );
-
-SELECT 
-	contract_id
-    
-
+WHERE  YEAR(con.start_day) = 2020 AND (con.start_day NOT BETWEEN '2020-01-01' AND '2020-01-03');
 
 -- task 7.	Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, 
 -- TenLoaiDichVu của tất cả các loại dịch vụ đã từng được Khách hàng đặt phòng trong năm 2020 
 -- nhưng chưa từng được Khách hàng đặt phòng  trong năm 2021
 
+-- 1st way
 DROP TEMPORARY TABLE IF EXISTS in_2020;
 CREATE TEMPORARY TABLE in_2020
 SELECT 
@@ -127,6 +107,7 @@ JOIN services serv USING (service_id)
 JOIN service_types st ON st.service_type_id = serv.service_type_id
 WHERE NOT EXISTS (SELECT * FROM in_2021 WHERE in_2020.service_id = in_2021.service_id );
 
+
 -- task 8.	Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoTenKhachHang không trùng nhau.
 -- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên
 
@@ -142,14 +123,113 @@ GROUP BY full_name;
 
 -- 3rd way:
 
--- SELECT 
--- 	full_name
--- FROM customers
--- GROUP BY full_name
--- HAVING COUNT(full_name)  = 1
+SELECT 
+    full_name
+FROM
+    customers 
+UNION SELECT 
+    full_name
+FROM
+    customers;
+
 
 -- task 9.	Thực hiện thống kê doanh thu theo tháng, 
 -- nghĩa là tương ứng với mỗi tháng trong năm 2020 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng
+
+-- create a table for 12 months
+CREATE TEMPORARY TABLE temp_month(month INT NOT NULL);
+
+INSERT INTO temp_month VALUES (1),(2),(3),(4),(5),(6),(8),(9),(10),(11),(12);
+
+select *
+from temp_month;
+
+-- calculate total payment of every contract
+DROP TEMPORARY TABLE IF EXISTS accompanied_total_payment;
+CREATE TEMPORARY TABLE accompanied_total_payment
+SELECT 
+	dc.contract_id,
+    SUM(acs.price*dc.quantity) AS total_price
+FROM detailed_contracts dc
+JOIN accompanied_services acs USING (accompanied_service_id)
+GROUP BY dc.contract_id;
+
+DROP TEMPORARY TABLE IF EXISTS total;
+CREATE TEMPORARY TABLE total
+SELECT 
+	con.contract_id,
+	cus.customer_id,
+    cus.full_name,
+    ct.type_name AS type_customer,
+    serv.service_name,
+    con.start_day,
+    con.end_day,
+    TIMESTAMPDIFF(DAY, con.start_day, con.end_day) * st.service_price + atp.total_price AS total_payment
+FROM customers cus
+JOIN customer_types ct USING (type_customer_id)
+LEFT JOIN contracts con USING (customer_id)
+LEFT JOIN services serv ON serv.service_id = con.service_id
+LEFT JOIN service_types st ON st.service_type_id = serv.service_type_id
+LEFT JOIN accompanied_total_payment atp ON atp.contract_id = con.contract_id;     
+
+select *
+from total;              
+
+-- get final result
+SELECT 
+	tm.`month`,
+    COUNT(MONTH(t.start_day)) AS number_registered,
+    SUM(t.total_payment) AS total
+FROM temp_month tm
+	LEFT JOIN total t ON tm.`month` = MONTH(t.start_day)
+WHERE YEAR(t.start_day) = 2020 OR YEAR(t.start_day) IS NULL OR MONTH(t.start_day) IS NULL
+GROUP BY tm.`month`;
+
+-- task 10 : Hiển thị thông tin tương ứng với từng Hợp đồng thì đã sử dụng bao nhiêu Dịch vụ đi kèm. 
+-- Kết quả hiển thị bao gồm IDHopDong, NgayLamHopDong, NgayKetthuc, TienDatCoc, SoLuongDichVuDiKem 
+-- (được tính dựa trên việc count các IDHopDongChiTiet).
+
+SELECT 
+	con.contract_id,
+    con.start_day,
+    con.end_day,
+    con.deposit,
+    COUNT(dcon.detailed_contract_id) AS number_accompanied_service
+FROM contracts con
+	JOIN detailed_contracts dcon USING (contract_id)
+GROUP BY con.contract_id;
+
+-- task 11 : Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có 
+-- TenLoaiKhachHang là “Diamond” và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”.
+
+SELECT 
+	customer_id,
+    c.address,
+    ct.type_name AS type_customer,
+    aserv.name_service,
+    aserv.price,
+    aserv.status
+FROM customers c
+	JOIN customer_types ct USING (type_customer_id)
+    JOIN contracts con USING (customer_id)
+    JOIN detailed_contracts dcon ON dcon.contract_id = con.contract_id
+    JOIN accompanied_services aserv ON dcon.accompanied_service_id = aserv.accompanied_service_id
+WHERE c.address IN ('Vinh', 'Quảng Ngãi') AND ct.type_name = 'Diamond';
+
+-- task 12 :Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, 
+-- TenDichVu, SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), TienDatCoc 
+-- của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng 
+-- chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
+
+
+
+
+
+
+
+
+
+
 
 
 
