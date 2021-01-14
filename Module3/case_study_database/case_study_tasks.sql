@@ -221,6 +221,205 @@ WHERE c.address IN ('Vinh', 'Quảng Ngãi') AND ct.type_name = 'Diamond';
 -- của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng 
 -- chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
 
+SELECT 
+	con.contract_id,
+    emp.full_name AS employee_name,
+    cus.full_name AS customer_name,
+    cus.phone_number AS customer_phone,
+    serv.service_name,
+    con.deposit,
+    SUM(dcon.quantity) AS number_accompanied_service
+FROM services serv
+JOIN contracts con USING (service_id)
+JOIN customers cus ON cus.customer_id = con.customer_id
+JOIN employees emp ON emp.employee_id = con.employee_id
+JOIN detailed_contracts dcon ON dcon.contract_id = con.contract_id
+JOIN accompanied_services aserv ON aserv.accompanied_service_id = dcon.accompanied_service_id
+WHERE EXISTS (
+			SELECT con.service_id 
+			FROM contracts con
+			WHERE YEAR(con.start_day) = 2020 AND 
+				  MONTH(con.start_day) IN (10,11,12) AND 
+				  con.service_id = serv.service_id
+	)
+	AND NOT EXISTS (
+				SELECT con.service_id
+				FROM contracts con
+				WHERE YEAR(con.start_day) = 2021 AND 
+					  MONTH(con.start_day) NOT IN (10,11,12) AND 
+					  con.service_id = serv.service_id
+    )
+GROUP BY dcon.contract_id;
+
+-- task 13 : Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng 
+-- đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+
+DROP TEMPORARY TABLE IF EXISTS accom_service_used;
+CREATE TEMPORARY TABLE accom_service_used
+SELECT 
+	aserv.name_service AS accompanied_service,
+    COUNT(dcon.accompanied_service_id) AS number_using
+FROM accompanied_services aserv
+JOIN detailed_contracts dcon USING (accompanied_service_id)
+GROUP BY aserv.accompanied_service_id;
+
+SELECT *
+FROM accom_service_used;
+
+DROP TEMPORARY TABLE IF EXISTS accom_service_max_using;
+CREATE TEMPORARY TABLE accom_service_max_using
+SELECT 
+	MAX(asu.number_using) AS max_using
+FROM accom_service_used asu ;
+
+SELECT 
+	asu.accompanied_service,
+    asmu.max_using
+FROM accom_service_used asu 
+JOIN accom_service_max_using asmu ON asmu.max_using = asu.number_using;
+
+-- task 14 : Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất.
+--  Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.
+
+DROP TEMPORARY TABLE IF EXISTS accom_service_used;
+CREATE TEMPORARY TABLE accom_service_used
+SELECT 
+	aserv.accompanied_service_id,
+	aserv.name_service AS accompanied_service_name,
+    COUNT(dcon.accompanied_service_id) AS number_using
+FROM accompanied_services aserv
+JOIN detailed_contracts dcon USING (accompanied_service_id)
+GROUP BY aserv.accompanied_service_id;
+
+SELECT *
+FROM accom_service_used
+WHERE number_using = 1;
+
+-- task 15 : Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, 
+-- TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 2 hợp đồng từ năm 2020 đến 2021.
+
+CREATE TEMPORARY TABLE employee_contract
+SELECT 
+	employee_id,
+	COUNT(employee_id) AS number_contracts
+FROM contracts con
+WHERE YEAR(start_day) BETWEEN 2020 AND 2021
+GROUP BY employee_id
+HAVING COUNT(employee_id) >= 2;
+
+SELECT 
+	ec.employee_id,
+    e.full_name,
+    pos.position_name,
+    dep.department_name,
+    e.phone_number,
+    e.address,
+    ec.number_contracts
+FROM employees e
+JOIN positions pos USING (position_id)
+JOIN departments dep USING (department_id)
+JOIN employee_contract ec USING (employee_id);
+
+-- task 16 : Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2020 đến năm 2021.
+
+DELETE FROM employees e
+WHERE e.employee_id NOT IN (
+							SELECT 
+								employee_id 
+							FROM contracts con
+							WHERE YEAR(start_day) BETWEEN 2020 AND 2021
+							GROUP BY employee_id
+							HAVING COUNT(employee_id) > 0
+					);
+
+-- task 17 : Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2020 
+-- là lớn hơn 10.000 USD.
+
+-- calculate total payment of every contract
+DROP TEMPORARY TABLE IF EXISTS accompanied_total_payment;
+CREATE TEMPORARY TABLE accompanied_total_payment
+SELECT 
+	dc.contract_id,
+    SUM(acs.price*dc.quantity) AS total_price
+FROM detailed_contracts dc
+JOIN accompanied_services acs USING (accompanied_service_id)
+GROUP BY dc.contract_id;
+
+DROP TEMPORARY TABLE IF EXISTS total;
+CREATE TEMPORARY TABLE total
+SELECT 
+	con.contract_id,
+	cus.customer_id,
+    cus.full_name,
+    ct.type_name AS type_customer,
+    serv.service_name,
+    con.start_day,
+    con.end_day,
+    TIMESTAMPDIFF(DAY, con.start_day, con.end_day) * st.service_price + atp.total_price AS total_payment
+FROM customers cus
+JOIN customer_types ct USING (type_customer_id)
+LEFT JOIN contracts con USING (customer_id)
+LEFT JOIN services serv ON serv.service_id = con.service_id
+LEFT JOIN service_types st ON st.service_type_id = serv.service_type_id
+LEFT JOIN accompanied_total_payment atp ON atp.contract_id = con.contract_id;     
+
+SELECT *
+FROM total;
+
+-- update
+CREATE TEMPORARY TABLE diamond_type
+SELECT
+	type_customer_id
+FROM customer_types
+WHERE type_name = 'Diamond';
+
+CREATE TEMPORARY TABLE platinium_type
+SELECT
+	type_customer_id
+FROM customer_types
+WHERE type_name = 'Platiumn';
+
+UPDATE customers
+JOIN diamond_type dt USING (type_customer_id)
+JOIN platinium_type pt USING (type_customer_id)
+SET type_customer_id = dt.type_customer_id
+WHERE customer_id IN (
+						SELECT customer_id
+                        FROM total
+                        WHERE total_payment >= 10000
+					)
+	AND type_customer_id = pt.type_customer_id;
+    
+-- task 18 : Xóa những khách hàng chỉ có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
+
+CREATE TEMPORARY TABLE deleting_customer
+SELECT customer_id
+FROM contracts
+WHERE E
+
+DELETE FROM contracts
+WHERE customer_id IN (
+						SELECT *
+						FROM deleting_customer
+					);
+
+DELETE FROM customers cus
+WHERE cus.customer_id IN (
+					SELECT customer_id
+                    FROM contracts con
+                    WHERE YEAR(start_day) < 2016
+				);
+
+
+
+
+
+
+
+
+    
+    
 
 
 
