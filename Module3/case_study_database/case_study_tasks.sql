@@ -380,36 +380,293 @@ SELECT
 FROM customer_types
 WHERE type_name = 'Platiumn';
 
-UPDATE customers
+UPDATE customers cus
 JOIN diamond_type dt USING (type_customer_id)
 JOIN platinium_type pt USING (type_customer_id)
-SET type_customer_id = dt.type_customer_id
-WHERE customer_id IN (
+SET cus.type_customer_id = dt.type_customer_id
+WHERE cus.customer_id IN (
 						SELECT customer_id
                         FROM total
                         WHERE total_payment >= 10000
 					)
-	AND type_customer_id = pt.type_customer_id;
+	AND cus.type_customer_id = pt.type_customer_id;
     
 -- task 18 : Xóa những khách hàng chỉ có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
 
+DROP TEMPORARY TABLE IF EXISTS deleting_customer;
 CREATE TEMPORARY TABLE deleting_customer
 SELECT customer_id
-FROM contracts
-WHERE E
+FROM contracts con1
+WHERE EXISTS (
+			SELECT con2.customer_id
+            FROM contracts con2
+            WHERE con2.start_day < '2016-01-01' AND con1.customer_id = con2.customer_id
+		)
+	AND NOT EXISTS (
+				SELECT con2.customer_id
+				FROM contracts con2
+				WHERE con2.start_day >= '2016-01-01' AND con1.customer_id = con2.customer_id
+    );
 
 DELETE FROM contracts
 WHERE customer_id IN (
-						SELECT *
-						FROM deleting_customer
+					SELECT *
+					FROM deleting_customer
 					);
 
 DELETE FROM customers cus
 WHERE cus.customer_id IN (
-					SELECT customer_id
-                    FROM contracts con
-                    WHERE YEAR(start_day) < 2016
-				);
+						SELECT *
+						FROM deleting_customer
+					);
+                    
+-- task 19 : Cập nhật giá cho các Dịch vụ đi kèm được sử dụng trên 10 lần 
+-- trong năm 2020 lên gấp đôi.                    
+
+UPDATE accompanied_services 
+SET price = price * 2
+WHERE accompanied_service_id IN (
+								SELECT 
+									dcon.accompanied_service_id
+								FROM contracts con
+								JOIN detailed_contracts dcon USING (contract_id)
+								WHERE YEAR(con.start_day) = 2020
+								GROUP BY dcon.accompanied_service_id
+								HAVING SUM(quantity) > 10
+							);
+                            
+-- task 20 : Hiển thị thông tin của tất cả các Nhân viên và Khách hàng có trong hệ thống, 
+-- thông tin hiển thị bao gồm ID (IDNhanVien, IDKhachHang), HoTen, Email, 
+-- SoDienThoai, NgaySinh, DiaChi.                            
+
+SELECT 
+	employee_id AS id,
+    full_name,
+    email,
+    phone_number,
+    birthday,
+    address
+FROM employees 
+UNION
+SELECT 
+	customer_id AS id,
+    full_name,
+    email,
+    phone_number,
+    birthday,
+    address
+FROM customers;
+
+-- task 21 :Tạo khung nhìn có tên là V_NHANVIEN để lấy được thông tin của tất cả các nhân viên 
+-- có địa chỉ là “Đà Nẵng” và đã từng lập hợp đồng cho 1 hoặc nhiều Khách hàng bất kỳ  
+-- với ngày lập hợp đồng là “12/12/2020”
+
+CREATE VIEW view_employee AS
+SELECT *
+FROM employees emp
+WHERE emp.address = 'Đà Nẵng' AND EXISTS (
+									SELECT con.employee_id
+                                    FROM contracts con
+                                    WHERE  con.start_day = '2020-12-12' AND
+                                          con.employee_id = emp.employee_id
+									GROUP BY con.employee_id
+                                    HAVING COUNT(con.employee_id) > 0
+							);
+                            
+-- task 22 :Thông qua khung nhìn V_NHANVIEN thực hiện cập nhật địa chỉ thành “Liên Chiểu” 
+-- đối với tất cả các Nhân viên được nhìn thấy bởi khung nhìn này.  
+
+UPDATE view_employee   
+SET address = 'Liên Chiểu';
+
+-- task 23 : Tạo Store procedure Sp_1 Dùng để xóa thông tin của một Khách hàng nào đó với 
+-- Id Khách hàng được truyền vào như là 1 tham số của Sp_1
+
+DELIMITER //
+CREATE PROCEDURE delete_customer_by_id(id INT)
+BEGIN
+	DECLARE count INT DEFAULT 0;
+    SET count = (SELECT COUNT(id) FROM customers WHERE customer_id = id);
+    IF count > 0 THEN 
+		DELETE FROM customers
+        WHERE customer_id = id;
+	ELSE 
+		SELECT  CONCAT('YOUR PARAMETER ', id, ' IS NOT EXISTS!!!') AS 'ERROR';
+    END IF;
+END;
+// DELIMITER ;
+
+CALL delete_customer_by_id(10);		
+
+-- task 24 : Tạo Store procedure Sp_2 Dùng để thêm mới vào bảng HopDong với yêu cầu Sp_2 
+-- phải thực hiện kiểm tra tính hợp lệ của dữ liệu bổ sung, với nguyên tắc không được trùng 
+-- khóa chính và đảm bảo toàn vẹn tham chiếu đến các bảng liên quan.		
+
+DELIMITER //
+CREATE PROCEDURE add_new_contract(
+	emp_id INT, cus_id INT, serv_id INT, start_day DATE, end_day DATE, depos DECIMAL(9,2))
+BEGIN
+		IF NOT EXISTS (SELECT * FROM employees WHERE employee_id = emp_id) THEN
+			SELECT 'employee_id does not exist' AS 'ERROR' ;
+		ELSEIF NOT EXISTS (SELECT * FROM customers WHERE customer_id = cus_id) THEN
+			SELECT 'customer_id does not exist' AS 'ERROR';
+		ELSEIF NOT EXISTS (SELECT * FROM services  WHERE service_id  = serv_id) THEN
+			SELECT 'service_id does not exist'  AS 'ERROR';
+        ELSE         
+			INSERT INTO contracts (employee_id, customer_id, service_id, start_day, end_day, deposit)
+				VALUES (emp_id, cus_id, serv_id, start_day, end_day, depos);
+		END IF;
+END ;
+// DELIMITER ;
+
+CALL add_new_contract(2,4,5,'2019-02-03','2019-02-25',500);
+
+-- task 25 : Tạo triggers có tên Tr_1 Xóa bản ghi trong bảng HopDong thì hiển thị 
+-- tổng số lượng bản ghi còn lại có trong bảng HopDong ra giao diện console của database
+
+DELIMITER //
+CREATE TRIGGER show_contract 
+	AFTER DELETE ON contracts 
+    FOR EACH ROW 
+		BEGIN
+			SET @number_records = (SELECT COUNT(*) FROM contracts);
+        END;
+// DELIMITER ;	
+SEt @number_records = 0;
+
+DELETE FROM contracts
+WHERE contract_id = 9;
+
+SELECT @number_records;		
+
+-- task 26 :Tạo triggers có tên Tr_2 Khi cập nhật Ngày kết thúc hợp đồng, cần kiểm tra xem 
+-- thời gian cập nhật có phù hợp hay không, với quy tắc sau: Ngày kết thúc hợp đồng phải 
+-- lớn hơn ngày làm hợp đồng ít nhất là 2 ngày. Nếu dữ liệu hợp lệ thì cho phép cập nhật, 
+-- nếu dữ liệu không hợp lệ thì in ra thông báo “Ngày kết thúc hợp đồng phải lớn hơn 
+-- ngày làm hợp đồng ít nhất là 2 ngày” trên console của database
+
+
+DROP TRIGGER IF EXISTS time_validator;
+DELIMITER //
+CREATE TRIGGER time_validator 
+	BEFORE UPDATE ON contracts
+	FOR EACH ROW
+		BEGIN
+			IF DATEDIFF(NEW.end_day, OLD.start_day) < 2 THEN
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The end day must be greater than start day 2 days';
+            END IF;    
+        END;
+// DELIMITER ;
+
+UPDATE contracts
+SET end_day = '2019-02-06'
+WHERE contract_id = 10;
+
+-- task 27 : Tạo user function thực hiện yêu cầu sau:
+-- a.	Tạo user function func_1: Đếm các dịch vụ đã được sử dụng với Tổng tiền là > 1000 USD.
+
+CREATE TEMPORARY TABLE service_with_totalpayment
+SELECT 
+	con.service_id,
+    SUM(st.service_price) AS total_payment
+FROM contracts con
+JOIN services serv USING (service_id)
+JOIN service_types st ON st.service_type_id = serv.service_type_id
+GROUP BY con.service_id;
+
+DELIMITER //
+CREATE FUNCTION count_service()
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	DECLARE counter INT DEFAULT 0;
+    
+    SELECT 
+		COUNT(service_id)
+        INTO counter
+	FROM service_with_totalpayment
+    WHERE total_payment > 1000;
+    
+    RETURN counter;
+END;
+// DELIMITER ;
+
+SELECT count_service();
+
+-- b.	Tạo user function Func_2: Tính khoảng thời gian dài nhất tính từ lúc bắt đầu làm hợp đồng
+--      đến lúc kết thúc hợp đồng mà Khách hàng đã thực hiện thuê dịch vụ (lưu ý chỉ xét các 
+--      khoảng thời gian dựa vào từng lần làm hợp đồng thuê dịch vụ, không xét trên toàn bộ các lần làm hợp đồng). 
+--      Mã của Khách hàng được truyền vào như là 1 tham số của function này.
+
+DELIMITER //
+CREATE FUNCTION get_longest_time(cus_id INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	DECLARE longest_time INT DEFAULT 0;
+    
+    IF NOT EXISTS (SELECT * FROM contracts WHERE customer_id = cus_id) THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'customer_id does not existed !';
+	END IF;
+    
+    SELECT 
+        MAX(DATEDIFF(end_day, start_day))
+        INTO longest_time
+    FROM contracts con
+    WHERE customer_id = cus_id;
+    
+    RETURN longest_time;
+END;
+// DELIMITER ;
+
+SELECT get_longest_time(2);
+
+-- task 28 : Tạo Store procedure Sp_3 để tìm các dịch vụ được thuê bởi khách hàng với loại dịch vụ
+--  là “Room” từ đầu năm 2015 đến hết năm 2021 để xóa thông tin của các dịch vụ đó 
+-- (tức là xóa các bảng ghi trong bảng DichVu) và xóa những HopDong sử dụng dịch vụ liên quan 
+-- (tức là phải xóa những bản gi trong bảng HopDong) và những bản liên quan khác.
+
+DELIMITER //
+CREATE FUNCTION delete_room_service()
+RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+	DROP TEMPORARY TABLE IF EXISTS room_in_2020;
+	CREATE TEMPORARY TABLE room_in_2020
+	SELECT 
+		serv.service_id,
+        dcon.contract_id
+	FROM services serv
+	JOIN service_types st USING (service_type_id)
+	JOIN contracts con USING (service_id)
+    JOIN detailed_contracts dcon ON con.contract_id = dcon.contract_id
+	WHERE st.name = 'room' AND (con.start_day BETWEEN '2015-01-01' AND '2021-12-31');
+    
+    DELETE FROM detailed_contracts
+    WHERE contract_id IN (
+						SELECT contract_id
+                        FROM room_in_2020
+					);
+    
+	DELETE FROM contracts
+    WHERE service_id IN (
+						SELECT service_id
+                        FROM room_in_2020
+					);
+                    
+	DELETE FROM services
+    WHERE service_id IN (
+						SELECT service_id
+                        FROM room_in_2020
+					);
+                    
+	RETURN 'completed deletion';
+END;
+// DELIMITER ;
+
+SELECT delete_room_service();
+
+
 
 
 
