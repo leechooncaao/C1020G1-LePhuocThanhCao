@@ -7,7 +7,7 @@ WHERE full_name REGEXP '^[HTK]{1,15}';
 SELECT 
 	full_name,
     birthday,
-    CURDATE() AS current_date,
+    CURDATE() AS `current_date`,
     TIMESTAMPDIFF(YEAR, birthday, CURDATE()) AS age,
     address
 FROM customers
@@ -208,7 +208,7 @@ SELECT
     ct.type_name AS type_customer,
     aserv.name_service,
     aserv.price,
-    aserv.status
+    aserv.`status`
 FROM customers c
 	JOIN customer_types ct USING (type_customer_id)
     JOIN contracts con USING (customer_id)
@@ -445,7 +445,8 @@ SELECT
     email,
     phone_number,
     birthday,
-    address
+    address,
+    'employee' AS position
 FROM employees 
 UNION
 SELECT 
@@ -454,7 +455,8 @@ SELECT
     email,
     phone_number,
     birthday,
-    address
+    address,
+    'customer' AS position
 FROM customers;
 
 -- task 21 :Tạo khung nhìn có tên là V_NHANVIEN để lấy được thông tin của tất cả các nhân viên 
@@ -532,7 +534,7 @@ CREATE TRIGGER show_contract
 			SET @number_records = (SELECT COUNT(*) FROM contracts);
         END;
 // DELIMITER ;	
-SEt @number_records = 0;
+SET @number_records = 0;
 
 DELETE FROM contracts
 WHERE contract_id = 9;
@@ -559,7 +561,7 @@ CREATE TRIGGER time_validator
 // DELIMITER ;
 
 UPDATE contracts
-SET end_day = '2019-02-06'
+SET end_day = '2019-02-03'
 WHERE contract_id = 10;
 
 -- task 27 : Tạo user function thực hiện yêu cầu sau:
@@ -665,6 +667,8 @@ END;
 // DELIMITER ;
 
 SELECT delete_room_service();
+
+
 
 
 
