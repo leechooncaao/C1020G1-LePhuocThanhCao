@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .col-1 {
+        width: 8.33%;
+      }
+      .col-2 {
+        width: 16.66%;
+      }
+      .col-3 {
+        width: 25%;
+      }
+      .col-4 {
+        width: 33.33%;
+      }
+      .col-5 {
+        width: 41.66%;
+      }
+      .col-6 {
+        width: 50%;
+      }
+      .col-7 {
+        width: 58.33%;
+      }
+      .col-8 {
+        width: 66.66%;
+      }
+      .col-9 {
+        width: 75%;
+      }
+      .col-10 {
+        width: 83.33%;
+      }
+      .col-11 {
+        width: 91.66%;
+      }
+      .col-12 {
+        width: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .header {
+        background-color: rgb(17, 39, 167);
+        width: 100%;
+        height: 58px;
+      }
+
+      .header img {
+        width: 32px;
+        height: 32px;
+        float: left;
+        margin: 10px;
+      }
+
+      .header input {
+        width: 300px;
+        height: 25px;
+        margin: 10px;
+        float: left;
+      }
+
+      .header h3 {
+        font-weight: bold;
+        float: right;
+        margin: 10px;
+        padding-right: 20px;
+        color: white;
+      }
+
+      .row2 {
+        clear: both;
+      }
+
+      .navbar {
+        padding: 10px;
+      }
+
+      .navbar img,
+      h3 {
+        padding-right: 30px;
+        float: left;
+        text-align: center;
+      }
+
+      .status-post {
+        padding: 10px;
+      }
+
+      .status-post textarea {
+        clear: both;
+        width: 957px;
+        height: 103px;
+      }
+
+      .main {
+        background-color: green;
+        border: 1px solid black;
+        width: 100%px;
+        height: 420px;
+        margin-left: 10px;
+        margin-right: 38px;
+      }
+
+      .main h3 {
+        position: absolute;
+        left: 430px;
+        top: 350px;
+        font-size: 30pt;
+      }
+
+      [class*="col-"] {
+        float: left;
+      }
+
+      .messenger img {
+        padding-top: 26px;
+        height: 588px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row1 header">
+      <img src="images/logo.jpg" alt="logo" />
+      <input type="text" placeholder="Search Facebook" />
+      <h3>Home</h3>
+    </div>
+    <div class="row2">
+      <div class="col-9">
+        <div class="row navbar">
+          <img src="images/account.png" alt="" />
+          <h3>FAVOURITES</h3>
+          <h3>GROUPS</h3>
+          <h3>PAGES</h3>
+          <h3>FRIENDS</h3>
+          <h3>APPS</h3>
+          <h3>INTERESTS</h3>
+          <h3>EVENTS</h3>
+        </div>
+        <div class="row status-post">
+          <textarea
+            name="status"
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="What's on your mind"
+          ></textarea>
+        </div>
+        <div class="row main">
+          <h3>Some Status</h3>
+        </div>
+      </div>
+      <div class="col-3 messenger">
+        <img src="images\friends.png" alt="" />
+      </div>
+    </div>
+  </body>
+</html>

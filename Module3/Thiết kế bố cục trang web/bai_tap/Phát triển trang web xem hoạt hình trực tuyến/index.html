@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12pt;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* position: relative; */
+      }
+
+      #header {
+        height: 60px;
+        border: 1px solid #cdcdcd;
+        background-color: white;
+        margin-bottom: 5px;
+        /* position: fixed; */
+        display: block;
+      }
+
+      #head-link {
+        height: 40px;
+        /* line-height: 30px; */
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #f5f5f5;
+        margin-bottom: 5px;
+        clear: both;
+        text-align: center;
+      }
+
+      #left {
+        width: 30%;
+        min-height: 700px;
+        background-color: #f5f5f5;
+        float: left;
+        margin-bottom: 5px;
+      }
+
+      #right {
+        width: 69%;
+        min-height: 700px;
+        background-color: #f5f5f5;
+        float: left;
+        margin-left: 9px;
+        margin-bottom: 5px;
+      }
+
+      #footer {
+        height: 50px;
+        clear: both;
+        background-color: #f5f5f5;
+      }
+
+      .logo img {
+        width: 180px;
+        height: 60px;
+      }
+
+      .logo {
+        display: inline-block;
+      }
+
+      #head-link ul {
+        list-style-type: none;
+        display: inline-block;
+        margin-top: 11px;
+      }
+
+      #head-link li {
+        float: left;
+        padding: 0 5px;
+      }
+
+      #head-link a {
+        text-decoration: none;
+        color: black;
+      }
+
+      #head-link a:link {
+        color: black;
+      }
+
+      #head-link a:hover {
+        color: red;
+        font-weight: bold;
+      }
+
+      #left iframe {
+        padding: 15px;
+        width: 370px;
+        height: 280px;
+      }
+
+      #right iframe {
+        padding: 15px;
+        width: 900px;
+        height: 450px;
+      }
+
+      #right p {
+        padding: 15px;
+      }
+
+      #footer {
+        text-align: center;
+      }
+
+      #footer p {
+        padding-top: 15px;
+      }
+
+      @media only screen and (max-width: 768px) {
+        #left {
+          width: 100%;
+        }
+
+        #right {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div class="logo">
+        <img src="images\logo.png" alt="cartoon" />
+      </div>
+    </div>
+    <div id="head-link">
+      <ul>
+        <li><a href="#">Phim hoạt hình</a></li>
+        <li><a href="#">| Phim hoạt hình yêu thích</a></li>
+        <li><a href="#">| Nhân vật hoạt hình</a></li>
+        <li><a href="#">| Góp ý</a></li>
+      </ul>
+    </div>
+    <div id="left">
+      <iframe
+        src="https://www.youtube.com/embed/Jo-PncrJOkM"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <iframe
+        width="370"
+        height="280"
+        src="https://www.youtube.com/embed/3lNo7nuQ3rA"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div id="right">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/3zSp961pxAM"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <p>
+        Thạch Sanh là truyện cổ tích về người dùng sĩ diệt chằn tinh, diệt đại
+        bàng cứu người bị hại, vạch mặt kẻ vong ân, bội nghĩa và chống quân xâm
+        lược. Truyện thể hiện ước mơ, niềm tin về đạo đức, công lí xã hội và lí
+        tưởng nhân đạo, yêu hòa bình của nhân dân ta.
+      </p>
+    </div>
+    <div id="footer">
+      <p>@2021-Thiết kế bởi Cao đẹp trai C1020G1</p>
+    </div>
+  </body>
+</html>

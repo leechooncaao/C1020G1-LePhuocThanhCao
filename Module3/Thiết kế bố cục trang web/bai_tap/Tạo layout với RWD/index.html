@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .col-1 {
+        width: 8.33%;
+      }
+      .col-2 {
+        width: 16.66%;
+      }
+      .col-3 {
+        width: 25%;
+      }
+      .col-4 {
+        width: 33.33%;
+      }
+      .col-5 {
+        width: 41.66%;
+      }
+      .col-6 {
+        width: 50%;
+      }
+      .col-7 {
+        width: 58.33%;
+      }
+      .col-8 {
+        width: 66.66%;
+      }
+      .col-9 {
+        width: 75%;
+      }
+      .col-10 {
+        width: 83.33%;
+      }
+      .col-11 {
+        width: 91.66%;
+      }
+      .col-12 {
+        width: 100%;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Times New Roman", Times, serif;
+        box-sizing: border-box;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      /* .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      } */
+
+      .row {
+        clear: both;
+      }
+
+      [class*="col-"] {
+        float: left;
+      }
+
+      .header {
+        background-color: rgb(15, 14, 14);
+        color: white;
+        height: 45px;
+      }
+
+      .header ul li {
+        float: left;
+        padding: 15px;
+        padding-bottom: 10px;
+      }
+
+      .header ul li:nth-child(6) {
+        float: right;
+      }
+
+      .header ul li:hover {
+        background-color: rgb(206, 39, 39);
+      }
+
+      .left {
+        background-color: rgb(224, 222, 222);
+        /* width: 25%; */
+        height: 400px;
+      }
+
+      .left ul {
+        padding: 20px;
+        position: absolute;
+        top: 72px;
+        left: 130px;
+      }
+
+      .left ul li {
+        padding: 10px;
+      }
+
+      .middle {
+        /* background-color: red; */
+        height: 400px;
+        color: black;
+      }
+
+      .middle h1,
+      h2,
+      p {
+        padding: 10px;
+      }
+
+      .right {
+        background-color: rgb(224, 222, 222);
+        height: 400px;
+      }
+
+      .right button {
+        border: 1px solid black;
+        padding: 10px;
+        width: 268px;
+        height: 50px;
+        margin: 15px 33px;
+      }
+
+      .footer {
+        background-color: rgb(97, 92, 92);
+        height: 40px;
+      }
+
+      .footer h4 {
+        text-align: center;
+        padding: 10px;
+        color: white;
+      }
+
+      @media only screen and (max-width: 768px) {
+        [class*="col-"] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="header">
+        <ul>
+          <li>Logo</li>
+          <li>Home</li>
+          <li>About</li>
+          <li>Project</li>
+          <li>Contact</li>
+          <li>Login</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 left">
+        <!-- <div class="left"> -->
+        <ul>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+        <!-- </div> -->
+      </div>
+      <div class="col-6 middle">
+        <h1>Welcome</h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores
+          itaque quam vitae ab magnam, molestiae similique officia cum! Vitae
+          repellat odit, nulla saepe quibusdam dicta omnis iure. Inventore,
+          corrupti distinctio.
+        </p>
+        <hr />
+        <h2>Test</h2>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem,
+          autem blanditiis dolores quae quas consequatur beatae nam aut at ab
+          optio, dolore non fuga ea ratione quo! Officia, ullam commodi?
+        </p>
+      </div>
+      <div class="col-3 right">
+        <button>ADS</button>
+        <button>ADS</button>
+      </div>
+    </div>
+
+    <div class="row footer">
+      <h4>Footer text</h4>
+    </div>
+  </body>
+</html>
