@@ -18,6 +18,7 @@ public class UserDao implements IUserDAO {
     private final String SQL_UPDATE_USER = "UPDATE users " +
                                             "SET `name` = ?, email = ?, country = ? " +
                                             "WHERE id = ?";
+    private final String SQL_SEARCH_BY_COUNTRY = "SELECT * FROM users WHERE country = ?";
 
 
     @Override
@@ -91,5 +92,22 @@ public class UserDao implements IUserDAO {
             return true;
 
         return false;
+    }
+
+    @Override
+    public List<User> searchByCountry(String country) throws SQLException {
+        List<User> userList = new ArrayList<>();
+        var preparedStatement = baseRepository.getConnection().prepareStatement(SQL_SEARCH_BY_COUNTRY);
+        preparedStatement.setString(1,country);
+
+        var resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next())
+            userList.add(new User(resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("country")));
+
+        return userList;
     }
 }

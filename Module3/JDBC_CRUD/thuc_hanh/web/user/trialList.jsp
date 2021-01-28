@@ -73,6 +73,9 @@
             top: 8px;
             left: 10px;
         }
+        .search-btn {
+            cursor: pointer;
+        }
         table.table tr th,
         table.table tr td {
             border-color: #e9e9e9;
@@ -135,12 +138,19 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Search by country &hellip;"
-                            />
+                            <form action="userServlet" id="searchForm">
+                                    <a class="search-btn" onclick="$('#searchForm').submit()">
+                                        <i class="material-icons">&#xE8B6;</i>
+                                    </a>
+                                <input type="hidden" name="action" value="search">
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Search by country &hellip;"
+                                        name="search-data"
+                                />
+                            </form>
+
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"", "/userServlet"})
 public class UserServlet extends HttpServlet {
@@ -50,6 +51,9 @@ public class UserServlet extends HttpServlet {
                 break;
             case "delete":
                 deleteUser(request,response);
+                break;
+            case "search":
+                search(request,response);
                 break;
             default:
                 showListUser(request,response);
@@ -129,6 +133,21 @@ public class UserServlet extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request,response);
             else
                 showListUser(request,response);
+        } catch (SQLException | ServletException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void search(HttpServletRequest request, HttpServletResponse response){
+        var country = request.getParameter("search-data");
+        try {
+            List<User> searchList =  userService.searchByCountry(country);
+            if(searchList.isEmpty())
+                request.getRequestDispatcher("notFound.jsp").forward(request,response);
+            else {
+                request.setAttribute("listUser", searchList);
+                request.getRequestDispatcher("user/trialList.jsp").forward(request,response);
+            }
         } catch (SQLException | ServletException | IOException throwables) {
             throwables.printStackTrace();
         }

@@ -34,4 +34,9 @@ public class UserService implements IUserService{
     public boolean updateUser(User user) throws SQLException {
         return userDao.updateUser(user);
     }
+
+    @Override
+    public List<User> searchByCountry(String country) throws SQLException {
+        return userDao.searchByCountry(country);
+    }
 }
