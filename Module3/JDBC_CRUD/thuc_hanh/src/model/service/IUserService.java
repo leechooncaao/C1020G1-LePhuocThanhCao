@@ -17,4 +17,6 @@ public interface IUserService {
     boolean updateUser(User user) throws SQLException;
 
     List<User> searchByCountry(String country) throws SQLException;
+
+    List<User> sortByName() throws SQLException;
 }

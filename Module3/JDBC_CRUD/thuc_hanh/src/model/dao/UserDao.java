@@ -19,6 +19,7 @@ public class UserDao implements IUserDAO {
                                             "SET `name` = ?, email = ?, country = ? " +
                                             "WHERE id = ?";
     private final String SQL_SEARCH_BY_COUNTRY = "SELECT * FROM users WHERE country = ?";
+    private final String SQL_SORT_BY_NAME = "SELECT * FROM users ORDER BY name ";
 
 
     @Override
@@ -109,5 +110,25 @@ public class UserDao implements IUserDAO {
                             resultSet.getString("country")));
 
         return userList;
+    }
+
+    @Override
+    public List<User> sortByName() throws SQLException {
+        List<User> userList = new ArrayList<>();
+
+        var statement = baseRepository.getConnection().createStatement();
+        var resultSet =  statement.executeQuery(SQL_SORT_BY_NAME);
+
+        while (resultSet.next()){
+            int id = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
+            String country = resultSet.getString("country");
+
+            userList.add(new User(id,name,email,country));
+        }
+
+        return userList;
+
     }
 }

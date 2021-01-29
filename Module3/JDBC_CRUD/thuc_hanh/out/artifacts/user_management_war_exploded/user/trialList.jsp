@@ -8,7 +8,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Bootstrap Simple Data Table</title>
+    <title>User Management</title>
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto"
@@ -111,6 +111,87 @@
         table.table td i {
             font-size: 19px;
         }
+        .modal-confirm {
+            color: #636363;
+            width: 400px;
+        }
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+        }
+        .modal-confirm .modal-body {
+            color: #999;
+        }
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 15px 25px;
+        }
+        .modal-confirm .modal-footer a {
+            color: #999;
+        }
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #f15e5e;
+        }
+        .modal-confirm .icon-box i {
+            color: #f15e5e;
+            font-size: 46px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+        .modal-confirm .btn,
+        .modal-confirm .btn:active {
+            color: #fff;
+            border-radius: 4px;
+            background: #60c7c1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            min-width: 120px;
+            border: none;
+            min-height: 40px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        .modal-confirm .btn-secondary {
+            background: #c1c1c1;
+        }
+        .modal-confirm .btn-secondary:hover,
+        .modal-confirm .btn-secondary:focus {
+            background: #a8a8a8;
+        }
+        .modal-confirm .btn-danger {
+            background: #f15e5e;
+        }
+        .modal-confirm .btn-danger:hover,
+        .modal-confirm .btn-danger:focus {
+            background: #ee3535;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -119,78 +200,137 @@
     </script>
 </head>
 <body>
-<div class="container-xl">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h2>
-                            User <b>Details</b>
-                            <span>
-                                <a href="/userServlet?action=create">
-                                    <button class="btn btn-danger profile-button" type="button">
-                                      Register
-                                    </button>
-                                </a>
-                            </span>
-                        </h2>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="search-box">
-                            <form action="userServlet" id="searchForm">
-                                    <a class="search-btn" onclick="$('#searchForm').submit()">
-                                        <i class="material-icons">&#xE8B6;</i>
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>
+                                User <b>Details</b>
+                                <span>
+                                    <a href="/userServlet?action=create">
+                                        <button class="btn btn-danger profile-button" type="button">
+                                          Register
+                                        </button>
                                     </a>
-                                <input type="hidden" name="action" value="search">
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Search by country &hellip;"
-                                        name="search-data"
-                                />
-                            </form>
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <form action="userServlet" id="searchForm">
+                                        <a class="search-btn" onclick="$('#searchForm').submit()">
+                                            <i class="material-icons">&#xE8B6;</i>
+                                        </a>
+                                    <input type="hidden" name="action" value="search">
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Search by country &hellip;"
+                                            name="search-data"
+                                    />
+                                </form>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name <i class="fa fa-sort"></i></th>
-                    <th>Email</th>
-                    <th>Country</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="user" items="${listUser}">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
                     <tr>
-                        <td><c:out value="${user.id}"/></td>
-                        <td><c:out value="${user.name}"/></td>
-                        <td><c:out value="${user.email}"/></td>
-                        <td><c:out value="${user.country}"/></td>
-                        <td>
-                            <a href="/userServlet?action=edit&id=${user.id}" class="edit" title="Edit" data-toggle="tooltip"
-                            ><i class="material-icons">&#xE254;</i></a
-                            >
-                            <a
-                                    href="/userServlet?action=delete&id=${user.id}"
-                                    class="delete"
-                                    title="Delete"
-                                    data-toggle="tooltip"
-                            >
-                                <i class="material-icons">&#xE872;</i>
+                        <th>ID</th>
+                        <th>
+                            Name
+                            <a href="/userServlet?action=sortByName">
+                                <i class="fa fa-sort"></i>
                             </a>
-                        </td>
+                        </th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>Actions</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="user" items="${listUser}">
+                        <tr>
+                            <td><c:out value="${user.id}"/></td>
+                            <td><c:out value="${user.name}"/></td>
+                            <td><c:out value="${user.email}"/></td>
+                            <td><c:out value="${user.country}"/></td>
+                            <td>
+                                <a href="/userServlet?action=edit&id=${user.id}" class="edit" title="Edit" data-toggle="tooltip"
+                                ><i class="material-icons">&#xE254;</i></a
+                                >
+                                <a
+                                        href="#myModal"
+                                        class="delete"
+                                        title="Delete"
+                                        data-toggle="modal"
+                                        onclick="setIdUser('${user.id}')"
+                                >
+                                    <i class="material-icons">&#xE872;</i>
+                                    <input id="deleting-user" type="hidden" name="id" value="${user.id}">
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-hidden="true"
+                    >
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Do you really want to delete these records? This process cannot be
+                        undone.
+                    </p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="submitDeleteForm()">Delete</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/userServlet" id="delete-form">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" id="id-user" name="id">
+    </form>
+
+    <script>
+        function setIdUser(idUser) {
+            document.getElementById('id-user').value = idUser;
+        }
+        function submitDeleteForm() {
+            document.getElementById('delete-form').submit();
+        }
+    </script>
 </body>
 </html>

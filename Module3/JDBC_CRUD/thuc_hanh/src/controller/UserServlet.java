@@ -55,6 +55,9 @@ public class UserServlet extends HttpServlet {
             case "search":
                 search(request,response);
                 break;
+            case "sortByName":
+                sortByName(request,response);
+                break;
             default:
                 showListUser(request,response);
                 break;
@@ -149,6 +152,16 @@ public class UserServlet extends HttpServlet {
                 request.getRequestDispatcher("user/trialList.jsp").forward(request,response);
             }
         } catch (SQLException | ServletException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void sortByName(HttpServletRequest request, HttpServletResponse response){
+        try {
+            var sortedList = userService.sortByName();
+            request.setAttribute("listUser", sortedList);
+            request.getRequestDispatcher("user/trialList.jsp").forward(request,response);
+        } catch (SQLException | IOException | ServletException throwables) {
             throwables.printStackTrace();
         }
     }
