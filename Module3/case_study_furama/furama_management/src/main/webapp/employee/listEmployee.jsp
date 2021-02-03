@@ -6,6 +6,7 @@
     <title>Employee</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/table_modal.css">
     <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -18,13 +19,24 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/table_modal.css">
-    <style>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tableEmployee').dataTable(
+                {
+                    "dom" : 'lrtip',
+                    "lengthChange" : false,
+                    "pageLength" : 5
+                }
+            );
+        });
+    </script>
 
-    </style>
 </head>
 <body>
 <div class="jumbotron text-center" style="margin-bottom: 0">
@@ -99,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-hover table-bordered table-responsive text-nowrap">
+            <table id="tableEmployee" class="table table-striped table-hover table-bordered table-responsive text-nowrap">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -226,6 +238,7 @@
     function submitDeleteEmployee() {
         document.getElementById("delete-employee").submit();
     }
+
 </script>
 </body>
 </html>

@@ -23,12 +23,15 @@
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/table_modal.css">
     <link rel="stylesheet" href="css/form_edit_create.css">
     <style>
-
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +84,7 @@
                     </div>
                     <h6 class="text-right">Register</h6>
                 </div>
-                <form method="post">
+                <form method="post" id="validate">
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <input
@@ -119,6 +122,7 @@
                                     class="form-control"
                                     placeholder="Salary"
                                     value="<c:out value='${employee.salary}' />"
+                                    digits
                             />
                         </div>
                     </div>
@@ -215,6 +219,18 @@
 >
     <p style="padding-top: 8px">Designed By Cao handsome</p>
 </div>
-
+<script>
+    $(document).ready(function() {
+        //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+        $("#validate").validate({
+            rules: {
+                salary: "digits",
+            },
+            messages: {
+                salary: " Only positive number",
+            }
+        });
+    });
+</script>
 </body>
 </html>
