@@ -59,7 +59,7 @@ CREATE TABLE employee(
     position_id INT,
     education_degree_id INT,
     division_id INT,
-    username VARCHAR(255),
+    username VARCHAR(45),
     
     PRIMARY KEY(employee_id),
     FOREIGN KEY(position_id) REFERENCES `position`(position_id),
@@ -77,10 +77,11 @@ CREATE TABLE customer_type(
 
 CREATE TABLE customer(
 	customer_id INT AUTO_INCREMENT,
+    customer_code VARCHAR(45) UNIQUE,
     customer_type_id INT,
     customer_name VARCHAR(45) NOT NULL,
     customer_birthday DATE NOT NULL,
-    customer_gender BIT(1) NOT NULL,
+    customer_gender VARCHAR(10) NOT NULL,
     customer_id_card VARCHAR(45) NOT NULL,
     customer_phone VARCHAR(45) NOT NULL,
     customer_email VARCHAR(45),
@@ -134,9 +135,9 @@ CREATE TABLE contract(
     service_id INT,
     
     PRIMARY KEY(contract_id),
-    FOREIGN KEY(employee_id) REFERENCES employee(employee_id),
-    FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
-    FOREIGN KEY(service_id) REFERENCES service(service_id)
+    FOREIGN KEY(employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE,
+    FOREIGN KEY(customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY(service_id) REFERENCES service(service_id) ON DELETE CASCADE
 );
 
 CREATE TABLE attach_service(
@@ -156,7 +157,7 @@ CREATE TABLE contract_detail(
     quantity INT NOT NULL,
     
     PRIMARY KEY(contract_detail_id),
-    FOREIGN KEY(contract_id) REFERENCES contract(contract_id),
+    FOREIGN KEY(contract_id) REFERENCES contract(contract_id) ON DELETE CASCADE,
     FOREIGN KEY(attach_service_id) REFERENCES attach_service(attach_service_id)
 );
 
@@ -239,11 +240,11 @@ INSERT INTO customer(
 					customer_email,
 					customer_address)
 VALUES 
-		(1,'Le Hoang Minh Tuan', '1994-02-05', 1,'32131311', '032132131', 'lehoangminhtuan@gmail.com', 'Da Nang'),
-		(2,'Nguyen Thanh Tung', '1993-05-21', 1,'7987978', '051331232', 'nguyenthanhtung@gmail.com', 'Da Nang'),
-		(3,'Nguyen Long Phin', '1999-01-18', 1,'98799797', '0121323321', 'nguyenlongphin@gmail.com', 'Quang Nam'),
-		(3,'Nguyen Ngoc Thinh', '1995-11-24', 1,'98798988', '03213112312', 'nguyenngocthinh@gmail.com', 'Quang Ngai'),
-		(4,'Nguyen Viet Dung', '1994-09-11', 1,'87879797', '032132131', 'nguyenvietdung@gmail.com', 'Da Nang');
+		(1,'KH-0001','Le Hoang Minh Tuan', '1994-02-05', 'Male','32131311', '032132131', 'lehoangminhtuan@gmail.com', 'Da Nang'),
+		(2,'KH-0002','Nguyen Thanh Tung', '1993-05-21', 'Male','7987978', '051331232', 'nguyenthanhtung@gmail.com', 'Da Nang'),
+		(3,'KH-0003','Nguyen Long Phin', '1999-01-18', 'Female','98799797', '0121323321', 'nguyenlongphin@gmail.com', 'Quang Nam'),
+		(3,'KH-0004','Nguyen Ngoc Thinh', '1995-11-24', 'Male','98798988', '03213112312', 'nguyenngocthinh@gmail.com', 'Quang Ngai'),
+		(4,'KH-0005','Nguyen Viet Dung', '1994-09-11', 'Female','87879797', '032132131', 'nguyenvietdung@gmail.com', 'Da Nang');
         
 INSERT INTO service_type(service_type_name)        
 VALUES ('Villa'), ('House'), ('Room');
@@ -321,6 +322,17 @@ VALUES
 		(6,2,3),
 		(6,1,4);
 
+-- Creating Trigger
+DELIMITER //
+CREATE TRIGGER before_add_employee
+BEFORE INSERT ON employee
+FOR EACH ROW 
+BEGIN
+	INSERT INTO `user`
+    VALUES (NEW.username, '12345');
+END ;
+
+// DELIMITER ;
 
 
 

@@ -1,4 +1,4 @@
-package model.dao;
+package model.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class BaseRepository {
     private Connection connection;
-    private final String url = "jdbc:mysql://localhost:3306/demo";
+    private final String url = "jdbc:mysql://localhost:3306/furama_management";
     private final String userName = "root";
     private final String password = "Mylove96";
 
