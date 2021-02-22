@@ -39,7 +39,7 @@
 
 </head>
 <body>
-<div class="jumbotron text-center" style="margin-bottom: 0">
+<div class="jumbotron text-center" style="margin-bottom: 0; padding: 0;">
     <div class="row">
         <div class="col-md-2 m-0">
             <img class="float-left" src="images/logo2.png" alt="fdsa" />
@@ -60,12 +60,12 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/employeeServlet">Employee</a>
+                <a class="nav-link  active" href="/employeeServlet">Employee</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/customerServlet">Customer</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/serviceServlet">Service</a>
             </li>
             <li class="nav-item">
