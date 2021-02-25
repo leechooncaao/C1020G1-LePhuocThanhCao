@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List Product</title>
 </head>
 <body>
 <h2>List of Products</h2>
 <div class="notify">
     <div th:if="${message}">
-        <span th:text="${message}"></span>
+        <p th:text="${message}"></p>
     </div>
 </div>
-<div>
-    <button>
+<div id="center-block">
+    <button id="back-menu">
         <a th:href="@{/product/create}">Add New Product</a>
     </button>
 </div>

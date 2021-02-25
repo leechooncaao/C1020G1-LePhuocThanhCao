@@ -16,4 +16,6 @@ public interface ProductService {
     Product showDetailInfo(Integer id);
 
     Product findById(Integer id);
+
+    int getIdProduct();
 }
