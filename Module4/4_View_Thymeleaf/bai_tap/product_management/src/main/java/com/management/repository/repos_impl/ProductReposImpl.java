@@ -50,4 +50,9 @@ public class ProductReposImpl implements ProductRepos {
     public Product findById(Integer id) {
         return productMap.get(id);
     }
+
+    @Override
+    public int getIdProduct() {
+        return 0;
+    }
 }

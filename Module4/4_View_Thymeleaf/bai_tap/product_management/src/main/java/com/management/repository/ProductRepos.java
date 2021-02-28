@@ -16,4 +16,6 @@ public interface ProductRepos {
     Product showDetailInfo(Integer id);
 
     Product findById(Integer id);
+
+    public int getIdProduct();
 }

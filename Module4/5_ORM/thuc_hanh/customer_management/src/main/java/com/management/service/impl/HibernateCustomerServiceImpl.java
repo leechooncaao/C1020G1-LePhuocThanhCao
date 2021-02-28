@@ -46,10 +46,8 @@ public class HibernateCustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer customer) {
-        Session session = null;
         Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Customer origin = findOne(customer.getId());
             origin.setName(customer.getName());
@@ -62,10 +60,6 @@ public class HibernateCustomerServiceImpl implements CustomerService {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
-            }
-        } finally {
-            if (session != null) {
-                session.close();
             }
         }
         return null;

@@ -2,7 +2,6 @@ package com.management;
 
 import com.management.service.CustomerService;
 import com.management.service.impl.HibernateCustomerServiceImpl;
-import com.management.service.impl.SimpleCustomerServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
