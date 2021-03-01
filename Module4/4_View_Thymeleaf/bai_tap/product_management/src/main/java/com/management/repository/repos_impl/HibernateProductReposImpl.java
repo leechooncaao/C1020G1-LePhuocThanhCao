@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -49,8 +50,10 @@ public class HibernateProductReposImpl implements ProductRepos {
 //                transaction.rollback();
 //            }
 //        }
-        System.out.println(product.toString());
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
         entityManager.persist(product);
+        entityTransaction.commit();
     }
 
     @Override
