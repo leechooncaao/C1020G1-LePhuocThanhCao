@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>List of BLogs</h2>
+<div class="notify">
+    <div th:if="${message}">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+<div id="center-block">
+    <button id="back-menu">
+        <a th:href="@{/blog/create}">Add New Blog</a>
+    </button>
+</div>
+<table id="product-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Title</th>
+        <th colspan="3">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogList}">
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.author}"></td>
+        <td th:text="${blog.title}"></td>
+        <td>
+            <button>
+                <a th:href="@{/blog/{id}/edit(id=${blog.id})}">Edit</a>
+            </button>
+        </td>
+        <td>
+            <button>
+                <a th:href="@{/blog/{id}/delete(id=${blog.id})}">Delete</a>
+            </button>
+        </td>
+        <td>
+            <button>
+                <a th:href="@{/blog/{id}/detail(id=${blog.id})}">Detail</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
