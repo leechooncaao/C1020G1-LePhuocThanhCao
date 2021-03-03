@@ -28,6 +28,7 @@
     <tr>
         <th>ID</th>
         <th>Author</th>
+        <th>Time Update</th>
         <th>Category</th>
         <th colspan="3">Action</th>
     </tr>
@@ -36,6 +37,7 @@
     <tr th:each="blog : ${blogs}">
         <td th:text="${blog.id}"></td>
         <td th:text="${blog.author}"></td>
+        <td th:text="${blog.timeUpdate}"></td>
         <td th:text="${blog.category.name}"></td>
         <td>
             <button>

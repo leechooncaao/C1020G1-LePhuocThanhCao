@@ -12,6 +12,17 @@ public class Blog {
     private String blogPage;
     private String description;
 
+    @Column(columnDefinition = "date")
+    private String timeUpdate;
+
+    public String getTimeUpdate() {
+        return timeUpdate;
+    }
+
+    public void setTimeUpdate(String timeUpdate) {
+        this.timeUpdate = timeUpdate;
+    }
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
