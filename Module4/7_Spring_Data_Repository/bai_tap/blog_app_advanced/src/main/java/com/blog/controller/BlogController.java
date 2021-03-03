@@ -35,7 +35,7 @@ public class BlogController {
         if(s.isPresent()){
             blogs = blogService.findAllByAuthorContaining(s.get(), pageable);
         } else {
-            blogs = blogService.findAll(pageable);
+            blogs = blogService.findByOrderByAuthorDesc(pageable);
         }
         model.addAttribute("blogs", blogs);
 

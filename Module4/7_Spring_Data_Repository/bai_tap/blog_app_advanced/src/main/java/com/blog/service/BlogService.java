@@ -8,4 +8,6 @@ import org.springframework.data.domain.Pageable;
 public interface BlogService extends Service<Blog> {
     Page<Blog> findAllByAuthorContaining (String author, Pageable pageable);
 
+    Page<Blog> findByOrderByAuthorDesc (Pageable pageable);
+
 }

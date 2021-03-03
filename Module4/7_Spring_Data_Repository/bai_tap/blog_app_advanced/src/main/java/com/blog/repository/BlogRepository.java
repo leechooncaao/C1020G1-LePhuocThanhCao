@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BlogRepository extends PagingAndSortingRepository<Blog, Integer> {
     Page<Blog> findAllByAuthorContaining (String author, Pageable pageable);
+
+    Page<Blog> findByOrderByAuthorDesc (Pageable pageable);
+//    Page<Blog> findByOrd (Pageable pageable);
 }

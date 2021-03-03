@@ -1,7 +1,6 @@
 package com.blog.service.impl;
 
 import com.blog.model.Blog;
-import com.blog.model.Category;
 import com.blog.repository.BlogRepository;
 import com.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,10 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAllByAuthorContaining(author,pageable);
     }
 
+    @Override
+    public Page<Blog> findByOrderByAuthorDesc(Pageable pageable) {
+        return blogRepository.findByOrderByAuthorDesc(pageable);
+    }
 
 
 }
