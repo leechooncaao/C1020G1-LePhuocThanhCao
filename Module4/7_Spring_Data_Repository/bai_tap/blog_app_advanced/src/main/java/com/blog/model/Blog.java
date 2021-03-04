@@ -15,19 +15,19 @@ public class Blog {
     @Column(columnDefinition = "date")
     private String timeUpdate;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+    public Blog() {
+    }
+
     public String getTimeUpdate() {
         return timeUpdate;
     }
 
     public void setTimeUpdate(String timeUpdate) {
         this.timeUpdate = timeUpdate;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    public Blog() {
     }
 
     public String getAuthor() {
