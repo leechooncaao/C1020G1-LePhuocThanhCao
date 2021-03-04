@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<!--<div class="notify">-->
+<!--    <div th:if="${message}">-->
+<!--        <p th:text="${message}"></p>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="center-block">
+    <button id="back-menu">
+        <a th:href="@{/}">Back to menu</a>
+    </button>
+</div>
+<table id="product-table">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Title</th>
+        <th>Publisher</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.publisher}"></td>
+        <td>
+            <button>
+                <a th:href="@{/book/{id}/detail(id=${book.id})}">Detail</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

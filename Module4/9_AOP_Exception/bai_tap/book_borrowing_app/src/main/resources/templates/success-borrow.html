@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Done</title>
+</head>
+<body>
+    <h2>Successfully borrowed !</h2>
+    <div>
+        Your borrow code : <span th:text="${borrowCode}"></span>
+    </div>
+    <div id="center-block">
+        <button id="back-menu">
+            <a th:href="@{/}">Back to menu</a>
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+    <h2>Detail</h2>
+    <div id="center-block">
+        <button id="back-menu">
+            <a th:href="@{/}">Back to menu</a>
+        </button>
+    </div>
+<!--    <table id="product-table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>No</th>-->
+<!--            <th>Title</th>-->
+<!--            <th>Publisher</th>-->
+<!--            <th>Category</th>-->
+<!--            <th>Quantity</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            <tr></tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+    <div th:object="${book}">
+        <div>
+            ID : <span th:text="${book.id}"></span>
+        </div>
+        <div>
+            Title : <span th:text="${book.title}"></span>
+        </div>
+        <div>
+            Publisher : <span th:text="${book.publisher}"></span>
+        </div>
+        <div>
+            Category : <span th:text="${book.category}"></span>
+        </div>
+        <div>
+            Quantity : <span th:text="${book.quantity}"></span>
+        </div>
+    </div>
+    <div>
+        <button>
+            <a th:href="@{/borrow/{id}(id=${book.id})}">Borrow</a>
+        </button>
+    </div>
+    <footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

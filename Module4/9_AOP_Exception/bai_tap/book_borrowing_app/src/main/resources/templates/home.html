@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Borrowing app</title>
+</head>
+<body>
+    <h2>Book Borrowing App</h2>
+    <div>
+        <div>
+            <button>
+                <a th:href="@{/books}">List books</a>
+            </button>
+        </div>
+        <div>
+            <button>
+                <a th:href="@{/return}">Return books</a>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
