@@ -7,5 +7,5 @@ public interface BookBorrowService {
 
     void save(BorrowManager borrowManager);
 
-    boolean borrowCodeIsExist(String borrowCode);
+    BorrowManager borrowCodeIsExist(String borrowCode);
 }

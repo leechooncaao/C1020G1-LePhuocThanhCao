@@ -1,7 +1,5 @@
 package com.app.model;
 
-import com.app.annotation.UniqueCode;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,11 +11,24 @@ public class BorrowManager {
     @Column(unique = true)
     private String borrowCode;
 
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
+
     public BorrowManager() {
     }
 
-    public BorrowManager(String borrowCode) {
+    public BorrowManager(String borrowCode, Book book) {
         this.borrowCode = borrowCode;
+        this.book = book;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Integer getId() {

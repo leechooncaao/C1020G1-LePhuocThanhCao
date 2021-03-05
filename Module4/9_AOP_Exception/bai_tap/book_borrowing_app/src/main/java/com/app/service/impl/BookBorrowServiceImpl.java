@@ -26,13 +26,13 @@ public class BookBorrowServiceImpl implements BookBorrowService {
     }
 
     @Override
-    public boolean borrowCodeIsExist(String borrowCode) {
+    public BorrowManager borrowCodeIsExist(String borrowCode) {
         List<BorrowManager> borrowManagerList = bookBorrowRepository.findAll();
         for(BorrowManager bm : borrowManagerList){
             if(borrowCode.equals(bm.getBorrowCode()))
-                return true;
+                return bm;
         }
-        return false;
+        return null;
     }
 
 

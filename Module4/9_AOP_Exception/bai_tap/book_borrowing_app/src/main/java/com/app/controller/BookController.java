@@ -5,6 +5,8 @@ import com.app.model.BorrowManager;
 import com.app.service.BookBorrowService;
 import com.app.service.BookService;
 import com.app.service.exception.BookIsNotExisted;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +50,7 @@ public class BookController {
         Book book = bookService.findById(id);
         bookService.borrowBook(book);
         String borrowCode = bookBorrowService.getBorrowCode();
-        bookBorrowService.save(new BorrowManager(borrowCode));
+        bookBorrowService.save(new BorrowManager(borrowCode, book));
         model.addAttribute("borrowCode", borrowCode);
 
         return "success-borrow";
@@ -62,11 +64,14 @@ public class BookController {
 
     @PostMapping("/book/return")
     public String returnBook(@RequestParam("borrowCode") String borrowCode,RedirectAttributes redirectAttributes){
-        if(!bookBorrowService.borrowCodeIsExist(borrowCode)){
+        BorrowManager borrowManager = bookBorrowService.borrowCodeIsExist(borrowCode);
+
+        if(borrowManager == null){
             redirectAttributes.addFlashAttribute("message", "Borrow Code does not exist !");
             return "redirect:/return";
         }
 
+        bookService.returnBook(borrowManager.getBook().getId());
         return "success-return";
     }
 

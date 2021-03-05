@@ -12,5 +12,5 @@ public interface BookService {
 
     void borrowBook(Book book) throws BookIsNotExisted;
 
-    void returnBook()
+    void returnBook(Integer id);
 }

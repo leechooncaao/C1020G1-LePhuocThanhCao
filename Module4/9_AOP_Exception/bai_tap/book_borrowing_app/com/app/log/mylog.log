@@ -1,0 +1,21 @@
+2021-03-05 09:39:09.900  INFO 4180 --- [main] com.app.BookBorrowingApplication         : Starting BookBorrowingApplication using Java 1.8.0_281 on DESKTOP-POLBLRQ with PID 4180 (E:\IT\C1020G1_Le_Phuoc_Thanh_Cao\Module4\9_AOP_Exception\bai_tap\book_borrowing_app\build\classes\java\main started by lephu in E:\IT\C1020G1_Le_Phuoc_Thanh_Cao\Module4\9_AOP_Exception\bai_tap\book_borrowing_app)
+2021-03-05 09:39:09.902  INFO 4180 --- [main] com.app.BookBorrowingApplication         : No active profile set, falling back to default profiles: default
+2021-03-05 09:39:11.022  INFO 4180 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-05 09:39:11.106  INFO 4180 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 2 JPA repository interfaces.
+2021-03-05 09:39:11.668  INFO 4180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-03-05 09:39:11.677  INFO 4180 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-03-05 09:39:11.678  INFO 4180 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-03-05 09:39:11.837  INFO 4180 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-03-05 09:39:11.838  INFO 4180 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1860 ms
+2021-03-05 09:39:11.999  INFO 4180 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-05 09:39:12.054  INFO 4180 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-03-05 09:39:12.178  INFO 4180 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-03-05 09:39:12.400  INFO 4180 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-03-05 09:39:13.136  INFO 4180 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-03-05 09:39:13.162  INFO 4180 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-03-05 09:39:14.038  INFO 4180 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-05 09:39:14.053  INFO 4180 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-05 09:39:14.504  WARN 4180 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-05 09:39:14.627  INFO 4180 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-05 09:39:14.897  INFO 4180 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-03-05 09:39:14.910  INFO 4180 --- [main] com.app.BookBorrowingApplication         : Started BookBorrowingApplication in 5.817 seconds (JVM running for 7.859)

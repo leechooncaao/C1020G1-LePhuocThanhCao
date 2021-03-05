@@ -26,9 +26,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void borrowBook(Book book) throws BookIsNotExisted {
-        book.setQuantity(book.getQuantity() -1);
-
         if(book.getQuantity() <= 0)
             throw new BookIsNotExisted("Book is not existed");
+        else book.setQuantity(book.getQuantity() -1);
+    }
+
+    @Override
+    public void returnBook(Integer id) {
+        Book book = bookRepository.findById(id).orElse(null);
+        book.setQuantity(book.getQuantity() + 1);
+        bookRepository.save(book);
+
     }
 }
