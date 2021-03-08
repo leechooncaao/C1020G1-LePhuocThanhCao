@@ -36,7 +36,8 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public String addToCart(@ModelAttribute("item") Item item,@RequestParam("quantity") int quantity, Model model, @ModelAttribute("cart") Cart cart){
+    public String addToCart(@RequestParam("id") int id,@RequestParam("quantity") int quantity, Model model, @ModelAttribute("cart") Cart cart){
+        Item item = itemService.findItemById(id);
         item.setQuantity(item.getQuantity() + quantity);
         cart.addToCart(item);
         model.addAttribute("item", item);
