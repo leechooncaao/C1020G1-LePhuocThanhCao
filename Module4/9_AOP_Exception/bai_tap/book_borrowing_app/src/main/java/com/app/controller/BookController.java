@@ -1,12 +1,11 @@
 package com.app.controller;
 
+import com.app.aop.Logger;
 import com.app.model.Book;
 import com.app.model.BorrowManager;
 import com.app.service.BookBorrowService;
 import com.app.service.BookService;
 import com.app.service.exception.BookIsNotExisted;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +47,7 @@ public class BookController {
     @GetMapping("/borrow/{id}")
     public String borrowBook(@PathVariable Integer id, Model model) throws BookIsNotExisted {
         Book book = bookService.findById(id);
+        Logger.bookName = book.getTitle();
         bookService.borrowBook(book);
         String borrowCode = bookBorrowService.getBorrowCode();
         bookBorrowService.save(new BorrowManager(borrowCode, book));
@@ -72,6 +72,7 @@ public class BookController {
         }
 
         bookService.returnBook(borrowManager.getBook().getId());
+        Logger.bookName = borrowManager.getBook().getTitle();
         return "success-return";
     }
 
