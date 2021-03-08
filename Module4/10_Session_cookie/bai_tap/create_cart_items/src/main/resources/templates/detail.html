@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Detail Item</h2>
+<a th:href="@{/}">Back to list Items</a>
+<form th:action="@{/add}" th:object="${item}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{name}">
+    <input type="hidden" th:field="*{price}">
+    <div>
+        ID : <span th:text="*{id}"></span>
+    </div>
+    <div>
+        Name : <span th:text="*{name}"></span>
+    </div>
+    <div>
+        Price : <span th:text="*{price}"></span>
+    </div>
+
+    <div>
+        Quantity : <input type="number" name="quantity">
+    </div>
+    <div>
+        <input type="submit" value="Add to cart">
+    </div>
+    <div>
+        <p th:text="${message}"></p>
+    </div>
+</form>
+<!--<div>-->
+<!--    <button>-->
+<!--        <a th:href="@{/add/{id}(id = ${item.id})}">Add to cart</a>-->
+<!--    </button>-->
+<!--</div>-->
+<div>
+    <a th:href="@{/cart}"> Go to Cart</a>
+</div>
+
+</body>
+</html>
