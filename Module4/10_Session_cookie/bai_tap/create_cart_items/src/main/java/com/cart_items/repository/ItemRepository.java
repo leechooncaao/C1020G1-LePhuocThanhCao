@@ -1,11 +1,9 @@
 package com.cart_items.repository;
 
 import com.cart_items.model.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ItemRepository {
-    List<Item> getListItem();
-
-    Item findItemById(int id);
+@Repository
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 }

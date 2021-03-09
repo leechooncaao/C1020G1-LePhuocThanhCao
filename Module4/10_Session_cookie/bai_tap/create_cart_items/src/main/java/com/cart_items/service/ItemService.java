@@ -5,7 +5,11 @@ import com.cart_items.model.Item;
 import java.util.List;
 
 public interface ItemService {
-    List<Item> getListItem();
+    List<Item> findAll();
 
-    Item findItemById(int id);
+    Item findById(Integer id);
+
+    void save(Item item);
+
+    void remove(Integer id);
 }

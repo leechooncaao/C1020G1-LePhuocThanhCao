@@ -8,18 +8,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
     @Override
-    public List<Item> getListItem() {
-        return itemRepository.getListItem();
+    public List<Item> findAll() {
+        return itemRepository.findAll();
     }
 
     @Override
-    public Item findItemById(int id) {
-        return itemRepository.findItemById(id);
+    public Item findById(Integer id) {
+        return itemRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Item item) {
+        itemRepository.save(item);
+    }
+
+    @Override
+    public void remove(Integer id) {
+        itemRepository.deleteById(id);
     }
 }

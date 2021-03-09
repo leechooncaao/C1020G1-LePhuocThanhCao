@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -25,20 +25,20 @@ public class CartController {
 
     @GetMapping("/")
     public String getHomePage(Model model){
-        model.addAttribute("items", itemService.getListItem());
+        model.addAttribute("items", itemService.findAll());
         return "home";
     }
 
     @GetMapping("/detail/{id}")
-    public String getDetailPage(@PathVariable int id, Model model){
-        model.addAttribute("item", itemService.findItemById(id));
+    public String getDetailPage(@PathVariable Integer id, Model model){
+        model.addAttribute("item", itemService.findById(id));
         return "detail";
     }
 
-    @PostMapping("/add")
-    public String addToCart(@RequestParam("id") int id,@RequestParam("quantity") int quantity, Model model, @ModelAttribute("cart") Cart cart){
-        Item item = itemService.findItemById(id);
-        item.setQuantity(item.getQuantity() + quantity);
+    @PostMapping("/add/{id}")
+    public String addToCart(@PathVariable("id") Integer id, Model model, @ModelAttribute("cart") Cart cart){
+        Item item = itemService.findById(id);
+
         cart.addToCart(item);
         model.addAttribute("item", item);
         model.addAttribute("message", "Successfully added !");
@@ -47,9 +47,16 @@ public class CartController {
 
     @GetMapping("/cart")
     public String getCartPage(@ModelAttribute("cart") Cart cart, Model model){
-        List<Item> cart_item = cart.getCart();
+        Map<Item, Integer> cart_item = cart.getCart();
         model.addAttribute("cart_item", cart_item);
 
         return "cart";
+    }
+
+    @GetMapping("/cart/delete/{id}")
+    public String removeItem(@ModelAttribute("cart") Cart cart, @PathVariable("id") Integer id){
+        cart.removeItem(itemService.findById(id));
+
+        return "redirect:/cart";
     }
 }

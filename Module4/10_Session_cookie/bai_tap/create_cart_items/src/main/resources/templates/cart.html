@@ -11,12 +11,15 @@
     <table border="1">
         <thead>
             <th>Item</th>
+            <th>Price</th>
             <th>Quantity</th>
         </thead>
         <tbody>
-            <tr th:each="item : ${cart_item}">
+            <tr th:each="item : ${cart_item.keySet()}">
                 <td th:text="${item.name}"></td>
-                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${cart.getQuantity(item)}"></td>
+                <td><a th:href="@{/cart/delete/{id}(id = ${item.id})}">Delete</a></td>
             </tr>
         </tbody>
     </table>
