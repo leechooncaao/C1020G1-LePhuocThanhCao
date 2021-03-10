@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog management</title>
+    <style>
+        h2 {
+            text-align: center;
+            background-color: aqua;
+            color: black;
+            padding: 10px;
+        }
+
+        button {
+            color: red;
+            padding: 5px;
+            margin: 5px;
+            background-color: chartreuse;
+            font-weight: bold;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: red;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: blue;
+        }
+
+        #center-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #item-table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #item-table td, #item-table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #item-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #item-table tr:hover {
+            background-color: #ddd;
+        }
+
+        #item-table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        input[type=text], input[type=number] {
+            width: 40%;
+            padding: 12px 5px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 300px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        #form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #inputSearch {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .notify p {
+            font-size: 15px;
+            color: red;
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+<div id="center-block">
+    <button id="back-menu">
+        <a href="/blog/create">Add New Blog</a>
+    </button>
+</div>
+<div>
+    <input type="text" placeholder="Search by author"  id="inputSearch"/>
+</div>
+<table id="item-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Author</th>
+        <th>Time Update</th>
+        <th>Category</th>
+        <th colspan="3">Action</th>
+    </tr>
+    </thead>
+    <tbody id="responseData">
+    </tbody>
+</table>
+<div>
+    <button type="button" id="read-more" value="0">Read more</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#inputSearch").on("keyup",function () {
+            let inputSearch = $("#inputSearch").val();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/blog/search?inputSearch=" + inputSearch,
+                success: function (blogs) {
+                    let result = "";
+                    for (let blog of blogs) {
+                        result += "<tr>";
+                        result += "<td>" + blog.id + "</td>";
+                        result += "<td>" + blog.author + "</td>";
+                        result += "<td>" + blog.timeUpdate + "</td>";
+                        result += "<td>" + blog.category.name + "</td>";
+                        result += "<td>" + "<button><a href='/blog/" + blog.id + "/edit'>Edit</a></button>" + "</td>";
+                        result += "</tr>";
+                    }
+
+                    $("#responseData").html(result);
+                }
+            });
+        });
+
+        $("#read-more").click(function () {
+            let pageNumber = parseInt($("#read-more").val());
+            pageNumber++;
+            console.log("1...." + pageNumber);
+            $.ajax({
+                type : "GET",
+                url : "http://localhost:8080/blogs/?pageNumber=" + pageNumber,
+                success: function (blogs) {
+                    let result = "";
+                    for (let blog of blogs) {
+                        result += "<tr>";
+                        result += "<td>" + blog.id + "</td>";
+                        result += "<td>" + blog.author + "</td>";
+                        result += "<td>" + blog.timeUpdate + "</td>";
+                        result += "<td>" + blog.category.name + "</td>";
+                        result += "<td>" + "<button><a href='/blog/" + blog.id + "/edit'>Edit</a></button>" + "</td>";
+                        result += "</tr>";
+                    }
+
+                    let previousList = $("#responseData").html();
+                    $("#responseData").html(previousList + result);
+                    $("#read-more").val(pageNumber);
+                }
+            });
+
+        });
+    });
+
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "GET",
+        url: "http://localhost:8080/blogs/?pageNumber=0",
+        success: function (blogs) {
+            let result = "";
+            for (let blog of blogs) {
+                result += "<tr>";
+                result += "<td>" + blog.id + "</td>";
+                result += "<td>" + blog.author + "</td>";
+                result += "<td>" + blog.timeUpdate + "</td>";
+                result += "<td>" + blog.category.name + "</td>";
+                result += "<td>" + "<button><a href='/blog/" + blog.id + "/edit'>Edit</a></button>" + "</td>";
+                result += "</tr>";
+            }
+
+            $("#responseData").html(result);
+        }
+    });
+</script>
+</body>
+</body>
+</html>

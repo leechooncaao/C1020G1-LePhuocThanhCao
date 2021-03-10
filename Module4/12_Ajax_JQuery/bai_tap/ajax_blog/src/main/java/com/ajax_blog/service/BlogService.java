@@ -13,5 +13,5 @@ public interface BlogService extends Service<Blog> {
 
     Page<Blog> findByAuthor(String inputSearch, Pageable pageable);
 
-    List<Blog> findAllByAuthor(String author);
+    List<Blog> findAllByAuthorContaining(String author);
 }

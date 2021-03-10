@@ -1,5 +1,8 @@
 package com.ajax_blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class Category {
     private Integer id;
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "category")
     private List<Blog> blogs;
 
