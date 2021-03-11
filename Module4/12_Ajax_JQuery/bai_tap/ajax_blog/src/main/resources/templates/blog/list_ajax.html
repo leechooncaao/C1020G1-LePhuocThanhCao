@@ -169,7 +169,6 @@
         $("#read-more").click(function () {
             let pageNumber = parseInt($("#read-more").val());
             pageNumber++;
-            console.log("1...." + pageNumber);
             $.ajax({
                 type : "GET",
                 url : "http://localhost:8080/blogs/?pageNumber=" + pageNumber,
