@@ -1,7 +1,13 @@
 package com.furama_app.service.employee;
 
+import com.furama_app.model.employee.AppRole;
+import com.furama_app.model.employee.AppUser;
 import com.furama_app.model.employee.Employee;
+import com.furama_app.model.employee.UserRole;
 import com.furama_app.repository.EmployeeRepository;
+import com.furama_app.repository.RoleRepository;
+import com.furama_app.repository.UserRepository;
+import com.furama_app.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +18,15 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public List<Employee> findAll() {
         return employeeRepository.findAll();
@@ -20,6 +35,24 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void save(Employee employee) {
         employeeRepository.save(employee);
+
+        AppRole role = roleRepository.findByName("member");
+
+        AppUser oldUser = userRepository.findByEmployee_Id(employee.getId());
+
+        UserRole oldUserRole = userRoleRepository.findByAppUser_Username(oldUser.getUsername());
+
+        AppUser newUser = new AppUser(employee.getEmail(), employee);
+
+        UserRole newUserRole = new UserRole(newUser, role);
+
+        if (oldUser != null) {
+            userRoleRepository.delete(oldUserRole);
+            userRepository.delete(oldUser);
+
+        }
+        userRepository.save(newUser);
+        userRoleRepository.save(newUserRole);
     }
 
     @Override
@@ -36,4 +69,5 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> findAllByNameContaining(String name) {
         return employeeRepository.findAllByNameContaining(name);
     }
+
 }

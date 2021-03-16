@@ -10,7 +10,7 @@ public class AppRole {
     @Column(name = "role_id")
     private Integer id;
 
-    @Column(name = "role_name", length = 255)
+    @Column(name = "role_name")
     private String name;
 
     public AppRole() {

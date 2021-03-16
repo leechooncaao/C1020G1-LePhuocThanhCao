@@ -1,7 +1,9 @@
 package com.furama_app.controller;
 
+import com.furama_app.model.employee.AppUser;
 import com.furama_app.model.employee.Employee;
 import com.furama_app.service.employee.EmployeeService;
+import com.furama_app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/list")
     public String getListCustomerPage(Model model){
@@ -31,7 +36,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String createCustomer(@ModelAttribute("employee") Employee employee, RedirectAttributes redirectAttributes){
+    public String create(@ModelAttribute("employee") Employee employee, RedirectAttributes redirectAttributes){
         employeeService.save(employee);
         redirectAttributes.addFlashAttribute("message", "Successfully created !");
 

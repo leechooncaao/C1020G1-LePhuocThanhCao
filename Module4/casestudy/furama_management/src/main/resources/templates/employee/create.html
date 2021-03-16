@@ -16,13 +16,13 @@
                     <div class="d-flex flex-row align-items-center back">
                         <i class="fa fa-long-arrow-left mr-1 mb-1"></i>
                         <h6>
-                            <a href="/customer/list">Back</a>
+                            <a href="/employee/list">Back</a>
                         </h6>
                     </div>
-                    <h6 class="text-right">Add New Customer</h6>
+                    <h6 class="text-right">Add New Employee</h6>
                 </div>
-                <form method="post" th:action="@{/customer/save}" th:object="${customer}">
-                    <input type="hidden" th:field="*{id}"/>
+                <form method="post" th:action="@{/employee/save}" th:object="${employee}">
+<!--                    <input type="hidden" th:field="*{id}"/>-->
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <input
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6">
                             <input
-                                    type="text"
+                                    type="date"
                                     class="form-control"
                                     placeholder="Birthday e.g : YYYY-MM-DD"
                                     th:field="*{birthday}"
@@ -51,10 +51,12 @@
                             />
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{gender}" class="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    placeholder="Salary"
+                                    th:field="*{salary}"
+                            />
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -85,12 +87,31 @@
                             />
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{customerType.id}" class="form-control">
-                                <option value="1">Diamond</option>
-                                <option value="2">Platinium</option>
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Member</option>
+                            <select th:field="*{position.id}" class="form-control">
+                                <option value="1">receptionist</option>
+                                <option value="2">waiter</option>
+                                <option value="3">specialist</option>
+                                <option value="4">supervisor</option>
+                                <option value="5">manager</option>
+                                <option value="6">director</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <select th:field="*{educationDegree.id}" class="form-control">
+                                <option value="1">intermediate</option>
+                                <option value="2">college</option>
+                                <option value="3">university</option>
+                                <option value="4">postgraduate</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select th:field="*{division.id}" class="form-control">
+                                <option value="1">sale-marketing</option>
+                                <option value="2">administration</option>
+                                <option value="3">service</option>
+                                <option value="4">management</option>
                             </select>
                         </div>
                     </div>

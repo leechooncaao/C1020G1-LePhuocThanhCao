@@ -3,7 +3,7 @@ package com.furama_app.model.employee;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", uniqueConstraints = {@UniqueConstraint(columnNames = {"employee_email"})})
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Employee {
     @Column(name = "employee_phone", length = 45, nullable = false)
     private String phoneNumber;
 
-    @Column(name = "employee_email", length = 45)
+    @Column(name = "employee_email", length = 45, nullable = false)
     private String email;
 
     @Column(name = "employee_address", length = 45)
@@ -43,10 +43,8 @@ public class Employee {
     @JoinColumn(name = "division_id", referencedColumnName = "division_id")
     private Division division;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "username")
-    private AppUser appUser;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
+//    private AppUser appUser;
 
     public Employee() {
     }
@@ -139,11 +137,11 @@ public class Employee {
         this.division = division;
     }
 
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
+//    public AppUser getAppUser() {
+//        return appUser;
+//    }
+//
+//    public void setAppUser(AppUser appUser) {
+//        this.appUser = appUser;
+//    }
 }

@@ -46,31 +46,35 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Type</th>
                     <th>Name</th>
                     <th>Birthday</th>
-                    <th>Gender</th>
                     <th>ID Card</th>
+                    <th>Salary</th>
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Position</th>
+                    <th>Education Degree</th>
+                    <th>Division</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="customer : ${listCustomer}">
-                    <td th:text="${customer.id}" ></td>
-                    <td th:text="${customer.customerType.name}"></td>
-                    <td th:text="${customer.name}"></td>
-                    <td th:text="${customer.birthday}"></td>
-                    <td th:text="${customer.gender}"></td>
-                    <td th:text="${customer.idCard}"></td>
-                    <td th:text="${customer.phoneNumber}"></td>
-                    <td th:text="${customer.email}"></td>
-                    <td th:text="${customer.address}"></td>
+                <tr th:each="employee : ${listEmployee}">
+                    <td th:text="${employee.id}" ></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.birthday}"></td>
+                    <td th:text="${employee.idCard}"></td>
+                    <td th:text="${employee.salary}"></td>
+                    <td th:text="${employee.phoneNumber}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.position.name}"></td>
+                    <td th:text="${employee.educationDegree.name}"></td>
+                    <td th:text="${employee.division.name}"></td>
                     <td>
                         <a
-                                th:href="@{/customer/edit/{id}(id=${customer.id})}"
+                                th:href="@{/employee/edit/{id}(id=${employee.id})}"
                                 class="edit"
                                 title="Edit"
                                 data-toggle="tooltip"
@@ -81,7 +85,7 @@
                                 class="delete"
                                 title="Delete"
                                 data-toggle="modal"
-                                th:onclick="|setId(${customer.id})|"
+                                th:onclick="|setId(${employee.id})|"
 
                         >
                             <i class="material-icons">&#xE872;</i>
@@ -95,7 +99,7 @@
 
 <div th:replace="/menu_layout :: delete-modal"></div>
 
-<form action="/customer/delete" id="delete-item">
+<form action="/employee/delete" id="delete-item">
     <input type="hidden" id="id-item" name="id" />
 </form>
 
