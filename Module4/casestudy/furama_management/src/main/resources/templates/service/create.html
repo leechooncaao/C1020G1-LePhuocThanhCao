@@ -39,6 +39,7 @@
                                     placeholder="Area"
                                     th:field="*{area}"
                             />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Name Error</div>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -49,6 +50,7 @@
                                     placeholder="Cost"
                                     th:field="*{cost}"
                             />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}">Name Error</div>
                         </div>
                         <div class="col-md-6">
                             <input
@@ -57,6 +59,7 @@
                                     placeholder="Max people"
                                     th:field="*{maxPeople}"
                             />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('maxPeople')}" th:errors="*{maxPeople}">Name Error</div>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -102,6 +105,7 @@
                                     placeholder="Pool area"
                                     th:field="*{poolArea}"
                             />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}">Name Error</div>
                         </div>
                         <div class="col-md-6">
                             <input
@@ -110,6 +114,18 @@
                                     placeholder="Number Floor"
                                     th:field="*{numberFloor}"
                             />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('numberFloor')}" th:errors="*{numberFloor}">Name Error</div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Service code e.g : DV-XXXX"
+                                    th:field="*{code}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Name Error</div>
                         </div>
                     </div>
                     <div class="row mt-3">

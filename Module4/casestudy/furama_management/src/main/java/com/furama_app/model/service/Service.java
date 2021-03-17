@@ -1,6 +1,8 @@
 package com.furama_app.model.service;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "service")
@@ -10,15 +12,22 @@ public class Service {
     @Column(name = "service_id")
     private Integer id;
 
+    @Pattern(regexp = "^(DV-)\\d{4}$", message = "Code must be DV-XXXX")
+    @Column(name = "service_code", length = 45)
+    private String code;
+
     @Column(name = "service_name", length = 45, nullable = false)
     private String name;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "service_area")
     private Integer area;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "service_cost", nullable = false)
     private Double cost;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "service_max_people")
     private Integer maxPeople;
 
@@ -36,9 +45,11 @@ public class Service {
     @Column(name = "description_other_convenience", length = 45)
     private String description;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "pool_area")
     private Double poolArea;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "number_of_floors")
     private Integer numberFloor;
 
@@ -131,5 +142,13 @@ public class Service {
 
     public void setNumberFloor(Integer numberFloor) {
         this.numberFloor = numberFloor;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

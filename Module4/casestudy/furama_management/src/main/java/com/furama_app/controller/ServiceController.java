@@ -6,6 +6,8 @@ import com.furama_app.service.service_app.ServService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,7 +35,11 @@ public class ServiceController {
     }
 
     @PostMapping("/save")
-    public String create(@ModelAttribute("service") Service service, RedirectAttributes redirectAttributes){
+    public String create(@Validated @ModelAttribute("service") Service service,BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasFieldErrors()) {
+            return "/service/create";
+        }
+
         servService.save(service);
         redirectAttributes.addFlashAttribute("message", "Successfully created !");
 
@@ -49,7 +55,11 @@ public class ServiceController {
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@ModelAttribute("service") Service service, Model model){
+    public String updateCustomer(@Validated @ModelAttribute("service") Service service, BindingResult bindingResult, Model model){
+        if (bindingResult.hasFieldErrors()) {
+            return "/service/edit";
+        }
+
         servService.save(service);
         model.addAttribute("message", "Successfully updated !");
 

@@ -1,6 +1,7 @@
 package com.furama_app.model.employee;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "employee", uniqueConstraints = {@UniqueConstraint(columnNames = {"employee_email"})})
@@ -16,15 +17,18 @@ public class Employee {
     @Column(name = "employee_birthday", nullable = false, columnDefinition = "date")
     private String birthday;
 
+    @Pattern(regexp = "(^\\d{9}$)|(^\\d{12}$)", message = "ID Card is not valid")
     @Column(name = "employee_id_card", nullable = false, length = 45)
     private String idCard;
 
     @Column(name = "employee_salary", nullable = false)
     private Double salary;
 
+    @Pattern(regexp = "(^(090)\\d{7}$)|(^(091)\\d{7}$)|(^(\\+\\(84\\) 90)\\d{7}$)|(^(\\+\\(84\\) 91)\\d{7}$)", message = "Phone number is not valid")
     @Column(name = "employee_phone", length = 45, nullable = false)
     private String phoneNumber;
 
+    @Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$", message = "Email is not valid")
     @Column(name = "employee_email", length = 45, nullable = false)
     private String email;
 
@@ -43,8 +47,8 @@ public class Employee {
     @JoinColumn(name = "division_id", referencedColumnName = "division_id")
     private Division division;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
-//    private AppUser appUser;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
+    private AppUser appUser;
 
     public Employee() {
     }

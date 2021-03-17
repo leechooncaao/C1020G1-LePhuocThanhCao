@@ -21,5 +21,10 @@ public class ContractDetailServiceImpl implements ContractDetailService {
     public List<ContractDetail> findByContract_Id(Integer id) {
         return contractDetailRepository.findByContract_Id(id);
     }
+
+    @Override
+    public void save(ContractDetail contractDetail) {
+        contractDetailRepository.save(contractDetail);
+    }
 }
 

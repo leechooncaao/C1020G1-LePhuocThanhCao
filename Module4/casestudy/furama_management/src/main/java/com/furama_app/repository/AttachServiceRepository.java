@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AttachServiceRepository extends JpaRepository<AttachService, Integer> {
+    AttachService findByName(String name);
 }

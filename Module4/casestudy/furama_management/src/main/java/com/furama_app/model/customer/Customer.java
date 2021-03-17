@@ -1,6 +1,7 @@
 package com.furama_app.model.customer;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "customer")
@@ -14,6 +15,10 @@ public class Customer {
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customer_type_id")
     private CustomerType customerType;
 
+    @Pattern(regexp = "^(KH-)\\d{4}$", message = "Code must be KH-XXXX")
+    @Column(name = "customer_code", length = 45)
+    private String code;
+
     @Column(name = "customer_name", length = 45, nullable = false)
     private String name;
 
@@ -23,12 +28,15 @@ public class Customer {
     @Column(name = "customer_gender", length = 10, nullable = false)
     private String gender;
 
+    @Pattern(regexp = "(^\\d{9}$)|(^\\d{12}$)", message = "ID Card is not valid")
     @Column(name = "customer_id_card", length = 45, nullable = false)
     private String idCard;
 
+    @Pattern(regexp = "(^(090)\\d{7}$)|(^(091)\\d{7}$)|(^(\\+\\(84\\) 90)\\d{7}$)|(^(\\+\\(84\\) 91)\\d{7}$)", message = "Phone number is not valid")
     @Column(name = "customer_phone", length = 45, nullable = false)
     private String phoneNumber;
 
+    @Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$", message = "Email is not valid")
     @Column(name = "customer_email", length = 45)
     private String email;
 
@@ -38,8 +46,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(CustomerType customerType, String name, String birthday, String gender, String idCard, String phoneNumber, String email, String address) {
+    public Customer(CustomerType customerType, String code, String name, String birthday, String gender, String idCard, String phoneNumber, String email, String address) {
         this.customerType = customerType;
+        this.code = code;
         this.name = name;
         this.birthday = birthday;
         this.gender = gender;
@@ -119,5 +128,13 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

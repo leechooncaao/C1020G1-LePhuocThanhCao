@@ -5,6 +5,7 @@ import com.furama_app.model.employee.Employee;
 import com.furama_app.model.service.Service;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 
 @Entity
 @Table(name = "contract")
@@ -20,9 +21,11 @@ public class Contract {
     @Column(name = "contract_end_date", nullable = false, columnDefinition = "date")
     private String endDate;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "contract_deposit", nullable = false)
     private Double deposit;
 
+    @DecimalMin(value = "0.01", message = "Negative value is not permitted")
     @Column(name = "contract_total_money", nullable = false)
     private Double total;
 

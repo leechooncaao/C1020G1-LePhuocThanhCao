@@ -7,6 +7,8 @@ import com.furama_app.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,7 +38,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String create(@ModelAttribute("employee") Employee employee, RedirectAttributes redirectAttributes){
+    public String create(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasFieldErrors()) {
+            return "/employee/create";
+        }
+
         employeeService.save(employee);
         redirectAttributes.addFlashAttribute("message", "Successfully created !");
 
@@ -54,7 +60,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@ModelAttribute("employee") Employee employee, Model model){
+    public String updateCustomer(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model){
+        if (bindingResult.hasFieldErrors()) {
+            return "/employee/edit";
+        }
+
         employeeService.save(employee);
         model.addAttribute("message", "Successfully updated !");
 

@@ -21,4 +21,19 @@ public class ContractServiceImpl implements ContractService{
     public Contract findById(Integer id) {
         return contractRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void save(Contract contract) {
+        contractRepository.save(contract);
+    }
+
+    @Override
+    public List<Contract> findAllByStartDateBeforeAndEndDateAfter(String currentDate) {
+        return contractRepository.findAllByStartDateBeforeAndEndDateAfter(currentDate,currentDate);
+    }
+
+    @Override
+    public List<Contract> findAllByStartDateBeforeAndEndDateAfterAndCustomer_Name(String currentDate,  String name) {
+        return contractRepository.findAllByStartDateBeforeAndEndDateAfterAndCustomer_Name(currentDate, currentDate, name);
+    }
 }

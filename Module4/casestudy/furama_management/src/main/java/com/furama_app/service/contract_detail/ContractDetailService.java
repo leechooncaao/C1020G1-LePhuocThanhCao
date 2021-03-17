@@ -8,4 +8,6 @@ public interface ContractDetailService {
     List<ContractDetail> findAll();
 
     List<ContractDetail> findByContract_Id(Integer id);
+
+    void save(ContractDetail contractDetail);
 }
