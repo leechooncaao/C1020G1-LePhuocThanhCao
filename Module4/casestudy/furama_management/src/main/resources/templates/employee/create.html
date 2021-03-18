@@ -69,6 +69,7 @@
                                     th:field="*{email}"
                             />
                             <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+                            <div class="error-box form-control" style="border: 0"th:if="${uniqueMessage}" th:text="${uniqueMessage}"></div>
                         </div>
                         <div class="col-md-6">
                             <input

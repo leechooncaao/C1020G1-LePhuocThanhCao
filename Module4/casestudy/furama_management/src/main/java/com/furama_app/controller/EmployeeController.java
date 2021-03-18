@@ -39,12 +39,16 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public String create(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasFieldErrors()) {
+        if (bindingResult.hasFieldErrors())
             return "/employee/create";
-        }
 
-        employeeService.save(employee);
-        redirectAttributes.addFlashAttribute("message", "Successfully created !");
+        Boolean isUnique = employeeService.emailIsUnique(employee.getEmail());
+        if(!isUnique)
+            redirectAttributes.addFlashAttribute("uniqueMessage", "Email is not unique !");
+        else {
+            employeeService.save(employee);
+            redirectAttributes.addFlashAttribute("message", "Successfully created !");
+        }
 
         return "redirect:/employee/create";
 

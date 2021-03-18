@@ -15,4 +15,6 @@ public interface EmployeeService {
 
     List<Employee> findAllByNameContaining(String name);
 
+    Boolean emailIsUnique(String email);
+
 }

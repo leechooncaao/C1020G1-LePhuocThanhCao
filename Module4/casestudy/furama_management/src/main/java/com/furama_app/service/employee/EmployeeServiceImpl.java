@@ -40,13 +40,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         AppUser oldUser = userRepository.findByEmployee_Id(employee.getId());
 
-        UserRole oldUserRole = userRoleRepository.findByAppUser_Username(oldUser.getUsername());
-
         AppUser newUser = new AppUser(employee.getEmail(), employee);
 
         UserRole newUserRole = new UserRole(newUser, role);
 
         if (oldUser != null) {
+            UserRole oldUserRole = userRoleRepository.findByAppUser_Username(oldUser.getUsername());
             userRoleRepository.delete(oldUserRole);
             userRepository.delete(oldUser);
 
@@ -68,6 +67,19 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Employee> findAllByNameContaining(String name) {
         return employeeRepository.findAllByNameContaining(name);
+    }
+
+    @Override
+    public Boolean emailIsUnique(String email) {
+        List<Employee> employees = employeeRepository.findAll();
+
+        for (Employee employee : employees){
+            if(email.equals(employee.getEmail())){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
