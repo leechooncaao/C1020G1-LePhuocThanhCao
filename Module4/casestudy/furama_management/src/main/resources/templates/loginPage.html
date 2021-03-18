@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/menu_layout :: head">
+</head>
+<body>
+<!-- menu navbar -->
+<div th:replace="/menu_layout :: menu-nav"></div>
+
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Sign In</h3>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fa fa-facebook-square"></i></span>
+                    <span><i class="fa fa-google-plus-square"></i></span>
+                    <span><i class="fa fa-twitter-square"></i></span>
+                </div>
+            </div>
+            <div class="card-body">
+                <form name='f' th:action="@{/j_spring_security_check}" method="post">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="username" name='username' value=''>
+
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="password" name='password'>
+                    </div>
+                    <div class="row align-items-center remember">
+                        <input type="checkbox" name="remember-me">Remember Me
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn float-right login_btn" name="submit">
+                    </div>
+                </form>
+            </div>
+            <!-- /login?error=true -->
+            <div th:if="${#request.getParameter('error') == 'true'}"
+                 style="color:red;margin-bottom: -1px; background-color: aqua">
+                <h5 style="text-align: center; margin-top: 5px">Login Failed!!!</h5>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account?<a href="#">Sign Up</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

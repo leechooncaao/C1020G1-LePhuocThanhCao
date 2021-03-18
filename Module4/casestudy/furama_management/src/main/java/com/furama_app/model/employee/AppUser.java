@@ -1,6 +1,7 @@
 package com.furama_app.model.employee;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -9,19 +10,22 @@ public class AppUser {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password",length = 128, nullable = false)
     private String password;
 
     @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     private Employee employee;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+    private List<UserRole> userRoles;
+
     public AppUser() {
     }
 
     public AppUser(String email, Employee employee) {
         this.username = email;
-        this.password = "12345";
+        this.password = "$2a$10$JDrCRHIlc3yeeCl9hgDTDed/niw6wHd1KPnS6m6/OTC/g1A/gbE0y";
         this.employee = employee;
     }
 
@@ -47,5 +51,13 @@ public class AppUser {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

@@ -1,6 +1,8 @@
 body {
     background: #eeeeee;
     font-family: "Varela Round", sans-serif;
+    height: 100%;
+    margin: 0;
 }
 .navbar {
     color: #fff;
@@ -180,4 +182,31 @@ body {
     .input-group {
         width: 100%;
     }
+}
+
+.bg-img img{
+    /* The image used */
+    /*background-image: url("/images/furama.jpg");*/
+
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.text-block {
+    position: absolute;
+    bottom: 410px;
+    right: 300px;
+    /*background-color: black;*/
+    color: wheat;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    font-size: 3.5rem;
+
 }

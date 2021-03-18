@@ -1,7 +1,10 @@
 package com.furama_app.model.employee;
 
+import com.furama_app.model.contract.Contract;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Table(name = "employee", uniqueConstraints = {@UniqueConstraint(columnNames = {"employee_email"})})
@@ -49,6 +52,9 @@ public class Employee {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
     private AppUser appUser;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<Contract> contracts;
 
     public Employee() {
     }
@@ -141,11 +147,19 @@ public class Employee {
         this.division = division;
     }
 
-//    public AppUser getAppUser() {
-//        return appUser;
-//    }
-//
-//    public void setAppUser(AppUser appUser) {
-//        this.appUser = appUser;
-//    }
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
 }

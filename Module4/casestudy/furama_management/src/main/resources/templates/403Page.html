@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/menu_layout :: head">
+</head>
+<body>
+<!-- menu navbar -->
+<div th:replace="/menu_layout :: menu-nav"></div>
+
+<h3 th:if="${message != null}" th:utext="${message}" style="color: red; margin-top: 140px; text-align: center"></h3>
+</body>
+</html>

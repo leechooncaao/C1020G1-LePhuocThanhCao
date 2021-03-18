@@ -1,7 +1,10 @@
 package com.furama_app.model.customer;
 
+import com.furama_app.model.contract.Contract;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -42,6 +45,9 @@ public class Customer {
 
     @Column(name = "customer_address", length = 45)
     private String address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Contract> contracts;
 
     public Customer() {
     }
@@ -136,5 +142,13 @@ public class Customer {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
     }
 }
