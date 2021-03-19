@@ -126,6 +126,15 @@ public class ContractController {
         return "redirect:/contract/create";
     }
 
+    @GetMapping("/edit/{id}")
+    public String getEditPage(@PathVariable("id") Integer id, Model model) {
+       Contract contract =  contractService.findById(id);
+
+       model.addAttribute("contract", contract);
+
+        return "/contract/edit";
+    }
+
 
 
 

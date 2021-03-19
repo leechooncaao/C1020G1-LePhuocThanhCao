@@ -41,6 +41,7 @@ public class PhoneNumber implements Validator {
         this.number = number;
     }
 
+
     @Override
     public boolean supports(Class<?> clazz) {
         return PhoneNumber.class.isAssignableFrom(clazz);

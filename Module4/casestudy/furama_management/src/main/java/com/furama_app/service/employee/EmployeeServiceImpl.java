@@ -82,4 +82,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         return true;
     }
 
+    @Override
+    public List<Employee> findAllInputTex(String keyword) {
+        return employeeRepository.findAllInputTex(keyword);
+    }
+
 }

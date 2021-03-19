@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employee")
@@ -24,26 +25,26 @@ public class EmployeeController {
     private UserService userService;
 
     @GetMapping("/list")
-    public String getListCustomerPage(Model model){
-        model.addAttribute("listEmployee",employeeService.findAll());
+    public String getListCustomerPage(Model model) {
+        model.addAttribute("listEmployee", employeeService.findAll());
 
         return "/employee/list";
     }
 
     @GetMapping("/create")
-    public String getCreatePage(Model model){
-        model.addAttribute("employee",new Employee());
+    public String getCreatePage(Model model) {
+        model.addAttribute("employee", new Employee());
 
         return "/employee/create";
     }
 
     @PostMapping("/save")
-    public String create(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String create(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors())
             return "/employee/create";
 
         Boolean isUnique = employeeService.emailIsUnique(employee.getEmail());
-        if(!isUnique)
+        if (!isUnique)
             redirectAttributes.addFlashAttribute("uniqueMessage", "Email is not unique !");
         else {
             employeeService.save(employee);
@@ -55,7 +56,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/edit/{id}")
-    public String getEditPage(@PathVariable("id") Integer id, Model model){
+    public String getEditPage(@PathVariable("id") Integer id, Model model) {
         Employee employee = employeeService.findById(id);
 
         model.addAttribute("employee", employee);
@@ -64,7 +65,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateCustomer(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model){
+    public String updateCustomer(@Validated @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model) {
         if (bindingResult.hasFieldErrors()) {
             return "/employee/edit";
         }
@@ -76,22 +77,23 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete")
-    public String deleteCustomer(@RequestParam("id") Integer id){
+    public String deleteCustomer(@RequestParam("id") Integer id) {
         employeeService.delete(employeeService.findById(id));
 
         return "redirect:/employee/list";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam("search-data") String input, Model model){
-        List<Employee> employees =  employeeService.findAllByNameContaining(input);
+    public String search(@RequestParam("search-data") Optional<String> keyword, Model model) {
+        List<Employee> employeeList;
+        if (keyword.isPresent())
+            employeeList = employeeService.findAllInputTex(keyword.get());
+        else
+            employeeList = employeeService.findAll();
 
-        if(employees.isEmpty())
-            return "notFound";
-        else {
-            model.addAttribute("listEmployee", employees);
-            return "/employee/list";
-        }
+        model.addAttribute("listEmployee", employeeList);
+
+        return "/employee/list";
 
     }
 }

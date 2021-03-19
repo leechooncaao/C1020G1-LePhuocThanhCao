@@ -83,7 +83,7 @@
                             <p class="float-right" style="margin-top: 0px">Employee :</p>
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{employee}">
+                            <select th:field="*{employee}" class="js-example-basic-single form-control">
                                 <option th:each="employee : ${listEmployee}" th:value="${employee.id}"
                                         th:text="${employee.name}"></option>
                             </select>
@@ -94,7 +94,7 @@
                             <p class="float-right" style="margin-top: 0px">Customer :</p>
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{customer}">
+                            <select th:field="*{customer}" class="js-example-basic-single form-control">
                                 <option th:each="customer : ${listCustomer}" th:value="${customer.id}"
                                         th:text="${customer.name}"></option>
                             </select>
@@ -105,7 +105,7 @@
                             <p class="float-right" style="margin-top: 0px">Service Name :</p>
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{service}">
+                            <select th:field="*{service}" class="js-example-basic-single form-control">
                                 <option th:each="service : ${listService}" th:value="${service.id}"
                                         th:text="${service.name}"></option>
                             </select>
@@ -147,6 +147,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+</script>
 </body>
 </html>

@@ -21,85 +21,120 @@
                     </div>
                     <h6 class="text-right">Edit Customer</h6>
                 </div>
-                <form method="post" th:action="@{/customer/update}" th:object="${customer}">
+                <form method="post" th:action="@{/contract/update}" th:object="${contract}">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="row mt-2">
                         <div class="col-md-6">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Name"
-                                    th:field="*{name}"
-                            />
+                            <p class="float-right" style="margin-top: 5px">Start Date :</p>
                         </div>
                         <div class="col-md-6">
                             <input
                                     type="date"
                                     class="form-control"
-                                    placeholder="Birthday e.g : YYYY-MM-DD"
-                                    th:field="*{birthday}"
+                                    placeholder="Start date"
+                                    th:field="*{startDate}"
                             />
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="ID Card : max 9 or 12 digits"
-                                    th:field="*{idCard}"
-                            />
+                            <p class="float-right" style="margin-top: 5px">End Date :</p>
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{gender}" class="form-control">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                            <input
+                                    type="date"
+                                    class="form-control"
+                                    th:field="*{endDate}"
+                            />
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 5px">Deposit :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    th:field="*{deposit}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}">Name Error</div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 5px">Total :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    th:field="*{total}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('total')}" th:errors="*{total}">Name Error</div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 0px">Employee :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <select th:field="*{employee}" class="js-example-basic-single form-control">
+                                <option th:each="employee : ${listEmployee}" th:value="${employee.id}"
+                                        th:text="${employee.name}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Email e.g : abc@gmail.com"
-                                    th:field="*{email}"
-                            />
+                            <p class="float-right" style="margin-top: 0px">Customer :</p>
                         </div>
                         <div class="col-md-6">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Phone Number : 090XXXXXXX - 091XXXXXXX - +(84) 90XXXXXXX - +(84) 91XXXXXXX"
-                                    th:field="*{phoneNumber}"
-                            />
+                            <select th:field="*{customer}" class="js-example-basic-single form-control">
+                                <option th:each="customer : ${listCustomer}" th:value="${customer.id}"
+                                        th:text="${customer.name}"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Address"
-                                    th:field="*{address}"
-                            />
+                            <p class="float-right" style="margin-top: 0px">Service Name :</p>
                         </div>
                         <div class="col-md-6">
-                            <select th:field="*{customerType.id}" class="form-control">
-                                <option value="1">Diamond</option>
-                                <option value="2">Platinium</option>
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Member</option>
+                            <select th:field="*{service}" class="js-example-basic-single form-control">
+                                <option th:each="service : ${listService}" th:value="${service.id}"
+                                        th:text="${service.name}"></option>
                             </select>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <table class="table table-striped table-hover table-bordered text-nowrap"
+                               style="text-align: center">
+                            <thead>
+                            <tr>
+                                <th>Attach Service</th>
+                                <th>Cost</th>
+                                <th>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="attachService : ${listAttachService}">
+                                <td th:text="${attachService.name}"></td>
+                                <td th:text="${attachService.cost}"></td>
+                                <td>
+                                    <input type="number" th:name="${attachService.name}" th:value="0">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <span th:if="${message}" th:text="${message}"></span>
                         </div>
                     </div>
-                    <div class="mt-5 text-right">
+                    <div class="mt-5 text-center" style="margin-left: 0">
                         <input type="submit" value="Save" class="btn btn-primary profile-button">
                     </div>
                 </form>

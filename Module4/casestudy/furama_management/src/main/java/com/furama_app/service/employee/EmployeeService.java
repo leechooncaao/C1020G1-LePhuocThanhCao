@@ -17,4 +17,6 @@ public interface EmployeeService {
 
     Boolean emailIsUnique(String email);
 
+    List<Employee> findAllInputTex(String keyword);
+
 }
