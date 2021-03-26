@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>exercise</title>
+
+    <meta name="description" content="" />
+  </head>
+
+  <body>
+    <h1>TypeScript Fundamentals</h1>
+
+    <div>
+      <form action="">
+        <input type="text" id="keyword" />
+        <input type="button" onclick="search()" value="submit" />
+      </form>
+    </div>
+
+    <div class="app">
+      <ul class="list"></ul>
+    </div>
+    <script type="text/javascript" src="/fileJs/search_git.js"></script>
+    <script type="text/javascript">
+      let search = function () {
+        let keyword = document.getElementById("keyword").value;
+        main(keyword);
+      };
+    </script>
+  </body>
+</html>

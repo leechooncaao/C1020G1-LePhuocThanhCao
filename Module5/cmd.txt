@@ -1,0 +1,11 @@
+C:\Users\lephu>cd\
+
+C:\>cd\
+
+C:\>cd /d E:\IT\C1020G1_Le_Phuoc_Thanh_Cao\Module5\2_Typescript\typescript-demo
+
+------
+npm init typescript-project
+
+-- 
+tsc -p tsconfig.json

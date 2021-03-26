@@ -20,7 +20,7 @@
 2021-03-08 08:56:05.684  INFO 412 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2021-03-08 08:56:05.697  INFO 412 --- [main] com.app.BookBorrowingApplication         : Started BookBorrowingApplication in 6.457 seconds (JVM running for 9.412)
 2021-03-08 08:56:09.341  INFO 412 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-03-08 08:56:09.342  INFO 412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-03-08 08:56:09.343  INFO 412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-03-08 08:56:09.342  INFO 412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Int'
+                                                                                                          2021-03-08 08:56:09.343  INFO 412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Comitializing Servlet 'dispatcherServlepleted initialization in 1 ms
 2021-03-08 08:56:14.103  INFO 412 --- [http-nio-8080-exec-4] com.app.controller.BookController        : Book: To Kill a Mockingbird had been borrowed !
 2021-03-08 08:56:33.331  INFO 412 --- [http-nio-8080-exec-6] com.app.controller.BookController        : Book: To Kill a Mockingbird had been return !

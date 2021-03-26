@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/menu_layout :: head"></th:block>
+    <link rel="stylesheet" href="/css/form_edit_create.css">
+    <style>
+        body {
+            height: 1050px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="/menu_layout :: menu-nav"></div>
+
+<div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back">
+                        <i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                        <h6>
+                            <a href="/contract/list">Back</a>
+                        </h6>
+                    </div>
+                    <h6 class="text-right">Add New Contract</h6>
+                </div>
+                <form method="post" th:action="@{/contract/save}" th:object="${contract}">
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 5px">Contract Code :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Code"
+                                    th:field="*{code}"
+                            />
+                            <div class="error-box form-control" style="border: 0"
+                                 th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Name Error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 0px">Customer :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <select th:field="*{customer}" class="js-example-basic-single form-control">
+                                <option th:each="customer : ${listCustomer}" th:value="${customer.id}"
+                                        th:text="${customer.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 5px">Estate Type :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" id="dat" th:value="dat" th:field="*{serviceType}">
+                            <label for="dat">Đất</label>
+                            <input type="radio" id="nhadat" th:value="nhadat" th:field="*{serviceType}">
+                            <label for="nhadat">Nhà Đất</label>
+                            <div class="error-box form-control" style="border: 0"
+                                 th:if="${#fields.hasErrors('serviceType')}" th:errors="*{serviceType}">Name Error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 5px">Date :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="date"
+                                    class="form-control"
+                                    th:field="*{date}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('date')}"
+                                 th:errors="*{date}">Name Error
+                            </div>
+<!--                            <div class="error-box form-control" style="border: 0"th:if="${validDate}" th:text="${validDate}"></div>-->
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 0px">Cost(VND) :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    th:field="*{cost}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('cost')}"
+                                 th:errors="*{cost}">Name Error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right" style="margin-top: 0px">Area(m2) :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    th:field="*{area}"
+                            />
+                            <div class="error-box form-control" style="border: 0" th:if="${#fields.hasErrors('area')}"
+                                 th:errors="*{area}">Name Error
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <span th:if="${message}" th:text="${message}"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3 text-center">
+                        <div class="col-md-6" style="margin-left: 0">
+                            <input type="submit" value="Save" class="btn btn-primary profile-button">
+                        </div>
+                        <div class="col-md-6" style="margin-left: 0">
+                            <a href="/contract/list">
+                                <input type="" value="Cancel" class="btn btn-primary profile-button">
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+</script>
+</body>
+</html>

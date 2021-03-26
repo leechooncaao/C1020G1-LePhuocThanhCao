@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/menu_layout :: head">
+</head>
+<body>
+<!-- menu navbar -->
+<div th:replace="/menu_layout :: menu-nav"></div>
+
+<!--container of list items-->
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>
+                        Contract <b>Details</b>
+
+                        <span>
+                                    <a th:href="@{/contract/create}">
+                                        <button class="btn btn-danger profile-button" type="button">
+                                          Add New
+                                        </button>
+                                    </a>
+                        </span>
+                    </h2>
+                </div>
+                <div class="col-sm-4">
+                    <div class="table-search-box">
+                        <form th:action="@{/contract/search}" id="searchForm">
+                            <div>
+                                <a class="search-btn" onclick="$('#searchForm').submit()">
+                                    <i class="material-icons">&#xE8B6;</i>
+                                </a>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Search by name &hellip;"
+                                        name="search-data"
+                                />
+                            </div>
+                            <div>
+                                <select class="form-control" name="serviceType">
+                                    <option value="Nha dat">Nhà Đất</option>
+                                    <option value="Dat">Đất</option>
+                                </select>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="table-page" class="table table-striped table-hover table-bordered table-responsive text-nowrap">
+            <thead>
+            <tr>
+                <th>Contract Code</th>
+                <th>Customer</th>
+                <th>Contract Date</th>
+                <th>Contract Type</th>
+                <th>Cost</th>
+                <th>Area</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contract : ${listContract}">
+                <td th:text="${contract.code}" ></td>
+                <td th:text="${contract.customer.name}"></td>
+                <td th:text="${contract.date}"></td>
+                <td th:text="${contract.serviceType}"></td>
+                <td th:text="${contract.cost}"></td>
+                <td th:text="${contract.area}"></td>
+                <td>
+                    <a
+                            th:href="@{/contract/detail/{id}(id=${contract.id})}"
+                            class="my_library_books"
+                            title="Detail"
+                            data-toggle="tooltip"
+                    ><i class="material-icons">&#xe02f;</i></a
+                    >
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $('#table-page').dataTable(-->
+<!--            {-->
+<!--                "dom" : 'lrtip',-->
+<!--                "lengthChange" : false,-->
+<!--                "pageLength" : 4-->
+<!--            }-->
+<!--        );-->
+<!--    });-->
+
+<!--    // functions for deleting item-->
+<!--    function setId(id) {-->
+<!--        document.getElementById("id-item").value = id;-->
+<!--    }-->
+<!--    function submitDelete() {-->
+<!--        document.getElementById("delete-item").submit();-->
+<!--    }-->
+<!--</script>-->
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/menu_layout :: head"></th:block>
+    <link rel="stylesheet" href="/css/form_edit_create.css">
+    <style>
+        body {
+            height: 1050px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="/menu_layout :: menu-nav"></div>
+
+<div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back">
+                        <i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                        <h6>
+                            <a href="/contract/list">Back</a>
+                        </h6>
+                    </div>
+                    <h6 class="text-right">Contract Detail</h6>
+                </div>
+                <div th:object="${contract}">
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <p class="float-right">Contract Code : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.code}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Service Type : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.serviceType}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Date : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.date}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Cost : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.cost}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Area : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.area}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Customer : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.customer.name}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Phone Number : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.customer.phoneNumber}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <p class="float-right">Email : </p>
+                        </div>
+                        <div class="col-md-6" th:text="${contract.customer.email}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <a href="/contract/list">
+                                <button class="btn btn-primary profile-button float-right">Back</button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a
+                                    href="#deleteModal"
+                                    class="delete"
+                                    title="Delete"
+                                    data-toggle="modal"
+                                    th:onclick="|setId(${contract.id})|"
+
+                            >
+                                <button class="btn btn-primary profile-button">Delete</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="/menu_layout :: delete-modal"></div>
+
+<form action="/contract/delete" id="delete-item">
+    <input type="hidden" id="id-item" name="id" />
+</form>
+
+<script>
+    // functions for deleting item
+    function setId(id) {
+        document.getElementById("id-item").value = id;
+    }
+    function submitDelete() {
+        document.getElementById("delete-item").submit();
+    }
+</script>
+</body>
+</html>
