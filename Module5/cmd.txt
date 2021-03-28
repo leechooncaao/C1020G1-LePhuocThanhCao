@@ -9,3 +9,13 @@ npm init typescript-project
 
 -- 
 tsc -p tsconfig.json
+
+ng add @ng-bootstrap/ng-bootstrap
+npm install popper.js --save
+npm install jquery --save
+
+npm install -g @angular/cli
+ng new my-dream-app
+cd my-dream-app
+ng serve
+ng generate component hero-detail
