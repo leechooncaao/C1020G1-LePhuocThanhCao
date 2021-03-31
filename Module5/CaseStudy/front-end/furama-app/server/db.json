@@ -1,0 +1,200 @@
+{
+  "customer_type": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinium"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "customer": [
+    {
+      "id": 1,
+      "code": "KH-0001",
+      "name": "Le Hoang Minh Tuan",
+      "birthday": "1994-02-23",
+      "gender": "Male",
+      "idCard": "321313119",
+      "phoneNumber": "0901234557",
+      "email": "lehoangminhtuan@gmail.com",
+      "address": "Da Nang",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": 2,
+      "code": "KH-0002",
+      "name": "Nguyen Thanh Tung",
+      "birthday": "1993-05-21",
+      "gender": "Male",
+      "idCard": "7987978",
+      "phoneNumber": "051331232",
+      "email": "nguyenthanhtung@gmail.com",
+      "address": "Da Nang",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    },
+    {
+      "id": 3,
+      "code": "KH-0003",
+      "name": "Nguyen Long Phin",
+      "birthday": "1999-01-18",
+      "gender": "Female",
+      "idCard": "98799797",
+      "phoneNumber": "0121323321",
+      "email": "nguyenlongphin@gmail.com",
+      "address": "Quang Nam",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": 4,
+      "code": "KH-0004",
+      "name": "Nguyen Ngoc Thinh",
+      "birthday": "1995-11-24",
+      "gender": "Male",
+      "idCard": "98798988",
+      "phoneNumber": "03213112312",
+      "email": "nguyenngocthinh@gmail.com",
+      "address": "Quang Ngai",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": 5,
+      "code": "KH-0005",
+      "name": "Nguyen Viet Dung1",
+      "birthday": "1994-09-11",
+      "gender": "Female",
+      "idCard": "87879797",
+      "phoneNumber": "032132131",
+      "email": "nguyenvietdung@gmail.com",
+      "address": "Da Nang",
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      }
+    },
+    {
+      "id": 10,
+      "code": "KH-0010",
+      "name": "leechoncaao",
+      "birthday": "1997-01-02",
+      "gender": "Male",
+      "idCard": "23133212",
+      "phoneNumber": "0777542581",
+      "email": "hathaykhongbanghayhat18@gmail.com",
+      "address": "Lenin",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": 12,
+      "code": "KH-0012",
+      "name": "leecaao",
+      "birthday": "2021-03-11",
+      "gender": "Male",
+      "idCard": "23124",
+      "phoneNumber": "0777542581",
+      "email": "leecao@gmail.com",
+      "address": "Lenin",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": 13,
+      "code": "KH-0013",
+      "name": "leecaao3",
+      "birthday": "2021-03-11",
+      "gender": "Male",
+      "idCard": "23124",
+      "phoneNumber": "0777542581",
+      "email": "hathaykhongbanghayhat18@gmail.com",
+      "address": "Lenin",
+      "customerType": {
+        "id": 5,
+        "name": "Member"
+      }
+    },
+    {
+      "id": 14,
+      "code": "KH-0014",
+      "name": "Thanh Cao Lê Phước 11",
+      "birthday": "2021-03-09",
+      "gender": "Male",
+      "idCard": "23133212",
+      "phoneNumber": "0777542581",
+      "email": "hathaykhongbanghayhat18@gmail.com",
+      "address": "Lenin",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": 15,
+      "code": "fsadf",
+      "name": "fdsa",
+      "birthday": "2021-03-12",
+      "gender": "Male",
+      "idCard": "sdfa",
+      "phoneNumber": "fsdfas",
+      "email": "fsa",
+      "address": "fsda",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "name": "fdsfasdf",
+      "idCard": "asdfsdfa",
+      "email": "sdafsadf",
+      "address": "sdafsadf",
+      "code": "sdafasdf",
+      "birthday": "2021-03-09",
+      "gender": "Female",
+      "phoneNumber": "fsdafsdfsdf",
+      "customerType": "1",
+      "id": 16
+    },
+    {
+      "name": "fdsfasdf",
+      "idCard": "asdfsdfa",
+      "email": "sdafsadf",
+      "address": "sdafsadf",
+      "code": "sdafasdf",
+      "birthday": "2021-03-09",
+      "gender": "Female",
+      "phoneNumber": "fsdafsdfsdf",
+      "customerType": "1",
+      "id": 17
+    }
+  ]
+}

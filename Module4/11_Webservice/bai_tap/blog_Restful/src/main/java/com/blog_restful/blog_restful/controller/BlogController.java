@@ -30,7 +30,7 @@ public class BlogController {
         if(blogs.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(blogs, HttpStatus.OK);
     }
 
     // Retrieve all blogs by category

@@ -8,6 +8,10 @@ import { CustomerAddComponent } from './components/customer/customer-add/custome
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { HeaderComponent } from './components/layout/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +19,15 @@ import { HeaderComponent } from './components/layout/header/header.component';
     CustomerAddComponent,
     CustomerListComponent,
     CustomerEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
   BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
