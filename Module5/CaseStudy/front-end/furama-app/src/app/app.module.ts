@@ -10,7 +10,9 @@ import { CustomerEditComponent } from './components/customer/customer-edit/custo
 import { HeaderComponent } from './components/layout/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './components/layout/footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteModalComponent } from './components/modals/delete-modal/delete-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,16 +22,20 @@ import { FormsModule } from '@angular/forms';
     CustomerListComponent,
     CustomerEditComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DeleteModalComponent
   ],
   imports: [
   BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents : [DeleteModalComponent]
 })
 export class AppModule { }

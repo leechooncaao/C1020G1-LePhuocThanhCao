@@ -19,3 +19,6 @@ ng new my-dream-app
 cd my-dream-app
 ng serve
 ng generate component hero-detail
+
+npm i json-server -g
+json-server --watch db.json

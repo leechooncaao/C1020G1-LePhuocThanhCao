@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Customer } from '../models/customer/Customer';
+import { Customer } from '../../models/customer/Customer';
+import { CustomerType } from '../../models/customer/CustomerType';
 
 const httpOptions = {
   headers : new HttpHeaders({
@@ -19,9 +20,21 @@ export class CustomerService {
 
   findAll():Observable<Customer[]>{
     return this.http.get<Customer[]>(this.baseUrl);
-  } 
+  }
 
   create(customer : Customer): Observable<Customer>{
       return this.http.post<Customer>(this.baseUrl, customer);
+  }
+
+  update(id : number, customer : Customer) : Observable<Customer>{
+    return this.http.put<Customer>(this.baseUrl + '/' + id, customer, httpOptions)
+  }
+
+  findById(id : number) : Observable<Customer>{
+    return this.http.get<Customer>(this.baseUrl+ '/' + id, httpOptions);
+  }
+
+  delete(id : number) : Observable<Customer>{
+    return this.http.delete<Customer>(this.baseUrl + '/' + id, httpOptions);
   }
 }

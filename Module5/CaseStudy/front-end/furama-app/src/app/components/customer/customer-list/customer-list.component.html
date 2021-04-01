@@ -48,6 +48,7 @@
           <th>Phone</th>
           <th>Email</th>
           <th>Address</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +63,23 @@
           <td>{{ customer.phoneNumber }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.address }}</td>
+          <td>
+            <a
+              [routerLink]="['/customer/', 'edit', customer.id]"
+              class="edit"
+              title="Edit"
+              data-toggle="tooltip"
+            >
+              <i class="material-icons">&#xE254;</i>
+            </a>
+            <a
+              class="delete"
+              title="Delete"
+              (click)="openModal()"
+            >
+              <i class="material-icons">&#xE872;</i>
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>

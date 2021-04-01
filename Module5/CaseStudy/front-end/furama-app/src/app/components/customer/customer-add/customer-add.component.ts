@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Customer } from 'src/app/models/customer/Customer';
-import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerTypeService } from 'src/app/services/customer-service/customer-type.service';
+import { CustomerService } from 'src/app/services/customer-service/customer.service';
+import { CustomerType } from './../../../models/customer/CustomerType';
 
 
 @Component({
@@ -9,27 +12,39 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./customer-add.component.scss']
 })
 export class CustomerAddComponent implements OnInit {
-  customer : Customer = new Customer;
+  customerForm : FormGroup;
+  customerTypes : CustomerType[];
+  message : string;
 
-  // id : number;
-  // code : string;
-  // name : string;
-  // birthday : string;
-  // gender : string;
-  // idCard : string;
-  // phoneNumber : string;
-  // email : string;
-  // address : string;
-  // customerType : CustomerType;
-
-
-  constructor(private customerService : CustomerService) { }
+  constructor(private customerService : CustomerService, 
+              private customerTypeSevice : CustomerTypeService) { }
 
   ngOnInit(): void {
+    this.customerForm = new FormGroup({
+      customerType : new FormControl(),
+      code : new FormControl(),
+      name : new FormControl(),
+      birthday : new FormControl(),
+      gender : new FormControl(),
+      idCard : new FormControl(),
+      email : new FormControl(),
+      address : new FormControl(),
+      phoneNumber : new FormControl()
+    });
+
+    const promise = this.customerTypeSevice.findAll().toPromise();
+
+    promise.then(customerTypes => {
+      this.customerTypes = customerTypes;
+
+      this.customerForm.get('gender').setValue('Male');
+      this.customerForm.get('customerType').setValue(this.customerTypes[0]);
+    })
   }
 
   onSubmit(){
-    this.customerService.create(this.customer).subscribe();
+    this.customerService.create(this.customerForm.value).subscribe(()=>{
+      this.message = "Successfully created !";
+    })
   }
-
 }

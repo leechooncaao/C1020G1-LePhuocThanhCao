@@ -11,8 +11,7 @@
           </div>
           <h6 class="text-right">Add New Customer</h6>
         </div>
-        <form (ngSubmit)="onSubmit()">
-          <!-- <input type="hidden" th:field="*{id}"/> -->
+        <form (ngSubmit)="onSubmit()" novalidate [formGroup]="customerForm">
           <div class="row mt-2">
             <div class="col-md-6">
               <input
@@ -20,7 +19,7 @@
                 class="form-control"
                 placeholder="Name"
                 name="name"
-                [(ngModel)]="customer.name"
+                formControlName="name"
               />
             </div>
             <div class="col-md-6">
@@ -29,7 +28,7 @@
                 class="form-control"
                 placeholder="Birthday e.g : YYYY-MM-DD"
                 name="birthday"
-                [(ngModel)]="customer.birthday"
+                formControlName="birthday"
               />
             </div>
           </div>
@@ -40,12 +39,12 @@
                 class="form-control"
                 placeholder="ID Card : max 9 or 12 digits"
                 name="idCard"
-                [(ngModel)]="customer.idCard"
+                formControlName="idCard"
               />
             </div>
             <div class="col-md-6">
               <select
-                [(ngModel)]="customer.gender"
+                formControlName="gender"
                 class="form-control"
                 name="gender"
               >
@@ -61,7 +60,7 @@
                 class="form-control"
                 placeholder="Email e.g : abc@gmail.com"
                 name="email"
-                [(ngModel)]="customer.email"
+                formControlName="email"
               />
             </div>
             <div class="col-md-6">
@@ -70,7 +69,7 @@
                 class="form-control"
                 placeholder="Phone Number : 090XXXXXXX - 091XXXXXXX - +(84) 90XXXXXXX - +(84) 91XXXXXXX"
                 name="phoneNumber"
-                [(ngModel)]="customer.phoneNumber"
+                formControlName="phoneNumber"
               />
             </div>
           </div>
@@ -81,20 +80,21 @@
                 class="form-control"
                 placeholder="Address"
                 name="address"
-                [(ngModel)]="customer.address"
+                formControlName="address"
               />
             </div>
             <div class="col-md-6">
               <select
-                [(ngModel)]="customer.customerType"
+                formControlName="customerType"
                 class="form-control"
-                name="type"
+                name="customerType"
               >
-                <option value="1">Diamond</option>
-                <option value="2">Platinium</option>
-                <option value="3">Gold</option>
-                <option value="4">Silver</option>
-                <option value="5">Member</option>
+                <option
+                  *ngFor="let customerType of customerTypes"
+                  [ngValue]="customerType"
+                >
+                  {{ customerType.name }}
+                </option>
               </select>
             </div>
           </div>
@@ -105,12 +105,14 @@
                 class="form-control"
                 placeholder="Customer code e.g : KH-XXXX"
                 name="code"
-                [(ngModel)]="customer.code"
+                formControlName="code"
               />
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-md-6"></div>
+            <div class="col-md-6">
+              <span *ngIf="message">{{ message }}</span>
+            </div>
           </div>
           <div class="mt-5 text-right">
             <input
