@@ -2,7 +2,9 @@ package com.furama_server.model.customer;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.furama_server.model.contract.Contract;
 
 import javax.persistence.*;
@@ -11,13 +13,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "customer")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Integer id;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customer_type_id")
     private CustomerType customerType;

@@ -8,11 +8,11 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> findAll();
 
-    void save(Customer customer);
+    Customer save(Customer customer);
 
     Customer findById(Integer id);
 
-    void delete(Customer customer);
+    void delete(Integer id);
 
     List<Customer> findAllByNameContaining(String name);
 }

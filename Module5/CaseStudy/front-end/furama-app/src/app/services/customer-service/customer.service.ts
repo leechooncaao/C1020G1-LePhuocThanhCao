@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Customer } from '../../models/customer/Customer';
-import { CustomerType } from '../../models/customer/CustomerType';
 
 const httpOptions = {
   headers : new HttpHeaders({
     'Content-type' : 'application/json'
+    
   })
 };
 
@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CustomerService {
-  baseUrl : string = 'http://localhost:3000/customer';
+  baseUrl : string = 'http://localhost:8080/api/customer';
 
   constructor(private http : HttpClient) { }
 

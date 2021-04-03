@@ -1,12 +1,44 @@
-<h1 mat-dialog-title>Hi</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput />
-  </mat-form-field>
+  <p>Are you sure to delete this record ?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="save()">Delete</button>
 </div>
+
+<!-- --------------------------------------------- -->
+
+<!-- <div class="modal-confirm">
+  <div class="modal-content" mat-dialog-content>
+    <div class="modal-header flex-column">
+      <div class="icon-box">
+        <i class="material-icons">&#xE5CD;</i>
+      </div>
+      <h4 class="modal-title w-100">Are you sure?</h4>
+      <button type="button" class="close"></button>
+    </div>
+    <div class="modal-body">
+      <p>
+        Do you really want to delete these records? This process cannot be
+        undone.
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-center" mat-dialog-actions>
+    <button class="btn btn-danger" mat-raised-button (click)="save()">
+      Delete
+    </button>
+    <button class="btn btn-secondary" mat-raised-button mat-dialog-close>
+      Cancel
+    </button>
+  </div>
+</div> -->
+
+<!-- -------------------------------------------- -->
+<!-- 
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="save()" tabindex="1">
+    Delete
+  </button>
+  <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+</mat-dialog-actions> -->

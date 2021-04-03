@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer/Customer';
 import { CustomerService } from '../../../services/customer-service/customer.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../modals/delete-modal/delete-modal.component';
 
 @Component({
@@ -15,24 +15,38 @@ export class CustomerListComponent implements OnInit {
 
 
   constructor(private customerService : CustomerService,
-              public dialog: MatDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getAllCustomers();
+  }
+
+  getAllCustomers(){
     this.customerService.findAll().subscribe(customers => {
       this.customers = customers;
     },
      error => console.log(error));
   }
 
-  openModal() {
-    const dialogRef = this.dialog.open(DeleteModalComponent, {
-      width: '250px',
-      data: {customerId: this.customerId}
-    });
+  openModal(customerId : number) {
+    const dialogConfig = new MatDialogConfig();
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id : customerId
+  };
+
+    const dialogRef = this.dialog.open(DeleteModalComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if(data){
+          this.customerService.delete(data).subscribe(() => {
+            this.getAllCustomers(); 
+          })
+        }
+      }
+    );  
   }
-
 }

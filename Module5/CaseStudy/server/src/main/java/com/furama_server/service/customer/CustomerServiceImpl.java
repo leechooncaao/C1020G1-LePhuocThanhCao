@@ -18,8 +18,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void save(Customer customer) {
-        customerRepository.save(customer);
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     @Override
@@ -28,9 +28,10 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void delete(Customer customer) {
-        customerRepository.delete(customer);
+    public void delete(Integer id) {
+        customerRepository.deleteById(id);
     }
+
 
     @Override
     public List<Customer> findAllByNameContaining(String name) {

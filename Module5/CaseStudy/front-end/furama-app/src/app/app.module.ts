@@ -13,8 +13,9 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteModalComponent } from './components/modals/delete-modal/delete-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CustomerEditComponent,
     HeaderComponent,
     FooterComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    HomeComponent
   ],
   imports: [
   BrowserModule,
@@ -32,7 +34,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

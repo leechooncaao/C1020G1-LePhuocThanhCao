@@ -25,8 +25,8 @@
     {
       "id": 1,
       "customerType": {
-        "id": 5,
-        "name": "Member"
+        "id": 3,
+        "name": "Gold"
       },
       "code": "KH-0001",
       "name": "Le Hoang Minh Tuan",
@@ -230,118 +230,34 @@
       "id": 19
     },
     {
-      "name": "fdsaf",
-      "idCard": "sdaf",
-      "email": "adsf",
-      "address": "asdf",
-      "code": "sdaf",
-      "birthday": "2021-04-28",
-      "gender": "Female",
-      "phoneNumber": "0777542581",
-      "customerType": "[object Object]",
-      "id": 20
-    },
-    {
-      "name": "fsdaf",
-      "idCard": "sdaf",
-      "email": "dsaf",
-      "address": "sadf",
-      "code": "dsaf",
-      "birthday": "2021-05-05",
-      "gender": "Female",
-      "phoneNumber": "0777542581",
-      "customerType": "[object Object]",
-      "id": 21
-    },
-    {
-      "name": "fsdaf",
-      "idCard": "sdaf",
-      "email": "sdafsadf",
-      "address": "asdf",
-      "code": "sdaf",
+      "id": 22,
+      "customerType": {
+        "id": 4,
+        "name": "Silver"
+      },
+      "code": "KH-0019",
+      "name": "caoo2",
       "birthday": "2021-04-20",
-      "gender": "Female",
-      "phoneNumber": "0777542581",
+      "gender": "Male",
+      "idCard": "231332124",
+      "email": "abc@gmail.com",
+      "address": "hue",
+      "phoneNumber": "0901234575"
+    },
+    {
       "customerType": {
         "id": 1,
         "name": "Diamond"
       },
-      "id": 22
-    },
-    {
-      "customerType": {
-        "id": 3,
-        "name": "Gold"
-      },
-      "code": "sadf",
-      "name": "cao1",
-      "birthday": "2021-04-14",
-      "gender": "Female",
-      "idCard": "asdf",
-      "email": "fasdf",
-      "address": "sadf",
-      "phoneNumber": "0777542581",
+      "code": "KH-0011",
+      "name": "cao",
+      "birthday": "2021-04-22",
+      "gender": "Male",
+      "idCard": "231332121",
+      "email": "hathaykhongbanghayhat18@gmail.com",
+      "address": "Lenin",
+      "phoneNumber": "0901234578",
       "id": 23
-    },
-    {
-      "customerType": {
-        "id": 2,
-        "name": "Platinium"
-      },
-      "code": "asdf",
-      "name": "fdsaf",
-      "birthday": "2021-04-22",
-      "gender": "Female",
-      "idCard": "af",
-      "email": "adsf",
-      "address": "ads",
-      "phoneNumber": "0777542581",
-      "id": 24
-    },
-    {
-      "customerType": {
-        "id": 3,
-        "name": "Gold"
-      },
-      "code": "asdf",
-      "name": "fdsaf",
-      "birthday": "2021-04-22",
-      "gender": "Male",
-      "idCard": "af",
-      "email": "adsf",
-      "address": "ads",
-      "phoneNumber": "0777542581",
-      "id": 25
-    },
-    {
-      "customerType": {
-        "id": 4,
-        "name": "Silver"
-      },
-      "code": "asdf",
-      "name": "fdsaf",
-      "birthday": "2021-04-22",
-      "gender": "Male",
-      "idCard": "af",
-      "email": "adsf",
-      "address": "ads",
-      "phoneNumber": "43214424",
-      "id": 26
-    },
-    {
-      "id": 27,
-      "customerType": {
-        "id": 4,
-        "name": "Silver"
-      },
-      "code": "asdf",
-      "name": "cao eeeee",
-      "birthday": "2021-04-22",
-      "gender": "Female",
-      "idCard": "af",
-      "email": "adsf",
-      "address": "ads",
-      "phoneNumber": "43214424"
     }
   ]
 }

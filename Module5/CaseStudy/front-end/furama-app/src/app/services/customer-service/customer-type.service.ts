@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CustomerTypeService {
-  baseUrl : string = 'http://localhost:3000/customer_type';
+  baseUrl : string = 'http://localhost:8080/api/customer_type';
   constructor(private http : HttpClient) { }
 
   findAll() : Observable<CustomerType[]> {

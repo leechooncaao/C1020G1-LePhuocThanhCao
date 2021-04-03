@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerType } from 'src/app/models/customer/CustomerType';
 import { CustomerTypeService } from 'src/app/services/customer-service/customer-type.service';
@@ -23,15 +23,15 @@ export class CustomerEditComponent implements OnInit {
   ngOnInit(): void {
     this.customerForm = new FormGroup({
       id : new FormControl(),
-      customerType : new FormControl(),
-      code : new FormControl(),
-      name : new FormControl(),
-      birthday : new FormControl(),
+      customerType : new FormControl('', Validators.required),
+      code : new FormControl('', [Validators.required, Validators.pattern("^(KH-)\\d{4}$")]),
+      name : new FormControl('', Validators.required),
+      birthday : new FormControl('', Validators.required),
       gender : new FormControl(),
-      idCard : new FormControl(),
-      email : new FormControl(),
-      address : new FormControl(),
-      phoneNumber : new FormControl()
+      idCard : new FormControl('', [Validators.required, Validators.pattern("(^\\d{9}$)|(^\\d{12}$)")]),
+      email : new FormControl('', [Validators.required, Validators.email]),
+      address : new FormControl('', Validators.required),
+      phoneNumber : new FormControl('', [Validators.required, Validators.pattern("(^(090)\\d{7}$)|(^(091)\\d{7}$)|(^(\\+\\(84\\) 90)\\d{7}$)|(^(\\+\\(84\\) 91)\\d{7}$)")])
     });
 
     const promiseCustomerTypes = this.customerTypeSevice.findAll().toPromise();

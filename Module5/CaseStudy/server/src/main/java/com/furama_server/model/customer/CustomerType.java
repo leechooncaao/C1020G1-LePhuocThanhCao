@@ -1,7 +1,9 @@
 package com.furama_server.model.customer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,9 +19,8 @@ public class CustomerType {
     @Column(name = "customer_type_name", length = 45)
     private String name;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "customerType")
-    private List<Customer> customers;
+//    @OneToMany(mappedBy = "customerType")
+//    private List<Customer> customers;
 
     public CustomerType() {
     }
@@ -40,11 +41,11 @@ public class CustomerType {
         this.name = name;
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
-    }
+//    public List<Customer> getCustomers() {
+//        return customers;
+//    }
+//
+//    public void setCustomers(List<Customer> customers) {
+//        this.customers = customers;
+//    }
 }
